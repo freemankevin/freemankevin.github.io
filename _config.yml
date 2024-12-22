@@ -108,7 +108,7 @@ deploy:
 
 algolia:
   applicationID: 'O3AB73GDVU'
-  apiKey: '079f5d7f60f3e6056d995859afbecaa1'
+  apiKey: 'b3f1048d604fe9a6c9648855741c1e6d'
   indexName: 'kevin_notes_index'
   chunkSize: 5000
   fields:
@@ -123,6 +123,6 @@ algolia:
 #   - hexo-generator-tag
 
 feed:
-  type: rss
-  path: rss.xml
+  type: atom
+  path: atom.xml
   limit: 20  # 可选：控制显示的文章数量

@@ -124,7 +124,7 @@ menu:
   #schedule: /schedule/ || fa fa-calendar
   #sitemap: /sitemap.xml || fa fa-sitemap
   #commonweal: /404/ || fa fa-heartbeat
-  # RSS: /rss.xml || fa fa-rss
+  RSS: /atom.xml || fa fa-rss
 
 # Enable / Disable menu icons / item badges.
 menu_settings:
@@ -182,17 +182,20 @@ social:
   #E-Mail: mailto:yourname@gmail.com || fa fa-envelope
   #Weibo: https://weibo.com/yourname || fab fa-weibo
   # Google: https://plus.google.com/yourname || fab fa-google
-  # Twitter: https://twitter.com/yourname || fab fa-twitter
+  # Twitter: https://x.com/fr75301596 || fab fa-twitter
   #FB Page: https://www.facebook.com/yourname || fab fa-facebook
-  #StackOverflow: https://stackoverflow.com/yourname || fab fa-stack-overflow
+  StackOver: https://stackoverflow.com/users/14609582/kevin || fab fa-stack-overflow
   # YouTube: https://youtube.com/yourname || fab fa-youtube
   #Instagram: https://instagram.com/yourname || fab fa-instagram
   #Skype: skype:yourname?call|chat || fab fa-skype
+  Mastodon: https://mastodon.social/@freemankevin || fab fa-mastodon
+  Bluesky: https://bsky.app/profile/freemankevin.bsky.social || fab fa-bluesky
+  # Bluesky: https://bsky.app/profile/freemankevin.bsky.social || /images/bluesky.svg
 
 social_icons:
   enable: true
   icons_only: false
-  transition: false
+  transition: true
 
 # Blog rolls
 links_settings:
@@ -279,7 +282,7 @@ follow_me:
   # Telegram: https://t.me/channel_name || fab fa-telegram
   #WeChat: /images/wechat_channel.jpg || fab fa-weixin
   # RSS: /atom.xml || fa fa-rss
-  RSS: /rss.xml || fa fa-rss
+  RSS: /atom.xml || fa fa-rss
 
 # Related popular posts
 # Dependencies: https://github.com/tea3/hexo-related-popular-posts
