@@ -119,5 +119,10 @@ algolia:
     - categories
     - tags
 
-plugins:
-  - hexo-generator-tag
+# plugins:
+#   - hexo-generator-tag
+
+feed:
+  type: rss
+  path: rss.xml
+  limit: 20  # 可选：控制显示的文章数量
