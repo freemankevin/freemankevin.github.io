@@ -142,12 +142,15 @@ dist
 public/
 .deploy*/
 
-# Ignore all files in themes directory except the configuration file
-themes/*
-!themes/next/_config.yml
-
 # Ignore multiple configuration files if present
 _multiconfig.yml
 
 # VSCode specific files
 .vscode/
+
+# 忽略 themes 目录下的所有文件
+themes/*
+
+# 但不忽略 themes/next 子目录中的 _config.yml 文件
+!themes/next/
+!themes/next/_config.yml

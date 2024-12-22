@@ -108,7 +108,7 @@ deploy:
 
 algolia:
   applicationID: 'O3AB73GDVU'
-  apiKey: 'b3f1048d604fe9a6c9648855741c1e6d'
+  apiKey: '079f5d7f60f3e6056d995859afbecaa1'
   indexName: 'kevin_notes_index'
   chunkSize: 5000
   fields:
