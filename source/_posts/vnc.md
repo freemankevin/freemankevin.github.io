@@ -8,9 +8,9 @@ tags:
 category: Linux
 ---
 
-VNC（Virtual Network Computing）是一个远程桌面访问协议，允许用户通过网络远程访问 Linux 系统的图形化界面。本文将介绍如何在不同的 Linux 发行版中安装和配置 VNC 服务。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VNC（Virtual Network Computing）是一个远程桌面访问协议，允许用户通过网络远程访问 Linux 系统的图形化界面。本文介绍了如何在不同的 Linux 发行版（包括 Ubuntu/Debian、CentOS/RHEL、openSUSE 和 Arch Linux）中安装和配置 VNC 服务。通过详细的步骤指导，包括安装 VNC 软件、配置 VNC 密码、创建启动脚本和启动 VNC 服务，你可以在各个系统上实现远程桌面访问。此外，本文还提供了常见问题的排查方法，以帮助解决可能遇到的连接和显示问题。
 
----
+<!-- more -->
 
 ## 1. Ubuntu/Debian 系统
 

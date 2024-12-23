@@ -8,10 +8,11 @@ tags:
 category: Linux
 ---
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本文介绍了如何在 CentOS 7 环境中使用镜像 ISO 文件制作本地 YUM 源。通过详细步骤指导，用户可以下载并挂载 CentOS 7.9 的 ISO 文件，创建 YUM 仓库配置文件，清理 YUM 缓存，并测试新的 YUM 仓库配置。文章还介绍了如何设置开机自动挂载 ISO 文件，以确保每次启动时本地 YUM 源都可用。通过这些步骤，用户可以在本地环境中使用 YUM 安装、更新或删除软件包。
 
-这里以Centos7 环境为例，其他系统也是类似。
+<!-- more -->
 
----
+> 这里以Centos7 环境为例，其他系统也是类似。
 
 阿里云ISO 镜像下载地址：https://mirrors.aliyun.com/centos/7.9.2009/isos/x86_64/
 

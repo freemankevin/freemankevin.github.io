@@ -9,9 +9,9 @@ tags:
 category: Linux
 ---
 
-防火墙是保护系统安全的重要组成部分，它可以帮助阻止未授权的访问。在 Linux 系统中，不同的发行版可能使用不同的防火墙工具和命令来管理防火墙。本文将介绍如何在常见的 Linux 发行版中开启防火墙。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;防火墙是保护系统安全的重要组成部分，它可以帮助阻止未授权的访问。本文介绍了如何在不同的 Linux 系统中开启和管理防火墙，包括 Ubuntu/Debian、CentOS/RHEL、openSUSE 和 Arch Linux 系统。我们详细讲解了每个系统中常用的防火墙工具和命令，例如 ufw、firewalld、SuSEfirewall2、iptables 和 nftables。通过这些步骤，你可以在各种 Linux 发行版上有效地开启防火墙并配置规则，从而增强系统的安全性。
 
----
+<!-- more -->
 
 ## 1. Ubuntu/Debian 系统
 

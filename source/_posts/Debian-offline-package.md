@@ -8,12 +8,11 @@ tags:
 category: Linux
 ---
 
-离线安装在Linux系统中是一个常见的需求。以下是在Debian系列操作系统（如Debian, Ubuntu）上创建和使用离线安装包的完整步骤。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;离线安装在 Linux 系统中是一个常见需求，特别是在无法联网的环境中。本文介绍了如何在 Debian 系列操作系统（如 Debian 和 Ubuntu）上创建和使用离线安装包的完整步骤。首先，我们在联网环境下下载所需的软件包及其依赖，并创建本地 APT 仓库。然后，我们将这些包复制到离线系统上，并配置本地仓库以便进行安装。通过这些步骤，你可以方便地在离线环境中安装所需的软件。
 
----
+<!-- more -->
+
 ## 在联网的环境下
-
-
 
 ### 1. 下载软件包及其依赖
 
@@ -32,6 +31,7 @@ sudo apt-get install --download-only <package-name>
 ```bash
 cp /var/cache/apt/archives/*.deb /path/to/your/usb-drive/debian-offline-packages
 ```
+
 
 ### 3. 创建本地APT仓库
 

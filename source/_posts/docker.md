@@ -9,9 +9,9 @@ tags:
 category: Linux
 ---
 
-Docker 是一种开源的容器化平台，可以简化应用程序的开发、部署和运行。在不同的 Linux 发行版中，安装 Docker 的方法可能略有不同。本文将介绍如何在常见的 Linux 系统中安装 Docker。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Docker 是一种开源的容器化平台，可以简化应用程序的开发、部署和运行。本文介绍了如何在不同的 Linux 系统中安装 Docker，包括 Ubuntu/Debian、CentOS/RHEL、openSUSE 和 Arch Linux。我们详细讲解了每个系统的安装步骤，包括更新系统、安装依赖、添加 Docker 软件源、安装 Docker 引擎以及验证安装。最后，我们还介绍了如何配置非 root 用户使用 Docker。通过这些步骤，你可以在各种 Linux 发行版上轻松安装和配置 Docker。
 
----
+<!-- more -->
 
 ## 1. Ubuntu/Debian 系统
 

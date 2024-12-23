@@ -8,6 +8,10 @@ tags:
 category: ElasticSearch
 ---
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在本文中，我们将介绍如何使用 Docker Compose 部署带有用户和密码认证的 Elasticsearch 服务，并实现索引的自动备份。首先，我们将展示如何准备配置文件并启动 Elasticsearch 服务。接着，我们将讲解如何配置并验证快照仓库。最后，我们提供了一个用于自动备份 Elasticsearch 索引的脚本，并通过 Crontab 定时任务实现自动备份。本文将帮助你确保数据的安全性和可恢复性。
+
+<!-- more -->
+
 ## 1. 部署 Elasticsearch 服务
 
 使用 Docker Compose 部署 Elasticsearch 服务，带有用户、密码认证的单节点配置。
@@ -49,6 +53,7 @@ volumes:
   es-snapshots:
   es-plugins:
 ```
+
 
 ### 1.2 部署服务
 
