@@ -43,7 +43,7 @@ custom_file_path:
 scheme: Gemini
 
 # Dark Mode
-darkmode: true
+darkmode: false
 
 
 # ---------------------------------------------------------------
@@ -163,8 +163,8 @@ site_state: true
 # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
 social:
   GitHub: https://github.com/freemankevin || fab fa-github
+  StackFlow: https://stackoverflow.com/users/14609582/kevin || fab fa-stack-overflow
   Bluesky: https://bsky.app/profile/freemankevin.bsky.social || fab fa-bluesky
-  StackOver: https://stackoverflow.com/users/14609582/kevin || fab fa-stack-overflow
   Mastodon: https://mastodon.social/@freemankevin || fab fa-mastodon
 
 social_icons:
@@ -391,11 +391,11 @@ back2top:
 reading_progress:
   enable: true
   # Available values: left | right
-  start_at: right
+  start_at: left
   # Available values: top | bottom
   position: bottom
   reversed: false
-  color: "#37c6c0"
+  color: "#1E90FF"
   height: 3px
 
 # Bookmark Support
@@ -671,24 +671,24 @@ comments:
   style: tabs
   # Choose a comment system to be displayed by default.
   # Available values: disqus | disqusjs | changyan | livere | gitalk | utterances
-  active:
+  active: disqus
   # Setting `true` means remembering the comment system selected by the visitor.
   storage: true
   # Lazyload all comment systems.
   lazyload: false
   # Modify texts or order for any naves, here are some examples.
   nav:
-    #disqus:
-    #  text: Load Disqus
-    #  order: -1
+    disqus:
+     text: Load Disqus
+     order: -1
     #gitalk:
     #  order: -2
 
 # Disqus
 # For more information: https://disqus.com
 disqus:
-  enable: false
-  shortname:
+  enable: true
+  shortname: freemankevin
   count: true
 
 # DisqusJS
