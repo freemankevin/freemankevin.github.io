@@ -12,13 +12,10 @@ category: Linux
 
 <!-- more -->
 
-> 这里以Centos7 环境为例，其他系统也是类似。
-
-阿里云ISO 镜像下载地址：https://mirrors.aliyun.com/centos/7.9.2009/isos/x86_64/
-
-要将CentOS 7.9的ISO映像文件挂载到CentOS 7.4系统上，并配置为本地YUM源，你可以按照以下步骤操作：
-
 1. **上传ISO文件**:
+
+   阿里云ISO 镜像下载地址：https://mirrors.aliyun.com/centos/7.9.2009/isos/x86_64/
+
    将CentOS 7.9的ISO文件上传到你的CentOS 7.4服务器上。假设ISO文件位于`/path/to/CentOS-7.9.iso`。
 
 2. **创建挂载点**:
