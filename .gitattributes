@@ -1,2 +1,16 @@
 # 强制使用 LF 作为行尾符
 * text eol=lf
+
+# 禁用git 修改文件
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+*.ttf binary
+*.otf binary
+*.woff binary
+*.woff2 binary
+*.eot binary
+*.pdf binary
