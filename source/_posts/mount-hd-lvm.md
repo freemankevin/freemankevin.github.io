@@ -44,7 +44,7 @@ category: Linux
 
 ### **LVM 配置步骤**
 
-#### 1. 初始化物理卷 (PV)
+#### 初始化物理卷 (PV)
 将 `vdb` 初始化为 LVM 的物理卷：
 ```bash
 sudo pvcreate /dev/vdb
@@ -57,7 +57,7 @@ sudo pvdisplay
 
 ---
 
-#### 2. 创建卷组 (VG)
+#### 创建卷组 (VG)
 创建一个新的卷组 `vg_data`，并将 `vdb` 添加到该卷组：
 ```bash
 sudo vgcreate vg_data /dev/vdb
@@ -70,7 +70,7 @@ sudo vgdisplay
 
 ---
 
-#### 3. 创建逻辑卷 (LV)
+#### 创建逻辑卷 (LV)
 在卷组 `vg_data` 中创建逻辑卷 `lv_data`：
 - 使用所有剩余空间：
   ```bash
@@ -88,7 +88,7 @@ sudo lvdisplay
 
 ---
 
-#### 4. 创建文件系统
+#### 创建文件系统
 为逻辑卷 `lv_data` 创建 EXT4 文件系统：
 ```bash
 sudo mkfs.ext4 /dev/vg_data/lv_data
@@ -96,7 +96,7 @@ sudo mkfs.ext4 /dev/vg_data/lv_data
 
 ---
 
-#### 5. 挂载逻辑卷
+#### 挂载逻辑卷
 1. 创建挂载点：
    ```bash
    sudo mkdir -p /data
@@ -114,7 +114,7 @@ sudo mkfs.ext4 /dev/vg_data/lv_data
 
 ---
 
-#### 6. 设置开机自动挂载
+#### 设置开机自动挂载
 编辑 `/etc/fstab` 文件，使逻辑卷在开机时自动挂载：
 ```bash
 sudo vim /etc/fstab

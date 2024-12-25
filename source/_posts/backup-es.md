@@ -12,11 +12,11 @@ category: ElasticSearch
 
 <!-- more -->
 
-## 1. 部署 Elasticsearch 服务
+## 部署 Elasticsearch 服务
 
 使用 Docker Compose 部署 Elasticsearch 服务，带有用户、密码认证的单节点配置。
 
-### 1.1 准备文件
+### 准备文件
 
 #### .env 文件
 
@@ -55,7 +55,7 @@ volumes:
 ```
 
 
-### 1.2 部署服务
+### 部署服务
 
 1. 启动 Elasticsearch 服务：
 
@@ -73,13 +73,13 @@ curl -u "elastic:${ELASTIC_PASSWORD}" -X GET "http://localhost:9200"
 
 ---
 
-## 2. 接口调用与验证
+## 接口调用与验证
 
 在开始备份前，需要确保以下几点：
 1. 已有访问 Elasticsearch 集群的权限。
 2. 确保集群健康状态为绿色或黄色。
 
-### 2.1 测试连接
+### 测试连接
 
 通过以下命令测试连接：
 
@@ -89,7 +89,7 @@ curl -u "elastic:${ELASTIC_PASSWORD}" -X GET "http://<your-es-host>:9200"
 
 如果连接成功，将返回集群的基本信息（JSON 格式）。
 
-### 2.2 验证快照仓库
+### 验证快照仓库
 
 在 ES 中，备份索引需要先配置一个快照仓库。
 
@@ -116,7 +116,7 @@ curl -u "elastic:${ELASTIC_PASSWORD}" -X GET "http://<your-es-host>:9200/_snapsh
 
 ---
 
-## 3. 备份脚本的实现
+## 备份脚本的实现
 
 以下是一个用于自动备份 Elasticsearch 索引的脚本：
 
@@ -151,7 +151,7 @@ chmod +x es_backup.sh
 
 ---
 
-## 4. 定时任务的配置
+## 定时任务的配置
 
 通过 `crontab` 设置定时任务，实现备份脚本的自动执行。
 
@@ -171,7 +171,7 @@ crontab -e
 
 ---
 
-## 5. 验证备份
+## 验证备份
 
 1. 查看已有的快照：
 
@@ -192,6 +192,6 @@ curl -u "elastic:${ELASTIC_PASSWORD}" -X POST "http://<your-es-host>:9200/_snaps
 
 ---
 
-## 6. 总结
+## 总结
 
 通过本文档的步骤，你可以快速实现 Elasticsearch 索引的自动备份，并通过 Docker Compose 快速部署一个带用户和密码认证的 Elasticsearch 单节点服务。确保备份脚本和定时任务配置正确，以降低数据丢失的风险。在生产环境中，请根据业务需求调整备份策略和存储位置。

@@ -20,13 +20,13 @@ category: Linux
 - **Linux ISO 文件**：从 Linux 发行版的官网下载你需要安装的 ISO 文件，例如 Debian 或 CentOS。
 - **下载 Rufus**：访问 [Rufus 官网](https://rufus.ie/) 下载最新版本的 Rufus。
 
-## 步骤 1: 打开 Rufus
+## 打开 Rufus
 
 1. 插入 U 盘。
 2. 运行你下载的 Rufus.exe 文件。
 3. 如果系统请求权限，请确认。
 
-## 步骤 2: 配置 Rufus
+## 配置 Rufus
 
 在 Rufus 的界面中，进行以下配置：
 
@@ -39,13 +39,13 @@ category: Linux
 5. **文件系统**：一般选择「FAT32」（尤其是对于 UEFI 启动），这是大多数 Linux 启动 U 盘推荐的格式。
 6. **卷标**：你可以给 U 盘命名，例如「LINUXINSTALL」。
 
-## 步骤 3: 启动创建过程
+## 启动创建过程
 
 1. 确认所有设置正确无误后，点击「开始」按钮。
 2. Rufus 将提示你所有数据将被清除。点击「确定」继续。
 3. 等待 Rufus 完成启动 U 盘的创建。这可能需要几分钟时间。
 
-## 步骤 4: 使用启动 U 盘安装 Linux
+## 使用启动 U 盘安装 Linux
 
 1. 完成 U 盘创建后，安全移除 U 盘。
 2. 将 U 盘插入你想要安装 Linux 的电脑。

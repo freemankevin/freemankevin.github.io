@@ -13,7 +13,7 @@ category: Linux
 
 <!-- more -->
 
-## 1. Ubuntu/Debian 系统
+## Ubuntu/Debian 系统
 
 Ubuntu 和 Debian 系统默认使用 `ufw`（Uncomplicated Firewall）作为防火墙工具。
 
@@ -40,7 +40,7 @@ sudo ufw allow ssh
 
 ---
 
-## 2. CentOS/RHEL 系统
+## CentOS/RHEL 系统
 
 CentOS 和 RHEL 系统默认使用 `firewalld` 作为防火墙工具。
 
@@ -70,7 +70,7 @@ sudo firewall-cmd --reload
 
 ---
 
-## 3. openSUSE 系统
+## openSUSE 系统
 
 openSUSE 系统默认使用 `firewalld`，但某些版本可能使用 `SuSEfirewall2`。
 
@@ -108,7 +108,7 @@ sudo SuSEfirewall2 start
 
 ---
 
-## 4. Arch Linux
+## Arch Linux
 
 Arch Linux 通常使用 `iptables` 或 `nftables` 来管理防火墙。
 
@@ -154,7 +154,7 @@ sudo systemctl enable nftables
 
 ---
 
-## 5. 常见问题排查
+## 常见问题排查
 
 - **端口未生效**：
   确保规则已永久保存并重新加载防火墙配置。

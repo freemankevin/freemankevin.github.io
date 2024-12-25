@@ -4,9 +4,9 @@ date: 2024-12-25 09:00:00
 tags:
   - MkDocs
   - GitHub Pages
-  - 博客
+  - GitHub
 # comments: true
-category: 博客
+category: MkDocs
 ---
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本指南将帮助你从头开始创建一个使用 MkDocs 的博客站点，并将其托管在 GitHub Pages 上。我们将涵盖以下内容：首先，我们会介绍如何安装 MkDocs，然后创建一个新的 MkDocs 项目。接下来，我们会配置和编辑内容，之后将站点部署到 GitHub Pages。我们还将介绍如何配置自定义域名，最后会添加 `.gitignore` 文件来忽略不必要的文件。
@@ -15,7 +15,7 @@ category: 博客
 
 <!-- more -->
 
-## 1. 安装 MkDocs
+## 安装 MkDocs
 
 首先，你需要确保已经安装了 MkDocs。你可以使用 `pip` 来安装 MkDocs：
 
@@ -23,15 +23,7 @@ category: 博客
 pip install mkdocs
 ```
 
-## 1. 安装 MkDocs
-
-首先，你需要确保已经安装了 MkDocs。你可以使用 `pip` 来安装 MkDocs：
-
-```shell
-pip install mkdocs
-```
-
-## 2. 创建 MkDocs 项目
+## 创建 MkDocs 项目
 
 使用 MkDocs 的命令行工具创建一个新的项目：
 
@@ -44,7 +36,7 @@ cd my-blog
 
 这将创建一个名为 `my-blog` 的目录，其中包含一个基本的 MkDocs 配置文件和一些示例内容。
 
-## 3. 配置和编辑内容
+## 配置和编辑内容
 
 ### 启动开发服务器
 
@@ -78,7 +70,7 @@ nav:
 theme: readthedocs
 ```
 
-## 4. 部署到 GitHub Pages
+## 部署到 GitHub Pages
 
 当你对内容和配置满意后，可以将站点部署到 GitHub Pages。
 
@@ -106,7 +98,7 @@ mkdocs gh-deploy
 
 
 
-## 5. 配置自定义域名
+## 配置自定义域名
 
 如果你已经购买了自定义域名，可以按照以下步骤配置：
 
@@ -156,7 +148,7 @@ mkdocs build
 mkdocs gh-deploy
 ```
 
-## 6. 添加 `.gitignore` 文件
+## 添加 `.gitignore` 文件
 
 为了避免将不必要的文件推送到仓库中，创建一个 `.gitignore` 文件并添加以下内容：
 

@@ -12,7 +12,7 @@ category: Linux
 
 <!-- more -->
 
-## 1. Ubuntu/Debian 系统
+## Ubuntu/Debian 系统
 
 Ubuntu 和 Debian 系统可以通过 APT 包管理器安装常见的 VNC 服务。
 
@@ -56,7 +56,7 @@ sudo apt install tigervnc-standalone-server tigervnc-xorg-extension
 
 ---
 
-## 2. CentOS/RHEL 系统
+## CentOS/RHEL 系统
 
 CentOS 和 RHEL 通常通过 YUM 或 DNF 安装 VNC 服务。
 
@@ -106,7 +106,7 @@ sudo yum install tigervnc-server
 
 ---
 
-## 3. openSUSE 系统
+## openSUSE 系统
 
 openSUSE 系统也支持安装和配置 VNC 服务。
 
@@ -145,7 +145,7 @@ sudo zypper install tightvnc
 
 ---
 
-## 4. Arch Linux
+## Arch Linux
 
 在 Arch Linux 上，可以通过 `pacman` 包管理器安装 VNC 服务。
 
@@ -184,7 +184,7 @@ sudo pacman -S tigervnc
 
 ---
 
-## 5. 常见问题排查
+## 常见问题排查
 
 - **连接失败**：
   - 检查防火墙是否允许 VNC 端口（默认 5901）。

@@ -13,7 +13,7 @@ category: Linux
 
 <!-- more -->
 
-## 1. Ubuntu/Debian 系统
+## Ubuntu/Debian 系统
 
 ### 更新系统
 ```bash
@@ -55,7 +55,7 @@ docker --version
 
 ---
 
-## 2. CentOS/RHEL 系统
+## CentOS/RHEL 系统
 
 ### 更新系统
 ```bash
@@ -90,7 +90,7 @@ docker --version
 
 ---
 
-## 3. openSUSE 系统
+## openSUSE 系统
 
 ### 更新系统
 ```bash
@@ -115,7 +115,7 @@ docker --version
 
 ---
 
-## 4. Arch Linux
+## Arch Linux
 
 ### 更新系统
 ```bash
@@ -140,7 +140,7 @@ docker --version
 
 ---
 
-## 5. 配置非 root 用户使用 Docker
+## 配置非 root 用户使用 Docker
 
 默认情况下，只有 root 用户或具有 sudo 权限的用户可以运行 Docker。你可以通过以下步骤允许非 root 用户使用 Docker：
 
