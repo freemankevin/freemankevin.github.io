@@ -50,6 +50,7 @@ category: PostgreSQL
 - **作用**：`effective_cache_size` 告诉 PostgreSQL 查询优化器可用的操作系统缓存大小，以帮助它估计缓存命中率。
 
 - **优化建议**: 设置为系统中可用于缓存的数据量，通常为系统总内存的 50%-75%。
+
   ```shell
   effective_cache_size = 24GB  # 根据实际可用内存设置
   ```
@@ -81,6 +82,7 @@ category: PostgreSQL
 - **优化建议**：
   - 增加 `checkpoint_segments` 可以减少 checkpoint 的频率，从而减少磁盘 I/O。
   - 默认的 `checkpoint_timeout` 可以保持在 5 分钟左右。`checkpoint_completion_target` 控制检查点完成的目标时间，如果系统负载较高，考虑将其设为较低值。
+
   ```shell
   checkpoint_timeout = 5min
   checkpoint_completion_target = 0.9
@@ -170,8 +172,8 @@ category: PostgreSQL
 ## 灵活调整
 > 适用于较低配置或共享资源的服务器
 
-```
-shellCopy codeshared_buffers = 4GB
+```shell
+shared_buffers = 4GB
 work_mem = 4MB
 maintenance_work_mem = 128MB 
 effective_cache_size = 6GB
