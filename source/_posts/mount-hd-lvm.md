@@ -1,5 +1,5 @@
 ---
-title: 数据盘挂载与LVM 创建
+title: 数据盘挂载与 LVM 创建
 date: 2024-12-11 12:17:25
 tags:
   - Mount

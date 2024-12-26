@@ -1,5 +1,5 @@
 ---
-title: 使用镜像ISO 文件制做本地Yum 源
+title: 使用镜像 ISO 文件制做本地Yum 源
 date: 2024-12-20 12:17:25
 tags:
     - Yum
