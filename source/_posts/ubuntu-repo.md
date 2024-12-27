@@ -82,10 +82,8 @@ sudo apt upgrade
 查看下载软件包时的源地址：
 
 ```shell
-sudo apt install <任意软件包名称> -y
+sudo apt install '任意软件包名称' -y   # 正常会显示来自： mirrors.tuna.tsinghua.edu.cn
 ```
-
-确保输出中显示 `mirrors.tuna.tsinghua.edu.cn`。
 
 ------
 

@@ -18,10 +18,10 @@ category: Ubuntu
 
 
 ### 考虑因素
-1. 显卡型号： `NVIDIA Geforce RTX4090D`，驱动版本需要与硬件匹配。
-2. 显卡数量： `*2` 双卡配置，需要支持双卡。
-3. 驱动版本： 可以通过[官方网站](https://www.nvidia.com/Download/index.aspx)来查询。
-4. 操作系统： `Ubuntu 22.04 LTS` , 需要server 版而非 desktop 版，以免不稳定。另外，没有特殊需要，不安装桌面。
+1. 显卡型号: `NVIDIA Geforce RTX4090D`，驱动版本需要与硬件匹配。
+2. 显卡数量: `*2` 双卡配置，需要支持双卡。
+3. 驱动版本: 可以通过[官方网站](https://www.nvidia.com/Download/index.aspx)来查询。
+4. 操作系统: `Ubuntu 22.04 LTS` , 需要server 版而非 desktop 版，以免不稳定。另外，没有特殊需要，不安装桌面。
 
 
 ------  

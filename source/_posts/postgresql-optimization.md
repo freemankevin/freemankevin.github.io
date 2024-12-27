@@ -170,7 +170,7 @@ category: PostgreSQL
 ---
 
 ## 灵活调整
-> 适用于较低配置或共享资源的服务器
+> 适用于较低配置或与人共用资源的服务器
 
 ```shell
 shared_buffers = 4GB
