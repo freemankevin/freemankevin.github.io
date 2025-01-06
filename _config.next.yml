@@ -410,7 +410,7 @@ bookmark:
 # `Follow me on GitHub` banner in the top-right corner.
 github_banner:
   enable: true
-  permalink: https://github.com/freemankevin
+  permalink: https://github.com/FreemanKevin/FreemanKevin.github.io
 
 
 # ---------------------------------------------------------------
