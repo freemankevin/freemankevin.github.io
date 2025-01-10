@@ -1,6 +1,6 @@
 ---
 title: 使用Locust进行Web应用性能测试：从入门到实践
-date: 2025-01-08 17:57:25
+date: 2025-01-09 17:57:25
 tags:
     - Locust
     - Test
