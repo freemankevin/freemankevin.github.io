@@ -10,7 +10,6 @@ category: Development
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 本文详细介绍了如何彻底清理Docker环境，分别针对RedHat/CentOS和Debian/Ubuntu系列系统提供了具体的操作步骤。包括环境检查、数据备份、服务停止、资源清理、软件包卸载等内容，帮助用户安全、完整地清理Docker环境。执行清理前请务必做好数据备份工作。
 
-
 <!-- more -->
 
 ## 前置准备
