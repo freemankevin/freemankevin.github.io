@@ -75,7 +75,6 @@
 
 - Responsive design
 - Full-text search
-- Dark mode support
 - SEO optimized
 - Fast loading
 - Multi-arch Docker support
