@@ -6,9 +6,11 @@
 
 > A personal tech blog focusing on DevOps, MLOps, and AIOps practices.
 
-[![Blog](https://img.shields.io/badge/Blog-FreemanKevin-blue?style=flat-square)](https://freemankevin.uk)
+
 [![Hexo](https://img.shields.io/badge/Hexo-5.0+-0E83CD?style=flat-square&logo=hexo)](https://hexo.io)
 [![Node.js](https://img.shields.io/badge/Node.js-14.0+-339933?style=flat-square&logo=node.js)](https://nodejs.org)
+[![Docker Pulls](https://img.shields.io/docker/pulls/freelabspace/freemankevin?style=flat-square&logo=docker)](https://hub.docker.com/r/freelabspace/freemankevin)
+[![GitHub Stars](https://img.shields.io/github/stars/FreemanKevin/FreemanKevin.github.io?style=flat-square&logo=github)](https://github.com/FreemanKevin/FreemanKevin.github.io/stargazers)
 [![GitHub](https://img.shields.io/github/license/FreemanKevin/FreemanKevin.github.io?style=flat-square)](LICENSE)
 
 <p align="center">
