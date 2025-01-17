@@ -1,13 +1,19 @@
 ---
 title: 如何在Kubernetes 环境中部署ArgoCD
 date: 2025-01-15 17:47:25
+keywords:
+  - Kubernetes
+  - ArgoCD
+  - DevOps
+  - GitOps
+  - Helm
+categories:
+  - DevOps
+  - Kubernetes
 tags:
-    - ArgoCD
-    - Helm
-    - RBAC
-    - TLS
-    - Kubernetes
-category: Kubernetes
+  - ArgoCD
+  - Kubernetes
+  - GitOps
 ---
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 本文详细介绍如何在 Kubernetes 集群中部署高可用的 ArgoCD，包括客户端工具安装、服务端部署、TLS 配置、用户认证、RBAC 权限管理等完整的部署和配置流程。

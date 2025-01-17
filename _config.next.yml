@@ -86,9 +86,13 @@ open_graph:
   enable: true
   options:
     type: blog
+    title: Kevin's Notes
+    description: A personal tech blog focusing on DevOps, MLOps, and AIOps practices
+    url: https://freemankevin.uk
+    image: /images/avatar.jpg
+    site_name: Kevin's Notes
     twitter_card: summary_large_image
     twitter_image: /images/avatar.jpg
-    image: /images/avatar.jpg
 
 
 # ---------------------------------------------------------------
@@ -448,10 +452,10 @@ font:
 
 # If true, site-subtitle will be added to the title of index page.
 # Remember to set up your site-subtitle in Hexo `_config.yml` (e.g. subtitle: Subtitle)
-index_with_subtitle: false
+index_with_subtitle: true
 
 # Automatically add external URL with Base64 encrypt & decrypt.
-exturl: false
+exturl: true
 # If true, an icon will be attached to each external URL
 exturl_icon: true
 
@@ -897,3 +901,25 @@ vendors:
   # custom_cdn_url: https://cdn.jsdelivr.net/npm/${npm_name}@${version}/${minified}
   # custom_cdn_url: https://cdnjs.cloudflare.com/ajax/libs/${cdnjs_name}/${version}/${cdnjs_file}
   custom_cdn_url:
+
+# SEO Settings
+seo: true
+
+# Disable duplicate title
+title_prefix: ''
+title_suffix: ''
+
+# External link settings
+exturl: true
+exturl_icon: true
+
+# Optimize meta description
+index_with_subtitle: true
+
+# Add canonical link in head
+canonical: true
+
+# Add nofollow to external links
+follow_me:
+  enable: true
+  nofollow: true
