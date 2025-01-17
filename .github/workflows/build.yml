@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          submodules: true
+          submodules: true  # 获取子模块（如果有的话）
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -30,6 +30,15 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Setup Deploy Key
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
 
       - name: Deploy to GitHub Pages
         env:
