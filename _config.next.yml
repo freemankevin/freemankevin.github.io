@@ -85,13 +85,10 @@ creative_commons:
 open_graph:
   enable: true
   options:
-    #twitter_card: <twitter:card>
-    #twitter_id: <twitter:creator>
-    #twitter_site: <twitter:site>
-    #twitter_image: <twitter:image>
-    #google_plus: <g+:profile_link>
-    #fb_admins: <fb:admin_id>
-    #fb_app_id: <fb:app_id>
+    type: blog
+    twitter_card: summary_large_image
+    twitter_image: /images/avatar.jpg
+    image: /images/avatar.jpg
 
 
 # ---------------------------------------------------------------
@@ -478,19 +475,6 @@ baidu_analytics: f30e496a439ca27b33fbf8949d960b00
 
 # Enable baidu push so that the blog will push the url to baidu automatically
 baidu_push: true
-
-# Open graph settings
-open_graph:
-  enable: true
-  options:
-    type: blog
-    twitter_card: summary_large_image
-    twitter_image: /images/avatar.jpg
-    twitter_id: your-twitter-id  # 可选
-    twitter_site: your-twitter-site  # 可选
-    image: /images/avatar.jpg
-    fb_admins: your-fb-admin-id  # 可选
-    fb_app_id: your-fb-app-id  # 可选
 
 
 # ---------------------------------------------------------------
