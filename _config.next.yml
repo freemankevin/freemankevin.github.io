@@ -750,7 +750,8 @@ addtoany:
 # Google Analytics
 # See: https://analytics.google.com
 google_analytics:
-  tracking_id: G-4QX3P6CBBF  # 您的 GA4 ID
+  enable: true
+  tracking_id: G-4QX3P6CBBF
   only_pageview: false
 
 # Baidu Analytics
