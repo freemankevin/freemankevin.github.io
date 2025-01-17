@@ -27,6 +27,7 @@
 - **Theme**: [NexT.Gemini](https://theme-next.js.org)
 - **Hosting**: GitHub Pages
 - **Search**: Algolia
+- **Container**: Docker
 
 ## 🗂 Content Categories
 
@@ -43,6 +44,7 @@
 - Dark mode support
 - SEO optimized
 - Fast loading
+- Multi-arch Docker support
 
 ## 📄 License
 
