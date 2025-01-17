@@ -901,25 +901,3 @@ vendors:
   # custom_cdn_url: https://cdn.jsdelivr.net/npm/${npm_name}@${version}/${minified}
   # custom_cdn_url: https://cdnjs.cloudflare.com/ajax/libs/${cdnjs_name}/${version}/${cdnjs_file}
   custom_cdn_url:
-
-# SEO Settings
-seo: true
-
-# Disable duplicate title
-title_prefix: ''
-title_suffix: ''
-
-# External link settings
-exturl: true
-exturl_icon: true
-
-# Optimize meta description
-index_with_subtitle: true
-
-# Add canonical link in head
-canonical: true
-
-# Add nofollow to external links
-follow_me:
-  enable: true
-  nofollow: true
