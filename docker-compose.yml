@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  blog:
+    image: freelabspace/freemankevin:latest
+    container_name: kevin-blog
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      - blog-network
+
+networks:
+  blog-network:
+    driver: bridge 

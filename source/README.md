@@ -1,6 +1,6 @@
 <div align="center">
 
-<a title="Kevin's Blog" href="https://freemankevin.uk"><img align="center" width="100" height="100" src="https://raw.githubusercontent.com/FreemanKevin/freemankevin.github.io/main/images/avatar.jpg"></a>
+<a title="Kevin's Notes" href="https://freemankevin.uk"><img align="center" width="100" height="100" src="https://raw.githubusercontent.com/FreemanKevin/freemankevin.github.io/main/images/avatar.jpg"></a>
 
 # 🚀 Kevin's Notes
 
@@ -29,7 +29,7 @@
 - **Theme**: [NexT.Gemini](https://theme-next.js.org)
 - **Hosting**: GitHub Pages
 - **Search**: Algolia
-- **Container**: Docker
+- **Container**: [Docker](https://hub.docker.com/r/freelabspace/freemankevin)
 
 ## 🗂 Content Categories
 
@@ -47,6 +47,24 @@
 - SEO optimized
 - Fast loading
 - Multi-arch Docker support
+
+## 🐳 Docker Usage
+
+Quick start with Docker:
+```bash
+docker run -d -p 80:80 freelabspace/freemankevin:latest
+```
+
+Or use Docker Compose:
+```yaml
+version: '3'
+services:
+  blog:
+    image: freelabspace/freemankevin:latest
+    ports:
+      - "80:80"
+    restart: unless-stopped
+```
 
 ## 📄 License
 
