@@ -2,10 +2,10 @@
 title: 如何在Kubernetes 环境中安装 INGRESS-NGINX
 date: 2025-01-21 15:57:25
 tags:
-    - Linux
-    - Debian
-    - CentOS
-category: Linux
+    - TLS
+    - KubeSphere
+    - Ingress-NGINX
+category: Kubernetes
 ---
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 本文将详细介绍如何在 Kubernetes 中部署 Ingress-NGINX 控制器，并配置 HTTP 和 HTTPS 访问。通过 Helm 工具，您可以快速安装并设置 NGINX 来代理外部流量，同时暴露 NodePort 服务。我们还会讲解如何配置 TLS 安全连接，并使用 Kubernetes Secret 来存储证书，确保数据传输加密。跟着本文的步骤走，您就能顺利完成 Ingress 部署，让集群应用访问更加便捷安全。
