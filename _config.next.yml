@@ -462,9 +462,8 @@ exturl_icon: true
 # Google Webmaster tools verification
 google_site_verification: 3frXch6thZZdl3bIIbkBoQEXQVWw68nMWquSYiFpmhY  # 替换为您的验证码
 
-# Bing Webmaster tools verification.
-# See: https://www.bing.com/webmasters
-# bing_site_verification: your-verification-code
+# Bing Webmaster tools verification
+bing_site_verification: 163141551EC7BC03EBD0FB765ED5C476
 
 # Yandex Webmaster tools verification.
 # See: https://webmaster.yandex.ru
