@@ -166,7 +166,8 @@ site_state: true
 # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
 social:
   GitHub: https://github.com/freemankevin || fab fa-github
-  StackFlow: https://stackoverflow.com/users/14609582/kevin || fab fa-stack-overflow
+  Twitter: https://x.com/chatops2023 || fab fa-x
+  # StackFlow: https://stackoverflow.com/users/14609582/kevin || fab fa-stack-overflow
   Bluesky: https://bsky.app/profile/freemankevin.bsky.social || fab fa-bluesky
   Mastodon: https://mastodon.social/@freemankevin || fab fa-mastodon
 
