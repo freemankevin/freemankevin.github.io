@@ -128,3 +128,10 @@ feed:
   type: atom
   path: atom.xml
   limit: 20  # 可选：控制显示的文章数量
+
+# Sitemap
+sitemap:
+  path: sitemap.xml
+  rel: false
+  tags: true
+  categories: true

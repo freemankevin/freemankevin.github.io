@@ -18,22 +18,47 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-MPHHRS5F');</script>
 <!-- End Google Tag Manager -->
 
+<!-- Google Search Console verification -->
+<meta name="google-site-verification" content="3frXch6thZZdl3bIIbkBoQEXQVWw68nMWquSYiFpmhY" />
+
 <!-- SEO Meta Tags -->
+<meta name="description" content="A personal tech blog focusing on DevOps, MLOps, and AIOps practices">
+<meta name="keywords" content="DevOps, MLOps, AIOps, Kubernetes, Docker, CI/CD">
 <meta name="author" content="Freeman Kevin">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="{{ page.permalink | default(url) }}">
+
+<!-- Open Graph / Social Media Meta Tags -->
+<meta property="og:title" content="{{ page.title }}">
+<meta property="og:description" content="{{ page.description }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ page.permalink | default(url) }}">
+<meta property="og:site_name" content="Kevin's Notes">
 
 <!-- Schema.org markup for Google -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Blog",
-  "name": "Kevin's Notes",
-  "url": "https://freemankevin.uk",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ page.permalink | default(url) }}"
+  },
+  "headline": "{{ page.title }}",
+  "description": "{{ page.description }}",
   "author": {
     "@type": "Person",
     "name": "Freeman Kevin"
   },
-  "description": "A personal tech blog focusing on DevOps, MLOps, and AIOps practices"
+  "datePublished": "{{ page.date }}",
+  "dateModified": "{{ page.updated }}",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kevin's Notes",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://freemankevin.uk/images/avatar.jpg"
+    }
+  }
 }
 </script>
