@@ -105,13 +105,13 @@ theme: next
 deploy:
   type: git
   repo: git@github.com:FreemanKevin/FreemanKevin.github.io.git
-  branch: main
+  branch: gh-pages
   message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}"
 
 algolia:
   applicationID: 'O3AB73GDVU'
   apiKey: 'b3f1048d604fe9a6c9648855741c1e6d'
-  indexName: 'kevin_notes_index'
+  indexName: 'freemankevin'
   chunkSize: 5000
   fields:
     - title
