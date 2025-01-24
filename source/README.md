@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://freemankevin.uk">
-    <img src="https://raw.githubusercontent.com/FreemanKevin/freemankevin.github.io/main/images/avatar.jpg" width="220" alt="Kevin's Notes">
+    <img src="https://raw.githubusercontent.com/FreemanKevin/freemankevin.github.io/gh-pages/images/avatar.jpg" width="220" alt="Kevin's Notes">
   </a>
 </p>
 
@@ -44,7 +44,7 @@
 
 <p align="center">
   <a href="https://freemankevin.uk">
-    <img src="https://raw.githubusercontent.com/FreemanKevin/freemankevin.github.io/main/images/screenshot.png" width="700" />
+    <img src="https://raw.githubusercontent.com/FreemanKevin/freemankevin.github.io/gh-pages/images/screenshot.png" width="700" />
   </a>
 </p>
 
@@ -93,14 +93,6 @@ git push
 - CI/CD Pipelines
 - Security
 - Cloud Native
-
-## 🌟 Features
-
-- Responsive design
-- Full-text search
-- SEO optimized
-- Fast loading
-- Multi-arch Docker support
 
 ## 🐳 Docker Usage
 
