@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="3frXch6thZZdl3bIIbkBoQEXQVWw68nMWquSYiFpmhY">
+  <meta name="msvalidate.01" content="163141551EC7BC03EBD0FB765ED5C476">
+  <meta name="yandex-verification" content="fc71ce89f1e2c38e">
+  <meta name="baidu-site-verification" content="codeva-53cAgrDcIO">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Source+Code+Pro:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=DM+Mono:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=monospace:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"freemankevin.uk","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Load Disqus","order":-1}},"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"O3AB73GDVU","apiKey":"b3f1048d604fe9a6c9648855741c1e6d","indexName":"kevin_notes_index","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="A personal tech blog focusing on DevOps, MLOps, and AIOps practices">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Kevin&#39;s Notes">
+<meta property="og:url" content="https://freemankevin.uk/">
+<meta property="og:site_name" content="Kevin&#39;s Notes">
+<meta property="og:description" content="A personal tech blog focusing on DevOps, MLOps, and AIOps practices">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://freemankevin.uk/images/avatar.jpg">
+<meta property="article:published_time" content="2025-01-15T09:10:25.000Z">
+<meta property="article:modified_time" content="2025-01-24T00:54:21.240Z">
+<meta property="article:author" content="Freeman Kevin">
+<meta property="article:tag" content="Kubernetes">
+<meta property="article:tag" content="TLS">
+<meta property="article:tag" content="NGINX">
+<meta property="article:tag" content="Traefik">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://freemankevin.uk/images/avatar.jpg">
+
+
+<link rel="canonical" href="https://freemankevin.uk/2025/01/15/k8s-traefik/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://freemankevin.uk/2025/01/15/k8s-traefik/","path":"2025/01/15/k8s-traefik/","title":"如何在Kubernetes 环境中部署Traefik"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>如何在Kubernetes 环境中部署Traefik | Kevin's Notes</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4QX3P6CBBF"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-4QX3P6CBBF","only_pageview":false,"measure_protocol_api_secret":null,"enable":true}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?f30e496a439ca27b33fbf8949d960b00"></script>
+
+
+
+
+
+
+<!-- Google tag (gtag.js) - GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4QX3P6CBBF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4QX3P6CBBF', {
+    page_path: window.location.pathname,
+    send_page_view: true
+  });
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MPHHRS5F');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google Search Console verification -->
+<meta name="google-site-verification" content="3frXch6thZZdl3bIIbkBoQEXQVWw68nMWquSYiFpmhY" />
+
+<!-- Baidu Site Verification -->
+<meta name="baidu-site-verification" content="codeva-53cAgrDcIO" />
+
+<!-- Bing Site Verification -->
+<meta name="msvalidate.01" content="163141551EC7BC03EBD0FB765ED5C476" />
+
+<!-- Yandex Site Verification -->
+<meta name="yandex-verification" content="fc71ce89f1e2c38e" />
+
+<!-- SEO Meta Tags -->
+<meta name="description" content="A personal tech blog focusing on DevOps, MLOps, and AIOps practices">
+<meta name="keywords" content="DevOps, MLOps, AIOps, Kubernetes, Docker, CI/CD">
+<meta name="author" content="Freeman Kevin">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://freemankevin.uk/2025/01/15/k8s-traefik/">
+
+<!-- Open Graph / Social Media Meta Tags -->
+<meta property="og:title" content="如何在Kubernetes 环境中部署Traefik">
+<meta property="og:description" content="">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://freemankevin.uk/2025/01/15/k8s-traefik/">
+<meta property="og:site_name" content="Kevin's Notes">
+
+<!-- Schema.org markup for Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://freemankevin.uk/2025/01/15/k8s-traefik/"
+  },
+  "headline": "如何在Kubernetes 环境中部署Traefik",
+  "description": "",
+  "author": {
+    "@type": "Person",
+    "name": "Freeman Kevin"
+  },
+  "datePublished": "1736932225000",
+  "dateModified": "1737680061240",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kevin's Notes",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://freemankevin.uk/images/avatar.jpg"
+    }
+  }
+}
+</script>
+
+<!-- Microsoft Clarity -->
+<script>
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "pxsoj8b2ce");
+</script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Kevin's Notes" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kevin's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E8%A6%81%E6%B1%82"><span class="nav-number">1.</span> <span class="nav-text">环境要求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E8%A6%81%E6%B1%82"><span class="nav-number">1.1.</span> <span class="nav-text">基础环境要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E4%BF%A1%E6%81%AF"><span class="nav-number">1.2.</span> <span class="nav-text">版本信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Traefik"><span class="nav-number">2.</span> <span class="nav-text">安装 Traefik</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0-Helm-%E4%BB%93%E5%BA%93"><span class="nav-number">2.1.</span> <span class="nav-text">添加 Helm 仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">准备配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2-Traefik"><span class="nav-number">2.3.</span> <span class="nav-text">部署 Traefik</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-TLS"><span class="nav-number">3.</span> <span class="nav-text">配置 TLS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6"><span class="nav-number">3.1.</span> <span class="nav-text">生成证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-TLS-Secret"><span class="nav-number">3.2.</span> <span class="nav-text">创建 TLS Secret</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%AE%A4%E8%AF%81"><span class="nav-number">4.</span> <span class="nav-text">配置认证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-Basic-Auth"><span class="nav-number">4.1.</span> <span class="nav-text">创建 Basic Auth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-IngressRoute"><span class="nav-number">4.2.</span> <span class="nav-text">创建 IngressRoute</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%AE%A4%E8%AF%81%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-number">4.3.</span> <span class="nav-text">创建认证中间件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9A%B4%E9%9C%B2%E6%9C%8D%E5%8A%A1"><span class="nav-number">5.</span> <span class="nav-text">暴露服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E5%8F%B0"><span class="nav-number">6.</span> <span class="nav-text">访问控制台</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5"><span class="nav-number">7.</span> <span class="nav-text">常见问题排查</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E4%B9%A6%E9%97%AE%E9%A2%98"><span class="nav-number">7.1.</span> <span class="nav-text">证书问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98"><span class="nav-number">7.2.</span> <span class="nav-text">访问问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%9B%B4%E6%96%B0"><span class="nav-number">7.3.</span> <span class="nav-text">配置更新</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Freeman Kevin"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Freeman Kevin</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">75</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZyZWVtYW5rZXZpbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;freemankevin"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly94LmNvbS9jaGF0b3BzMjAyMw==" title="Twitter → https:&#x2F;&#x2F;x.com&#x2F;chatops2023"><i class="fab fa-x fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9ic2t5LmFwcC9wcm9maWxlL2ZyZWVtYW5rZXZpbi5ic2t5LnNvY2lhbA==" title="Bluesky → https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;freemankevin.bsky.social"><i class="fab fa-bluesky fa-fw"></i>Bluesky</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9tYXN0b2Rvbi5zb2NpYWwvQGZyZWVtYW5rZXZpbg==" title="Mastodon → https:&#x2F;&#x2F;mastodon.social&#x2F;@freemankevin"><i class="fab fa-mastodon fa-fw"></i>Mastodon</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://freemankevin.uk/2025/01/15/k8s-traefik/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Freeman Kevin">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kevin's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="如何在Kubernetes 环境中部署Traefik | Kevin's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何在Kubernetes 环境中部署Traefik
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-01-15 17:10:25" itemprop="dateCreated datePublished" datetime="2025-01-15T17:10:25+08:00">2025-01-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Kubernetes/" itemprop="url" rel="index"><span itemprop="name">Kubernetes</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2025/01/15/k8s-traefik/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2025/01/15/k8s-traefik/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 本文将详细介绍如何在 Kubernetes 集群中安装和配置带有 TLS 的 Traefik Ingress Controller。包括环境准备、安装配置、TLS 证书管理、认证设置以及常见问题排查等完整流程。</p>
+<span id="more"></span>
+
+<h2 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h2><h3 id="基础环境要求"><a href="#基础环境要求" class="headerlink" title="基础环境要求"></a>基础环境要求</h3><ul>
+<li>Kubernetes 集群 (版本 &gt;&#x3D; 1.16)</li>
+<li>Helm (版本 &gt;&#x3D; 3.9)</li>
+<li>kubectl 已配置可访问集群</li>
+</ul>
+<h3 id="版本信息"><a href="#版本信息" class="headerlink" title="版本信息"></a>版本信息</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 检查 helm 版本</span></span><br><span class="line">helm version</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装-Traefik"><a href="#安装-Traefik" class="headerlink" title="安装 Traefik"></a>安装 Traefik</h2><h3 id="添加-Helm-仓库"><a href="#添加-Helm-仓库" class="headerlink" title="添加 Helm 仓库"></a>添加 Helm 仓库</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 添加官方 helm 仓库</span></span><br><span class="line">helm repo add traefik https://traefik.github.io/charts</span><br><span class="line">helm repo update</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看可用版本</span></span><br><span class="line">helm search repo traefik/traefik -l</span><br></pre></td></tr></table></figure>
+
+<h3 id="准备配置文件"><a href="#准备配置文件" class="headerlink" title="准备配置文件"></a>准备配置文件</h3><p>创建 <code>values.yaml</code> 配置文件：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Traefik 基础配置</span></span><br><span class="line"><span class="attr">ingressRoute:</span></span><br><span class="line">  <span class="attr">dashboard:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="attr">ingressClass:</span></span><br><span class="line">  <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">isDefaultClass:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="attr">providers:</span></span><br><span class="line">  <span class="attr">kubernetesCRD:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">allowCrossNamespace:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">allowExternalNameServices:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">kubernetesIngress:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">allowExternalNameServices:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 日志配置</span></span><br><span class="line"><span class="attr">logs:</span></span><br><span class="line">  <span class="attr">general:</span></span><br><span class="line">    <span class="attr">level:</span> <span class="string">DEBUG</span></span><br><span class="line">  <span class="attr">access:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 服务配置</span></span><br><span class="line"><span class="attr">service:</span></span><br><span class="line">  <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">single:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">ClusterIP</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 额外参数</span></span><br><span class="line"><span class="attr">additionalArguments:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">&quot;--log.level=DEBUG&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="部署-Traefik"><a href="#部署-Traefik" class="headerlink" title="部署 Traefik"></a>部署 Traefik</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建命名空间并安装 Traefik</span></span><br><span class="line">helm install traefik traefik/traefik \</span><br><span class="line">  --namespace=traefik-v2 \</span><br><span class="line">  --create-namespace \</span><br><span class="line">  --values=values.yaml \</span><br><span class="line">  --version 25.0.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看部署状态</span></span><br><span class="line">kubectl get pods -n traefik-v2</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置-TLS"><a href="#配置-TLS" class="headerlink" title="配置 TLS"></a>配置 TLS</h2><h3 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建证书目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p tls &amp;&amp; <span class="built_in">cd</span> tls</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 CA 配置文件</span></span><br><span class="line"><span class="built_in">cat</span> &gt; openssl-ca.cnf &lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">[req]</span></span><br><span class="line"><span class="string">distinguished_name = req_distinguished_name</span></span><br><span class="line"><span class="string">x509_extensions = v3_ca</span></span><br><span class="line"><span class="string">default_days = 3650</span></span><br><span class="line"><span class="string">default_md = sha256</span></span><br><span class="line"><span class="string">prompt = no</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[req_distinguished_name]</span></span><br><span class="line"><span class="string">CN = My Root CA</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[v3_ca]</span></span><br><span class="line"><span class="string">subjectKeyIdentifier=hash</span></span><br><span class="line"><span class="string">authorityKeyIdentifier=keyid:always,issuer</span></span><br><span class="line"><span class="string">basicConstraints = critical, CA:true </span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建服务器证书配置</span></span><br><span class="line"><span class="built_in">cat</span> &gt; openssl-server.cnf &lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">[req]</span></span><br><span class="line"><span class="string">distinguished_name = req_distinguished_name</span></span><br><span class="line"><span class="string">x509_extensions = v3_req</span></span><br><span class="line"><span class="string">prompt = no</span></span><br><span class="line"><span class="string">default_days = 3650</span></span><br><span class="line"><span class="string">default_md = sha256</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[req_distinguished_name]</span></span><br><span class="line"><span class="string">CN = traefik.k8scluster.com</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[v3_req]</span></span><br><span class="line"><span class="string">keyUsage = digitalSignature, keyEncipherment</span></span><br><span class="line"><span class="string">extendedKeyUsage = serverAuth</span></span><br><span class="line"><span class="string">subjectAltName = @alt_names</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[alt_names]</span></span><br><span class="line"><span class="string">DNS.1 = traefik.k8scluster.com</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成证书</span></span><br><span class="line">openssl genrsa -out rootCA.key 2048</span><br><span class="line">openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 3650 -out rootCA.crt -config openssl-ca.cnf</span><br><span class="line">openssl genrsa -out server.key 2048</span><br><span class="line">openssl req -new -key server.key -out server.csr -config openssl-server.cnf</span><br><span class="line">openssl x509 -req -<span class="keyword">in</span> server.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out server.crt -days 3650 -sha256 -extensions v3_req -extfile openssl-server.cnf</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建-TLS-Secret"><a href="#创建-TLS-Secret" class="headerlink" title="创建 TLS Secret"></a>创建 TLS Secret</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl create secret tls traefik-ingress-dashboard \</span><br><span class="line">  --namespace traefik-v2 \</span><br><span class="line">  --key ./server.key \</span><br><span class="line">  --cert ./server.crt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证证书</span></span><br><span class="line">kubectl -n traefik-v2 get secret traefik-ingress-dashboard -o jsonpath=<span class="string">&quot;&#123;.data.tls\.crt&#125;&quot;</span> | <span class="built_in">base64</span> --decode | openssl x509 -inform pem -text -noout</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置认证"><a href="#配置认证" class="headerlink" title="配置认证"></a>配置认证</h2><h3 id="创建-Basic-Auth"><a href="#创建-Basic-Auth" class="headerlink" title="创建 Basic Auth"></a>创建 Basic Auth</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装 htpasswd 工具</span></span><br><span class="line">apt-get update &amp;&amp; apt-get install apache2-utils -y</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成密码</span></span><br><span class="line">htpasswd -nb admin &lt;your-password&gt; | kubectl create secret generic basic-auth \</span><br><span class="line">  --namespace=traefik-v2 \</span><br><span class="line">  --from-file=auth=/dev/stdin</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建-IngressRoute"><a href="#创建-IngressRoute" class="headerlink" title="创建 IngressRoute"></a>创建 IngressRoute</h3><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># traefik-websecure-dashboard.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">traefik.containo.us/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">IngressRoute</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">websecure-dashboard</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">traefik-v2</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">entryPoints:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">websecure</span></span><br><span class="line">  <span class="attr">routes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">match:</span> <span class="string">Host(`traefik.k8scluster.com`)</span> <span class="string">&amp;&amp;</span> <span class="string">(PathPrefix(`/dashboard`)</span> <span class="string">||</span> <span class="string">PathPrefix(`/api`))</span></span><br><span class="line">      <span class="attr">kind:</span> <span class="string">Rule</span></span><br><span class="line">      <span class="attr">services:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">api@internal</span></span><br><span class="line">          <span class="attr">kind:</span> <span class="string">TraefikService</span></span><br><span class="line">      <span class="attr">middlewares:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">basic-auth</span></span><br><span class="line">          <span class="attr">namespace:</span> <span class="string">traefik-v2</span></span><br><span class="line">  <span class="attr">tls:</span></span><br><span class="line">    <span class="attr">secretName:</span> <span class="string">traefik-ingress-dashboard</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="创建认证中间件"><a href="#创建认证中间件" class="headerlink" title="创建认证中间件"></a>创建认证中间件</h3><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># traefik-middleware.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">traefik.containo.us/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Middleware</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">basic-auth</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">traefik-v2</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">basicAuth:</span></span><br><span class="line">    <span class="attr">secret:</span> <span class="string">basic-auth</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="暴露服务"><a href="#暴露服务" class="headerlink" title="暴露服务"></a>暴露服务</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 配置 NodePort 服务</span></span><br><span class="line">kubectl patch svc traefik -n traefik-v2 -p <span class="string">&#x27;&#123;</span></span><br><span class="line"><span class="string">  &quot;spec&quot;: &#123;</span></span><br><span class="line"><span class="string">    &quot;type&quot;: &quot;NodePort&quot;,</span></span><br><span class="line"><span class="string">    &quot;ports&quot;: [</span></span><br><span class="line"><span class="string">      &#123;</span></span><br><span class="line"><span class="string">        &quot;name&quot;: &quot;web&quot;,</span></span><br><span class="line"><span class="string">        &quot;port&quot;: 80,</span></span><br><span class="line"><span class="string">        &quot;targetPort&quot;: &quot;web&quot;,</span></span><br><span class="line"><span class="string">        &quot;nodePort&quot;: 30882</span></span><br><span class="line"><span class="string">      &#125;,</span></span><br><span class="line"><span class="string">      &#123;</span></span><br><span class="line"><span class="string">        &quot;name&quot;: &quot;websecure&quot;,</span></span><br><span class="line"><span class="string">        &quot;port&quot;: 443,</span></span><br><span class="line"><span class="string">        &quot;targetPort&quot;: &quot;websecure&quot;,</span></span><br><span class="line"><span class="string">        &quot;nodePort&quot;: 30883</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    ]</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证服务状态</span></span><br><span class="line">kubectl get svc -n traefik-v2</span><br></pre></td></tr></table></figure>
+
+<h2 id="访问控制台"><a href="#访问控制台" class="headerlink" title="访问控制台"></a>访问控制台</h2><ol>
+<li>添加域名解析（本地测试可修改 hosts 文件）：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$&#123;NODE_IP&#125;</span> traefik.k8scluster.com&quot;</span> &gt;&gt; /etc/hosts</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>访问地址：</li>
+</ol>
+<ul>
+<li>Dashboard: <span class="exturl" data-url="aHR0cHM6Ly90cmFlZmlrLms4c2NsdXN0ZXIuY29tOjMwODgzL2Rhc2hib2FyZC8=">https://traefik.k8scluster.com:30883/dashboard/<i class="fa fa-external-link-alt"></i></span></li>
+<li>使用之前设置的用户名密码登录</li>
+</ul>
+<h2 id="常见问题排查"><a href="#常见问题排查" class="headerlink" title="常见问题排查"></a>常见问题排查</h2><h3 id="证书问题"><a href="#证书问题" class="headerlink" title="证书问题"></a>证书问题</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 检查证书是否正确创建</span></span><br><span class="line">kubectl get secret -n traefik-v2</span><br><span class="line">kubectl describe secret traefik-ingress-dashboard -n traefik-v2</span><br></pre></td></tr></table></figure>
+
+<h3 id="访问问题"><a href="#访问问题" class="headerlink" title="访问问题"></a>访问问题</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 检查 Pod 状态</span></span><br><span class="line">kubectl get pods -n traefik-v2</span><br><span class="line">kubectl describe pod -n traefik-v2 &lt;pod-name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查日志</span></span><br><span class="line">kubectl logs -n traefik-v2 &lt;pod-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置更新"><a href="#配置更新" class="headerlink" title="配置更新"></a>配置更新</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 更新 Traefik 配置</span></span><br><span class="line">helm upgrade traefik traefik/traefik \</span><br><span class="line">  --namespace=traefik-v2 \</span><br><span class="line">  --values=values.yaml</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Freeman Kevin
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://freemankevin.uk/2025/01/15/k8s-traefik/" title="如何在Kubernetes 环境中部署Traefik">https://freemankevin.uk/2025/01/15/k8s-traefik/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLW5kLzQuMC9jbg=="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Kubernetes/" rel="tag"># Kubernetes</a>
+              <a href="/tags/TLS/" rel="tag"># TLS</a>
+              <a href="/tags/NGINX/" rel="tag"># NGINX</a>
+              <a href="/tags/Traefik/" rel="tag"># Traefik</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/01/15/tls-minio/" rel="prev" title="MinIO TLS部署指南">
+                  <i class="fa fa-angle-left"></i> MinIO TLS部署指南
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/01/15/k8s-runner/" rel="next" title="如何在Kubernetes 环境中部署GitLab Runner">
+                  如何在Kubernetes 环境中部署GitLab Runner <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Freeman Kevin</span>
+  </div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL0ZyZWVtYW5LZXZpbi9GcmVlbWFuS2V2aW4uZ2l0aHViLmlv" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.24.0/algoliasearch-lite.umd.js" integrity="sha256-b2n6oSgG4C1stMT/yc/ChGszs9EY/Mhs6oltEjQbFCQ=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"freemankevin","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
