@@ -470,10 +470,10 @@ bing_site_verification: 163141551EC7BC03EBD0FB765ED5C476
 yandex_site_verification:
 
 # Baidu Webmaster tools verification
-baidu_site_verification: codeva-53cAgrDcIO
+# baidu_site_verification: codeva-53cAgrDcIO
 
 # Baidu Analytics
-baidu_analytics: f30e496a439ca27b33fbf8949d960b00
+# baidu_analytics: f30e496a439ca27b33fbf8949d960b00
 
 # Enable baidu push so that the blog will push the url to baidu automatically
 baidu_push: true
