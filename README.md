@@ -66,8 +66,8 @@
 ## Quick Start
 ```shell
 # clone project
-git clone https://github.com/FreemanKevin/hexo-blog.git
-cd hexo-blog
+git clone https://github.com/FreemanKevin/FreemanKevin.github.io.git
+cd FreemanKevin.github.io
 
 # run project
 git clone https://github.com/next-theme/hexo-theme-next themes/next
