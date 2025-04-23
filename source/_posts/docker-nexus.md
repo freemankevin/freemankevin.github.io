@@ -1,5 +1,5 @@
 ---
-title: 在Docker环境中部署Nexus的技术指南
+title: 在 Docker 环境中部署 Nexus 仓库
 date: 2025-04-22T15:14:25.000Z
 tags: [Docker, Nexus, Maven, PostgreSQL]
 categories: Development
