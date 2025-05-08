@@ -138,6 +138,32 @@ cloudflared tunnel --config C:\Users\Devops\.cloudflared\config.yml --origin-ca-
 2. 检查 Cloudflare 仪表盘中的 DNS 记录是否正确。
 3. 查看 `cloudflared` 日志（`C:\Users\Devops\.cloudflared\cloudflared.log`）以排查错误。
 
+### 添加系统服务
+为了方便启动和管理隧道，我们可以将上面的隧道共享服务添加到系统服务中：
+
+#### 添加服务
+```powershell
+# 以管理员身份打开 PowerShell
+# 创建系统服务
+sc create CloudflaredTunnel binPath= "C:\Program Files (x86)\cloudflared\cloudflared.exe tunnel --config C:\Users\Devops\.cloudflared\config.yml run share" start= auto DisplayName= "Cloudflare Tunnel Service"
+
+# 设置服务描述
+sc description CloudflaredTunnel "Cloudflare Tunnel for secure remote access"
+
+# 配置故障恢复（自动重启）
+sc failure CloudflaredTunnel reset= 30 actions= restart/5000
+
+
+# 启动服务
+sc start CloudflaredTunnel
+```
+添加后，`cloudflared` 将作为系统服务运行，无需手动启动。
+
+#### 卸载服务
+如果不再需要该服务，可以卸载：
+```powershell
+sc delete CloudflaredTunnel
+```
 ## 免费版限制
 
 - **带宽**：Cloudflare Tunnel 免费版没有明确的带宽限制，但可能对滥用行为进行限制。

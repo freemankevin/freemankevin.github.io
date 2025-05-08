@@ -150,3 +150,4 @@ _multiconfig.yml
 
 # 忽略 themes 目录下的所有文件
 themes/**/*
+.qodo
