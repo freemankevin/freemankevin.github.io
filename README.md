@@ -35,14 +35,6 @@
 </p>
 
 <p align="center">
-  🌟 <a href="https://freemankevin.uk">Visit Site</a> |
-  📖 <a href="https://freemankevin.uk/archives/">Archives</a> |
-  📊 <a href="https://freemankevin.uk/categories/">Categories</a> |
-  🔖 <a href="https://freemankevin.uk/tags/">Tags</a> |
-  📰 <a href="https://freemankevin.uk/atom.xml">RSS</a>
-</p>
-
-<p align="center">
   <a href="https://freemankevin.uk">
     <img src="https://raw.githubusercontent.com/FreemanKevin/freemankevin.github.io/gh-pages/images/screenshot.png" width="700" />
   </a>
@@ -54,14 +46,6 @@
     <a href="https://freemankevin.uk">freemankevin.uk</a>
   </em>
 </p>
-
-## 🛠 Tech Stack
-
-- **Framework**: [Hexo](https://hexo.io)
-- **Theme**: [NexT.Gemini](https://theme-next.js.org)
-- **Hosting**: GitHub Pages
-- **Search**: Algolia
-- **Container**: [Docker](https://hub.docker.com/r/freelabspace/freemankevin)
 
 ## Quick Start
 ```shell
@@ -84,32 +68,6 @@ hexo cl && hexo g && hexo algolia
 git add .
 git commit -m "update files"
 git push
-```
-
-## 🗂 Content Categories
-
-- DevOps Practices
-- Machine Learning Operations
-- CI/CD Pipelines
-- Security
-- Cloud Native
-
-## 🐳 Docker Usage
-
-Quick start with Docker:
-```bash
-docker run -d -p 80:80 freelabspace/freemankevin:latest
-```
-
-Or use Docker Compose:
-```yaml
-version: '3'
-services:
-  blog:
-    image: freelabspace/freemankevin:latest
-    ports:
-      - "80:80"
-    restart: unless-stopped
 ```
 
 ## 📄 License
