@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://freemankevin.uk/sitemap.xml 
