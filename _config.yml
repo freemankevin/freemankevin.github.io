@@ -106,9 +106,8 @@ theme: next
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: git@github.com:FreemanKevin/FreemanKevin.github.io.git
+  repo: https://github.com/freemankevin/freemankevin.github.io.git
   branch: gh-pages
-  message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}"
 
 algolia:
   applicationID: 'O3AB73GDVU'
