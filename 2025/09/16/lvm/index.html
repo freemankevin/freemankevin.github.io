@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="3frXch6thZZdl3bIIbkBoQEXQVWw68nMWquSYiFpmhY">
+  <meta name="msvalidate.01" content="163141551EC7BC03EBD0FB765ED5C476">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Source+Code+Pro:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=DM+Mono:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=monospace:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"freemankevin.uk","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.25.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Load Disqus","order":-1}},"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"O3AB73GDVU","apiKey":"b3f1048d604fe9a6c9648855741c1e6d","indexName":"freemankevin","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="A personal tech blog focusing on DevOps, MLOps, and AIOps practices">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Kevin&#39;s Notes">
+<meta property="og:url" content="https://freemankevin.uk/">
+<meta property="og:site_name" content="Kevin&#39;s Notes">
+<meta property="og:description" content="A personal tech blog focusing on DevOps, MLOps, and AIOps practices">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://freemankevin.uk/images/avatar.jpg">
+<meta property="article:published_time" content="2025-09-16T02:10:00.000Z">
+<meta property="article:modified_time" content="2025-10-21T03:34:40.415Z">
+<meta property="article:author" content="Freeman Kevin">
+<meta property="article:tag" content="LVM">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="数据迁移">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://freemankevin.uk/images/avatar.jpg">
+
+
+<link rel="canonical" href="https://freemankevin.uk/2025/09/16/lvm/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://freemankevin.uk/2025/09/16/lvm/","path":"2025/09/16/lvm/","title":"从传统分区到LVM统一存储的完整迁移实践"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>从传统分区到LVM统一存储的完整迁移实践 | Kevin's Notes</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4QX3P6CBBF"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-4QX3P6CBBF","only_pageview":false,"measure_protocol_api_secret":null,"enable":true}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/5.36.0/lite/builds/browser.umd.js" integrity="sha256-o49zoHLDPBm9WLg6AiliAVi3axCRTqe3ltTxLvhzAVg=" crossorigin="anonymous" defer></script><script src="/js/third-party/search/algolia-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+<!-- Google tag (gtag.js) - GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4QX3P6CBBF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4QX3P6CBBF', {
+    page_path: window.location.pathname,
+    send_page_view: true
+  });
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MPHHRS5F');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google Search Console verification -->
+<meta name="google-site-verification" content="3frXch6thZZdl3bIIbkBoQEXQVWw68nMWquSYiFpmhY" />
+
+<!-- Bing Site Verification -->
+<meta name="msvalidate.01" content="163141551EC7BC03EBD0FB765ED5C476" />
+
+<!-- SEO Meta Tags -->
+<meta name="description" content="A personal tech blog focusing on DevOps, MLOps, and AIOps practices">
+<meta name="keywords" content="DevOps, MLOps, AIOps, Kubernetes, Docker, CI/CD">
+<meta name="author" content="Freeman Kevin">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://freemankevin.uk/2025/09/16/lvm/">
+
+<!-- Open Graph / Social Media Meta Tags -->
+<meta property="og:title" content="从传统分区到LVM统一存储的完整迁移实践">
+<meta property="og:description" content="">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://freemankevin.uk/2025/09/16/lvm/">
+<meta property="og:site_name" content="Kevin's Notes">
+
+<!-- Schema.org markup for Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://freemankevin.uk/2025/09/16/lvm/"
+  },
+  "headline": "从传统分区到LVM统一存储的完整迁移实践",
+  "description": "",
+  "author": {
+    "@type": "Person",
+    "name": "Freeman Kevin"
+  },
+  "datePublished": "1757988600000",
+  "dateModified": "1761017680415",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kevin's Notes",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://freemankevin.uk/images/avatar.jpg"
+    }
+  }
+}
+</script>
+
+<!-- Microsoft Clarity -->
+<script>
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "pxsoj8b2ce");
+</script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Kevin's Notes" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kevin's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E8%83%8C%E6%99%AF%E4%B8%8E%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">项目背景与需求分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E5%A7%8B%E7%8E%AF%E5%A2%83%E7%8A%B6%E5%86%B5"><span class="nav-number">1.1.</span> <span class="nav-text">原始环境状况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E4%B8%B4%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">面临的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.3.</span> <span class="nav-text">目标架构设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LVM%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">LVM技术原理深度解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LVM%E6%9E%B6%E6%9E%84%E5%B1%82%E6%AC%A1"><span class="nav-number">2.1.</span> <span class="nav-text">LVM架构层次</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Physical-Volume-PV"><span class="nav-number">2.1.1.</span> <span class="nav-text">Physical Volume (PV)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Volume-Group-VG"><span class="nav-number">2.1.2.</span> <span class="nav-text">Volume Group (VG)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Logical-Volume-LV"><span class="nav-number">2.1.3.</span> <span class="nav-text">Logical Volume (LV)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LVM-vs-%E4%BC%A0%E7%BB%9F%E5%88%86%E5%8C%BA%E5%AF%B9%E6%AF%94"><span class="nav-number">2.2.</span> <span class="nav-text">LVM vs 传统分区对比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E6%96%BD%E6%96%B9%E6%A1%88%E8%AF%A6%E7%BB%86%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.</span> <span class="nav-text">实施方案详细步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B6%E6%AE%B5%E4%B8%80%EF%BC%9ALVM%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%9E%84%E5%BB%BA"><span class="nav-number">3.1.</span> <span class="nav-text">阶段一：LVM基础设施构建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-%E5%88%9B%E5%BB%BA%E7%89%A9%E7%90%86%E5%8D%B7"><span class="nav-number">3.1.1.</span> <span class="nav-text">1.1 创建物理卷</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-%E5%88%9B%E5%BB%BA%E5%8D%B7%E7%BB%84"><span class="nav-number">3.1.2.</span> <span class="nav-text">1.2 创建卷组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-%E5%88%9B%E5%BB%BA%E9%80%BB%E8%BE%91%E5%8D%B7"><span class="nav-number">3.1.3.</span> <span class="nav-text">1.3 创建逻辑卷</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%88%9B%E5%BB%BA"><span class="nav-number">3.1.4.</span> <span class="nav-text">1.4 文件系统创建</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B6%E6%AE%B5%E4%BA%8C%EF%BC%9A%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E7%AD%96%E7%95%A5%E4%B8%8E%E5%AE%9E%E6%96%BD"><span class="nav-number">3.2.</span> <span class="nav-text">阶段二：数据迁移策略与实施</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-%E8%BF%81%E7%A7%BB%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">3.2.1.</span> <span class="nav-text">2.1 迁移准备工作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-%E6%95%B0%E6%8D%AE%E5%AE%8C%E6%95%B4%E6%80%A7%E8%BF%81%E7%A7%BB"><span class="nav-number">3.2.2.</span> <span class="nav-text">2.2 数据完整性迁移</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-%E6%95%B0%E6%8D%AE%E5%AE%8C%E6%95%B4%E6%80%A7%E9%AA%8C%E8%AF%81"><span class="nav-number">3.2.3.</span> <span class="nav-text">2.3 数据完整性验证</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B6%E6%AE%B5%E4%B8%89%EF%BC%9A%E7%B3%BB%E7%BB%9F%E5%88%87%E6%8D%A2%E4%B8%8E%E8%BF%9B%E7%A8%8B%E5%A4%84%E7%90%86"><span class="nav-number">3.3.</span> <span class="nav-text">阶段三：系统切换与进程处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E8%BF%9B%E7%A8%8B%E6%8E%92%E6%9F%A5%E4%B8%8E%E5%A4%84%E7%90%86"><span class="nav-number">3.3.1.</span> <span class="nav-text">3.1 进程排查与处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-%E4%BC%98%E9%9B%85%E5%81%9C%E6%AD%A2%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.3.2.</span> <span class="nav-text">3.2 优雅停止服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-%E5%AE%89%E5%85%A8%E5%8D%B8%E8%BD%BD%E4%B8%8E%E5%88%87%E6%8D%A2"><span class="nav-number">3.3.3.</span> <span class="nav-text">3.3 安全卸载与切换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B6%E6%AE%B5%E5%9B%9B%EF%BC%9A%E5%AD%98%E5%82%A8%E6%B1%A0%E6%89%A9%E5%B1%95"><span class="nav-number">3.4.</span> <span class="nav-text">阶段四：存储池扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-%E7%AC%AC%E4%BA%8C%E5%9D%97%E7%A3%81%E7%9B%98%E5%A4%84%E7%90%86"><span class="nav-number">3.4.1.</span> <span class="nav-text">4.1 第二块磁盘处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-%E6%89%A9%E5%B1%95LVM%E5%AD%98%E5%82%A8%E6%B1%A0"><span class="nav-number">3.4.2.</span> <span class="nav-text">4.2 扩展LVM存储池</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-%E9%AA%8C%E8%AF%81%E6%89%A9%E5%B1%95%E7%BB%93%E6%9E%9C"><span class="nav-number">3.4.3.</span> <span class="nav-text">4.3 验证扩展结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B6%E6%AE%B5%E4%BA%94%EF%BC%9A%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E4%B8%8E%E9%AA%8C%E8%AF%81"><span class="nav-number">3.5.</span> <span class="nav-text">阶段五：系统配置与验证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-%E6%9B%B4%E6%96%B0%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE"><span class="nav-number">3.5.1.</span> <span class="nav-text">5.1 更新系统配置</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Freeman Kevin"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Freeman Kevin</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZyZWVtYW5rZXZpbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;freemankevin"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly94LmNvbS9jaGF0b3BzMjAyMw==" title="Twitter → https:&#x2F;&#x2F;x.com&#x2F;chatops2023"><i class="fab fa-x fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9ic2t5LmFwcC9wcm9maWxlL2ZyZWVtYW5rZXZpbi5ic2t5LnNvY2lhbA==" title="Bluesky → https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;freemankevin.bsky.social"><i class="fab fa-bluesky fa-fw"></i>Bluesky</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9tYXN0b2Rvbi5zb2NpYWwvQGZyZWVtYW5rZXZpbg==" title="Mastodon → https:&#x2F;&#x2F;mastodon.social&#x2F;@freemankevin"><i class="fab fa-mastodon fa-fw"></i>Mastodon</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://freemankevin.uk/2025/09/16/lvm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Freeman Kevin">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kevin's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="从传统分区到LVM统一存储的完整迁移实践 | Kevin's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          从传统分区到LVM统一存储的完整迁移实践
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-09-16 10:10:00" itemprop="dateCreated datePublished" datetime="2025-09-16T10:10:00+08:00">2025-09-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2025/09/16/lvm/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2025/09/16/lvm/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在企业级Linux服务器管理中，存储扩展和数据迁移是运维工程师经常面临的挑战。本文将详细记录一次真实的生产环境存储重构项目：将分散在多个传统分区的数据统一迁移到LVM（Logical Volume Manager）管理的大容量存储中，实现存储的统一管理和动态扩展。</p>
+<span id="more"></span>
+
+<h2 id="项目背景与需求分析"><a href="#项目背景与需求分析" class="headerlink" title="项目背景与需求分析"></a>项目背景与需求分析</h2><h3 id="原始环境状况"><a href="#原始环境状况" class="headerlink" title="原始环境状况"></a>原始环境状况</h3><p>我们的服务器配置如下：</p>
+<ul>
+<li>系统盘：SDA 446.6GB（根分区、EFI分区）</li>
+<li>数据盘1：NVMe0n1 3.5TB（已分区，挂载到 <code>/data</code>）</li>
+<li>数据盘2：NVMe1n1 3.5TB（未使用）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NAME               MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS</span><br><span class="line">sda                  8:0    0 446.6G  0 disk</span><br><span class="line">├─sda1               8:1    0     1G  0 part /boot/efi</span><br><span class="line">├─sda2               8:2    0 445.6G  0 part /</span><br><span class="line">└─sda3               8:3    0    65M  0 part</span><br><span class="line">nvme0n1            259:0    0   3.5T  0 disk</span><br><span class="line">└─nvme0n1p1        259:3    0 931.3G  0 part /data</span><br><span class="line">nvme1n1            259:1    0   3.5T  0 disk</span><br></pre></td></tr></table></figure>
+
+<h3 id="面临的问题"><a href="#面临的问题" class="headerlink" title="面临的问题"></a>面临的问题</h3><ol>
+<li><strong>存储分散</strong>：数据分散在 <code>/data</code> 和 <code>/home</code> 等多个挂载点</li>
+<li><strong>扩展困难</strong>：传统分区无法动态调整大小</li>
+<li><strong>资源浪费</strong>：NVMe1n1 完全未使用</li>
+<li><strong>管理复杂</strong>：多个独立分区增加了管理复杂度</li>
+</ol>
+<h3 id="目标架构设计"><a href="#目标架构设计" class="headerlink" title="目标架构设计"></a>目标架构设计</h3><p>设计一个统一的LVM存储架构：</p>
+<ul>
+<li>将两块NVMe盘整合为单一卷组（Volume Group）</li>
+<li>创建大容量逻辑卷，提供约7TB可用空间</li>
+<li>通过软链接保持应用程序路径兼容性</li>
+<li>实现存储的统一管理和动态扩展能力</li>
+</ul>
+<h2 id="LVM技术原理深度解析"><a href="#LVM技术原理深度解析" class="headerlink" title="LVM技术原理深度解析"></a>LVM技术原理深度解析</h2><h3 id="LVM架构层次"><a href="#LVM架构层次" class="headerlink" title="LVM架构层次"></a>LVM架构层次</h3><p>LVM采用三层架构设计，从底层到上层分别是：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">应用层          文件系统 (ext4/xfs)</span><br><span class="line">逻辑层    ←     逻辑卷 (Logical Volume)</span><br><span class="line">组管理层  ←     卷组 (Volume Group)  </span><br><span class="line">物理层    ←     物理卷 (Physical Volume)</span><br><span class="line">硬件层          物理磁盘 (/dev/nvme0n1, /dev/nvme1n1)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Physical-Volume-PV"><a href="#Physical-Volume-PV" class="headerlink" title="Physical Volume (PV)"></a>Physical Volume (PV)</h4><p>物理卷是LVM的基础构建块，将物理存储设备（硬盘、分区）转换为LVM可管理的格式：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># PV创建过程中的关键操作</span></span><br><span class="line">pvcreate /dev/nvme1n1</span><br><span class="line"><span class="comment"># 在磁盘开头写入LVM标签和元数据</span></span><br><span class="line"><span class="comment"># 划分PE (Physical Extent) 单位，默认4MB</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Volume-Group-VG"><a href="#Volume-Group-VG" class="headerlink" title="Volume Group (VG)"></a>Volume Group (VG)</h4><p>卷组将多个物理卷聚合为统一的存储池：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vgcreate data_vg /dev/nvme1n1</span><br><span class="line"><span class="comment"># 创建卷组元数据</span></span><br><span class="line"><span class="comment"># 建立PE到VG的映射关系</span></span><br><span class="line"><span class="comment"># 提供统一的存储地址空间</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Logical-Volume-LV"><a href="#Logical-Volume-LV" class="headerlink" title="Logical Volume (LV)"></a>Logical Volume (LV)</h4><p>逻辑卷是用户实际使用的存储单元，具有以下特性：</p>
+<ul>
+<li><strong>动态扩展</strong>：可在线扩展容量</li>
+<li><strong>快照支持</strong>：支持一致性备份</li>
+<li><strong>条带化</strong>：支持多磁盘并行I&#x2F;O</li>
+</ul>
+<h3 id="LVM-vs-传统分区对比"><a href="#LVM-vs-传统分区对比" class="headerlink" title="LVM vs 传统分区对比"></a>LVM vs 传统分区对比</h3><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>传统分区</th>
+<th>LVM</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>大小调整</td>
+<td>困难，通常需要重建</td>
+<td>在线动态调整</td>
+</tr>
+<tr>
+<td>跨磁盘</td>
+<td>不支持</td>
+<td>支持跨多个物理磁盘</td>
+</tr>
+<tr>
+<td>快照</td>
+<td>不支持</td>
+<td>支持CoW快照</td>
+</tr>
+<tr>
+<td>性能</td>
+<td>单磁盘性能</td>
+<td>支持条带化提升性能</td>
+</tr>
+<tr>
+<td>管理复杂度</td>
+<td>简单</td>
+<td>中等，但功能强大</td>
+</tr>
+</tbody></table>
+<h2 id="实施方案详细步骤"><a href="#实施方案详细步骤" class="headerlink" title="实施方案详细步骤"></a>实施方案详细步骤</h2><h3 id="阶段一：LVM基础设施构建"><a href="#阶段一：LVM基础设施构建" class="headerlink" title="阶段一：LVM基础设施构建"></a>阶段一：LVM基础设施构建</h3><h4 id="1-1-创建物理卷"><a href="#1-1-创建物理卷" class="headerlink" title="1.1 创建物理卷"></a>1.1 创建物理卷</h4><p>首先将NVMe1n1磁盘转换为LVM物理卷：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建物理卷，写入LVM元数据</span></span><br><span class="line">pvcreate /dev/nvme1n1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证PV创建结果</span></span><br><span class="line">pvdisplay /dev/nvme1n1</span><br></pre></td></tr></table></figure>
+
+<p>物理卷创建过程中，LVM会在磁盘开头写入以下信息：</p>
+<ul>
+<li>LVM标签（LVM2_member）</li>
+<li>物理卷UUID</li>
+<li>卷组名称</li>
+<li>PE大小和数量</li>
+</ul>
+<h4 id="1-2-创建卷组"><a href="#1-2-创建卷组" class="headerlink" title="1.2 创建卷组"></a>1.2 创建卷组</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建卷组，将PV加入存储池</span></span><br><span class="line">vgcreate data_vg /dev/nvme1n1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看卷组信息</span></span><br><span class="line">vgdisplay data_vg</span><br></pre></td></tr></table></figure>
+
+<p>卷组创建后的关键参数：</p>
+<ul>
+<li><strong>PE Size</strong>: 4.00 MiB（默认）</li>
+<li><strong>Total PE</strong>: 约915,707个PE</li>
+<li><strong>Allocatable</strong>: 是否可分配空间</li>
+</ul>
+<h4 id="1-3-创建逻辑卷"><a href="#1-3-创建逻辑卷" class="headerlink" title="1.3 创建逻辑卷"></a>1.3 创建逻辑卷</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建逻辑卷，使用所有可用空间</span></span><br><span class="line">lvcreate -l 100%FREE -n data1_lv data_vg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证逻辑卷状态</span></span><br><span class="line">lvdisplay /dev/data_vg/data1_lv</span><br></pre></td></tr></table></figure>
+
+<p>关键参数说明：</p>
+<ul>
+<li><code>-l 100%FREE</code>: 使用所有可用的逻辑分区单元</li>
+<li><code>-n data1_lv</code>: 指定逻辑卷名称</li>
+<li><code>data_vg</code>: 目标卷组名称</li>
+</ul>
+<h4 id="1-4-文件系统创建"><a href="#1-4-文件系统创建" class="headerlink" title="1.4 文件系统创建"></a>1.4 文件系统创建</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建ext4文件系统</span></span><br><span class="line">mkfs.ext4 /dev/data_vg/data1_lv</span><br><span class="line"></span><br><span class="line"><span class="comment"># 优化参数（可选）</span></span><br><span class="line">mkfs.ext4 -b 4096 -E stride=32,stripe-width=64 /dev/data_vg/data1_lv</span><br></pre></td></tr></table></figure>
+
+<h3 id="阶段二：数据迁移策略与实施"><a href="#阶段二：数据迁移策略与实施" class="headerlink" title="阶段二：数据迁移策略与实施"></a>阶段二：数据迁移策略与实施</h3><h4 id="2-1-迁移准备工作"><a href="#2-1-迁移准备工作" class="headerlink" title="2.1 迁移准备工作"></a>2.1 迁移准备工作</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建挂载点</span></span><br><span class="line"><span class="built_in">mkdir</span> /data1</span><br><span class="line">mount /dev/data_vg/data1_lv /data1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建目标目录结构</span></span><br><span class="line"><span class="built_in">mkdir</span> /data1/data_backup</span><br><span class="line"><span class="built_in">mkdir</span> /data1/home_backup</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-数据完整性迁移"><a href="#2-2-数据完整性迁移" class="headerlink" title="2.2 数据完整性迁移"></a>2.2 数据完整性迁移</h4><p>使用rsync进行增量同步，保证数据一致性：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 迁移/data数据，保持所有属性</span></span><br><span class="line"><span class="built_in">nohup</span> rsync -avxHAX --progress \</span><br><span class="line">    --exclude=<span class="string">&#x27;lost+found&#x27;</span> \</span><br><span class="line">    /data/ /data1/data_backup/ \</span><br><span class="line">    &gt; /data1/data_backup.log 2&gt;&amp;1 &amp;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 迁移/home数据（确保没有用户登陆，已登陆用户请踢出）</span></span><br><span class="line"><span class="built_in">nohup</span> rsync -avxHAX --progress \</span><br><span class="line">    --exclude=<span class="string">&#x27;lost+found&#x27;</span> \</span><br><span class="line">    /home/ /data1/home_backup/ \</span><br><span class="line">    &gt; /data1/home_backup.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+
+<p>rsync参数详解：</p>
+<ul>
+<li><code>-a</code>: 归档模式，保持权限、时间戳等</li>
+<li><code>-v</code>: 详细输出</li>
+<li><code>-x</code>: 不跨文件系统</li>
+<li><code>-H</code>: 保持硬链接</li>
+<li><code>-A</code>: 保持ACL</li>
+<li><code>-X</code>: 保持扩展属性</li>
+<li><code>--progress</code>: 显示进度</li>
+</ul>
+<h4 id="2-3-数据完整性验证"><a href="#2-3-数据完整性验证" class="headerlink" title="2.3 数据完整性验证"></a>2.3 数据完整性验证</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 比较文件数量</span></span><br><span class="line">find /data -<span class="built_in">type</span> f | <span class="built_in">wc</span> -l</span><br><span class="line">find /data1/data_backup -<span class="built_in">type</span> f | <span class="built_in">wc</span> -l</span><br><span class="line"></span><br><span class="line"><span class="comment"># 比较总大小</span></span><br><span class="line"><span class="built_in">du</span> -sh /data</span><br><span class="line"><span class="built_in">du</span> -sh /data1/data_backup</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用校验和验证（可选，耗时较长）</span></span><br><span class="line">find /data -<span class="built_in">type</span> f -<span class="built_in">exec</span> <span class="built_in">md5sum</span> &#123;&#125; \; | <span class="built_in">sort</span> &gt; /tmp/original.md5</span><br><span class="line"><span class="built_in">cd</span> /data1/data_backup</span><br><span class="line">find . -<span class="built_in">type</span> f -<span class="built_in">exec</span> <span class="built_in">md5sum</span> &#123;&#125; \; | <span class="built_in">sort</span> &gt; /tmp/backup.md5</span><br><span class="line">diff /tmp/original.md5 /tmp/backup.md5</span><br></pre></td></tr></table></figure>
+
+<h3 id="阶段三：系统切换与进程处理"><a href="#阶段三：系统切换与进程处理" class="headerlink" title="阶段三：系统切换与进程处理"></a>阶段三：系统切换与进程处理</h3><h4 id="3-1-进程排查与处理"><a href="#3-1-进程排查与处理" class="headerlink" title="3.1 进程排查与处理"></a>3.1 进程排查与处理</h4><p>在卸载原分区前，必须确保没有进程占用：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查找占用/data的进程</span></span><br><span class="line">lsof +D /data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例输出分析</span></span><br><span class="line">COMMAND       PID USER   FD   TYPE DEVICE   SIZE/OFF     NODE NAME</span><br><span class="line">sftp-serv 1528862 root    3r   REG  259,3 8776906927 11273975 /data/opt/...</span><br></pre></td></tr></table></figure>
+
+<p>发现SFTP进程正在传输大文件，这解释了为什么”静态文件”会有进程占用。</p>
+<h4 id="3-2-优雅停止服务"><a href="#3-2-优雅停止服务" class="headerlink" title="3.2 优雅停止服务"></a>3.2 优雅停止服务</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 停止相关服务</span></span><br><span class="line">systemctl stop docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># 强制终止占用进程（谨慎使用）</span></span><br><span class="line">fuser -km /data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者单独终止特定进程</span></span><br><span class="line"><span class="built_in">kill</span> -15 1528862  <span class="comment"># 温和终止</span></span><br><span class="line"><span class="built_in">kill</span> -9 1528862   <span class="comment"># 强制终止</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3-安全卸载与切换"><a href="#3-3-安全卸载与切换" class="headerlink" title="3.3 安全卸载与切换"></a>3.3 安全卸载与切换</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 备份fstab</span></span><br><span class="line"><span class="built_in">cp</span> /etc/fstab /etc/fstab.backup</span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载原分区</span></span><br><span class="line">umount /data</span><br><span class="line"><span class="comment"># 如果busy，使用懒卸载</span></span><br><span class="line">umount -l /data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重命名原目录（保留备份）</span></span><br><span class="line"><span class="built_in">mv</span> /data /data.old</span><br><span class="line"><span class="built_in">mv</span> /home /home.old</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建软链接</span></span><br><span class="line"><span class="built_in">ln</span> -s /data1/data_backup /data</span><br><span class="line"><span class="built_in">ln</span> -s /data1/home_backup /home</span><br></pre></td></tr></table></figure>
+
+<h3 id="阶段四：存储池扩展"><a href="#阶段四：存储池扩展" class="headerlink" title="阶段四：存储池扩展"></a>阶段四：存储池扩展</h3><h4 id="4-1-第二块磁盘处理"><a href="#4-1-第二块磁盘处理" class="headerlink" title="4.1 第二块磁盘处理"></a>4.1 第二块磁盘处理</h4><p>NVMe0n1已有分区表，需要清理：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 清除分区表和文件系统签名</span></span><br><span class="line">wipefs -a /dev/nvme0n1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出示例</span></span><br><span class="line">/dev/nvme0n1: 8 bytes were erased at offset 0x00000200 (gpt): 45 46 49 20 50 41 52 54</span><br><span class="line">/dev/nvme0n1: 8 bytes were erased at offset 0x37e3ee55e00 (gpt): 45 46 49 20 50 41 52 54</span><br><span class="line">/dev/nvme0n1: 2 bytes were erased at offset 0x000001fe (PMBR): 55 aa</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-扩展LVM存储池"><a href="#4-2-扩展LVM存储池" class="headerlink" title="4.2 扩展LVM存储池"></a>4.2 扩展LVM存储池</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将新磁盘加入物理卷</span></span><br><span class="line">pvcreate /dev/nvme0n1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 扩展卷组</span></span><br><span class="line">vgextend data_vg /dev/nvme0n1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 扩展逻辑卷</span></span><br><span class="line">lvextend -l +100%FREE /dev/data_vg/data1_lv</span><br><span class="line"></span><br><span class="line"><span class="comment"># 扩展文件系统</span></span><br><span class="line">resize2fs /dev/data_vg/data1_lv</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-3-验证扩展结果"><a href="#4-3-验证扩展结果" class="headerlink" title="4.3 验证扩展结果"></a>4.3 验证扩展结果</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看存储状态</span></span><br><span class="line">pvdisplay</span><br><span class="line">vgdisplay data_vg</span><br><span class="line">lvdisplay /dev/data_vg/data1_lv</span><br><span class="line"><span class="built_in">df</span> -Th</span><br></pre></td></tr></table></figure>
+
+<h3 id="阶段五：系统配置与验证"><a href="#阶段五：系统配置与验证" class="headerlink" title="阶段五：系统配置与验证"></a>阶段五：系统配置与验证</h3><h4 id="5-1-更新系统配置"><a href="#5-1-更新系统配置" class="headerlink" title="5.1 更新系统配置"></a>5.1 更新系统配置</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 更新fstab，添加新挂载项</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;/dev/data_vg/data1_lv /data1 ext4 defaults 0 2&quot;</span> &gt;&gt; /etc/fstab</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证fstab语法</span></span><br><span class="line">mount -a</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Freeman Kevin
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://freemankevin.uk/2025/09/16/lvm/" title="从传统分区到LVM统一存储的完整迁移实践">https://freemankevin.uk/2025/09/16/lvm/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLW5kLzQuMC9jbg=="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/LVM/" rel="tag"># LVM</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/" rel="tag"># 数据迁移</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/08/13/docker-manifest/" rel="prev" title="Harbor 多架构镜像管理完整指南">
+                  <i class="fa fa-angle-left"></i> Harbor 多架构镜像管理完整指南
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Freeman Kevin</span>
+  </div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL0ZyZWVtYW5LZXZpbi9GcmVlbWFuS2V2aW4uZ2l0aHViLmlv" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"freemankevin","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js" defer></script>
+
+</body>
+</html>

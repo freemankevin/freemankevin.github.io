@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="3frXch6thZZdl3bIIbkBoQEXQVWw68nMWquSYiFpmhY">
+  <meta name="msvalidate.01" content="163141551EC7BC03EBD0FB765ED5C476">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Source+Code+Pro:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=DM+Mono:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=monospace:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"freemankevin.uk","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.25.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Load Disqus","order":-1}},"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"O3AB73GDVU","apiKey":"b3f1048d604fe9a6c9648855741c1e6d","indexName":"freemankevin","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="A personal tech blog focusing on DevOps, MLOps, and AIOps practices">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Kevin&#39;s Notes">
+<meta property="og:url" content="https://freemankevin.uk/">
+<meta property="og:site_name" content="Kevin&#39;s Notes">
+<meta property="og:description" content="A personal tech blog focusing on DevOps, MLOps, and AIOps practices">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://freemankevin.uk/images/avatar.jpg">
+<meta property="article:published_time" content="2025-01-10T01:57:25.000Z">
+<meta property="article:modified_time" content="2025-10-21T03:34:40.404Z">
+<meta property="article:author" content="Freeman Kevin">
+<meta property="article:tag" content="Development">
+<meta property="article:tag" content="Https">
+<meta property="article:tag" content="Minica">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://freemankevin.uk/images/avatar.jpg">
+
+
+<link rel="canonical" href="https://freemankevin.uk/2025/01/10/Minica/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://freemankevin.uk/2025/01/10/Minica/","path":"2025/01/10/Minica/","title":"开发环境中生成自签名证书"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>开发环境中生成自签名证书 | Kevin's Notes</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4QX3P6CBBF"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-4QX3P6CBBF","only_pageview":false,"measure_protocol_api_secret":null,"enable":true}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/5.36.0/lite/builds/browser.umd.js" integrity="sha256-o49zoHLDPBm9WLg6AiliAVi3axCRTqe3ltTxLvhzAVg=" crossorigin="anonymous" defer></script><script src="/js/third-party/search/algolia-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+<!-- Google tag (gtag.js) - GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4QX3P6CBBF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4QX3P6CBBF', {
+    page_path: window.location.pathname,
+    send_page_view: true
+  });
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MPHHRS5F');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google Search Console verification -->
+<meta name="google-site-verification" content="3frXch6thZZdl3bIIbkBoQEXQVWw68nMWquSYiFpmhY" />
+
+<!-- Bing Site Verification -->
+<meta name="msvalidate.01" content="163141551EC7BC03EBD0FB765ED5C476" />
+
+<!-- SEO Meta Tags -->
+<meta name="description" content="A personal tech blog focusing on DevOps, MLOps, and AIOps practices">
+<meta name="keywords" content="DevOps, MLOps, AIOps, Kubernetes, Docker, CI/CD">
+<meta name="author" content="Freeman Kevin">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://freemankevin.uk/2025/01/10/Minica/">
+
+<!-- Open Graph / Social Media Meta Tags -->
+<meta property="og:title" content="开发环境中生成自签名证书">
+<meta property="og:description" content="">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://freemankevin.uk/2025/01/10/Minica/">
+<meta property="og:site_name" content="Kevin's Notes">
+
+<!-- Schema.org markup for Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://freemankevin.uk/2025/01/10/Minica/"
+  },
+  "headline": "开发环境中生成自签名证书",
+  "description": "",
+  "author": {
+    "@type": "Person",
+    "name": "Freeman Kevin"
+  },
+  "datePublished": "1736474245000",
+  "dateModified": "1761017680404",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kevin's Notes",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://freemankevin.uk/images/avatar.jpg"
+    }
+  }
+}
+</script>
+
+<!-- Microsoft Clarity -->
+<script>
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "pxsoj8b2ce");
+</script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Kevin's Notes" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kevin's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-minica"><span class="nav-number">1.</span> <span class="nav-text">安装 minica</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#macOS"><span class="nav-number">1.1.</span> <span class="nav-text">macOS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows"><span class="nav-number">1.2.</span> <span class="nav-text">Windows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-CentOS-Debian"><span class="nav-number">1.3.</span> <span class="nav-text">Linux (CentOS&#x2F;Debian)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%BA%90%E4%BB%A3%E7%A0%81%E5%AE%89%E8%A3%85"><span class="nav-number">1.3.1.</span> <span class="nav-text">使用源代码安装</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%A0%B9%E8%AF%81%E4%B9%A6%E5%92%8C%E7%A7%81%E9%92%A5"><span class="nav-number">2.</span> <span class="nav-text">生成根证书和私钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E6%9C%AC%E5%9C%B0%E5%BC%80%E5%8F%91%E5%9F%9F%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6"><span class="nav-number">3.</span> <span class="nav-text">为本地开发域生成证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%A0%B9%E8%AF%81%E4%B9%A6"><span class="nav-number">4.</span> <span class="nav-text">安装根证书</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#macOS-1"><span class="nav-number">4.1.</span> <span class="nav-text">macOS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-1"><span class="nav-number">4.2.</span> <span class="nav-text">Windows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-CentOS-Debian-1"><span class="nav-number">4.3.</span> <span class="nav-text">Linux (CentOS&#x2F;Debian)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%9C%AC%E5%9C%B0%E5%BC%80%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">5.</span> <span class="nav-text">配置本地开发服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-hosts-%E6%96%87%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">修改 hosts 文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#macOS-Linux"><span class="nav-number">6.1.</span> <span class="nav-text">macOS &#x2F; Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-2"><span class="nav-number">6.2.</span> <span class="nav-text">Windows</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E6%9C%AC%E5%9C%B0%E7%AB%99%E7%82%B9"><span class="nav-number">7.</span> <span class="nav-text">访问本地站点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">7.1.</span> <span class="nav-text">注意事项</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Freeman Kevin"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Freeman Kevin</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZyZWVtYW5rZXZpbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;freemankevin"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly94LmNvbS9jaGF0b3BzMjAyMw==" title="Twitter → https:&#x2F;&#x2F;x.com&#x2F;chatops2023"><i class="fab fa-x fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9ic2t5LmFwcC9wcm9maWxlL2ZyZWVtYW5rZXZpbi5ic2t5LnNvY2lhbA==" title="Bluesky → https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;freemankevin.bsky.social"><i class="fab fa-bluesky fa-fw"></i>Bluesky</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9tYXN0b2Rvbi5zb2NpYWwvQGZyZWVtYW5rZXZpbg==" title="Mastodon → https:&#x2F;&#x2F;mastodon.social&#x2F;@freemankevin"><i class="fab fa-mastodon fa-fw"></i>Mastodon</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://freemankevin.uk/2025/01/10/Minica/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Freeman Kevin">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kevin's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="开发环境中生成自签名证书 | Kevin's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          开发环境中生成自签名证书
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-01-10 09:57:25" itemprop="dateCreated datePublished" datetime="2025-01-10T09:57:25+08:00">2025-01-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Development/" itemprop="url" rel="index"><span itemprop="name">Development</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2025/01/10/Minica/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2025/01/10/Minica/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在本篇文章中，我们将介绍如何使用轻量级工具 <code>minica</code> 在本地开发环境中生成自签名证书，支持 macOS、Windows 和 Linux（包括 CentOS 和 Debian 系列）。内容涵盖安装方法、证书生成、根证书的安装与信任配置，以及如何在本地开发服务器（如 NGINX）中集成 HTTPS 支持。通过本教程，你可以快速实现开发环境的 HTTPS 配置，让本地站点更加安全、专业，且无需依赖外部 CA。</p>
+<span id="more"></span>
+<h2 id="安装-minica"><a href="#安装-minica" class="headerlink" title="安装 minica"></a>安装 <code>minica</code></h2><h3 id="macOS"><a href="#macOS" class="headerlink" title="macOS"></a>macOS</h3><p>通过 Homebrew 安装：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">brew install minica</span><br></pre></td></tr></table></figure>
+
+<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><ol>
+<li>从 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pzaGEvbWluaWNhL3JlbGVhc2Vz">minica GitHub<i class="fa fa-external-link-alt"></i></span> 下载最新版本的 <code>minica.exe</code>。</li>
+<li>将 <code>minica.exe</code> 移动到系统路径目录（如 <code>C:\Windows\System32</code>），方便全局调用。</li>
+</ol>
+<h3 id="Linux-CentOS-Debian"><a href="#Linux-CentOS-Debian" class="headerlink" title="Linux (CentOS&#x2F;Debian)"></a>Linux (CentOS&#x2F;Debian)</h3><h4 id="使用源代码安装"><a href="#使用源代码安装" class="headerlink" title="使用源代码安装"></a>使用源代码安装</h4><ol>
+<li><p>确保系统已安装 Go 编译环境。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo yum install golang  # CentOS</span><br><span class="line">sudo apt install golang  # Debian/Ubuntu</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>克隆 <code>minica</code> 仓库并编译：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/jsha/minica.git</span><br><span class="line">cd minica</span><br><span class="line">go build</span><br></pre></td></tr></table></figure>
+
+<p>编译完成后，你会在当前目录下得到 <code>minica</code> 可执行文件。</p>
+</li>
+<li><p>将 <code>minica</code> 文件移动到 <code>/usr/local/bin</code>，以便全局使用：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo mv minica /usr/local/bin/</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="生成根证书和私钥"><a href="#生成根证书和私钥" class="headerlink" title="生成根证书和私钥"></a>生成根证书和私钥</h2><p>运行以下命令生成根证书和私钥：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">minica</span><br></pre></td></tr></table></figure>
+
+<p>生成的文件：</p>
+<ul>
+<li><code>minica.pem</code>：根证书</li>
+<li><code>minica-key.pem</code>：根证书的私钥</li>
+</ul>
+<h2 id="为本地开发域生成证书"><a href="#为本地开发域生成证书" class="headerlink" title="为本地开发域生成证书"></a>为本地开发域生成证书</h2><p>以 <code>example.local</code> 为例，生成域名证书：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">minica --domains example.local</span><br></pre></td></tr></table></figure>
+
+<p>生成的目录结构：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── example.local/</span><br><span class="line">│   ├── cert.pem         # 域名证书</span><br><span class="line">│   └── key.pem          # 域名证书的私钥</span><br><span class="line">├── minica.pem           # 根证书</span><br><span class="line">└── minica-key.pem       # 根证书的私钥</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="安装根证书"><a href="#安装根证书" class="headerlink" title="安装根证书"></a>安装根证书</h2><h3 id="macOS-1"><a href="#macOS-1" class="headerlink" title="macOS"></a>macOS</h3><ol>
+<li>打开 <strong>钥匙串访问</strong> (Keychain Access)。</li>
+<li>选择 <code>文件 -&gt; 导入项目</code>，导入 <code>minica.pem</code>。</li>
+<li>在 <strong>系统</strong> 钥匙串中找到导入的证书，右键选择 <code>获取信息</code>。</li>
+<li>在 <strong>信任</strong> 部分，将 <code>使用此证书时</code> 设置为 <code>始终信任</code>。</li>
+</ol>
+<h3 id="Windows-1"><a href="#Windows-1" class="headerlink" title="Windows"></a>Windows</h3><ol>
+<li>双击 <code>minica.pem</code> 文件启动证书安装向导。</li>
+<li>选择 <code>本地计算机</code>，点击 <code>下一步</code>。</li>
+<li>选择 <code>将所有的证书放入下列存储</code>，点击 <code>浏览</code>。</li>
+<li>选择 <code>受信任的根证书颁发机构</code>，完成安装。</li>
+</ol>
+<h3 id="Linux-CentOS-Debian-1"><a href="#Linux-CentOS-Debian-1" class="headerlink" title="Linux (CentOS&#x2F;Debian)"></a>Linux (CentOS&#x2F;Debian)</h3><ol>
+<li>将根证书复制到系统证书目录：<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo cp minica.pem /usr/local/share/ca-certificates/minica.crt</span><br></pre></td></tr></table></figure></li>
+<li>更新系统证书存储：<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo update-ca-certificates  # Debian 系列</span><br><span class="line">sudo update-ca-trust         # CentOS 系列</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="配置本地开发服务器"><a href="#配置本地开发服务器" class="headerlink" title="配置本地开发服务器"></a>配置本地开发服务器</h2><p>以 NGINX 为例，配置 HTTPS 服务：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 443 ssl;</span><br><span class="line">    server_name example.local;</span><br><span class="line"></span><br><span class="line">    ssl_certificate /path/to/example.local/cert.pem;</span><br><span class="line">    ssl_certificate_key /path/to/example.local/key.pem;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:3000;  # 替换为实际的服务地址</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name example.local;</span><br><span class="line">    return 301 https://$host$request_uri;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重启 NGINX：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo systemctl restart nginx</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="修改-hosts-文件"><a href="#修改-hosts-文件" class="headerlink" title="修改 hosts 文件"></a>修改 <code>hosts</code> 文件</h2><p>为确保浏览器可以解析 <code>example.local</code>，需要更新 <code>hosts</code> 文件。</p>
+<h3 id="macOS-Linux"><a href="#macOS-Linux" class="headerlink" title="macOS &#x2F; Linux"></a>macOS &#x2F; Linux</h3><p>编辑 <code>hosts</code> 文件：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/hosts</span><br></pre></td></tr></table></figure>
+
+<p>添加以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">127.0.0.1 example.local</span><br></pre></td></tr></table></figure>
+
+<p>保存并退出。</p>
+<h3 id="Windows-2"><a href="#Windows-2" class="headerlink" title="Windows"></a>Windows</h3><ol>
+<li>打开 <strong>记事本</strong>（管理员权限）。</li>
+<li>编辑文件 <code>C:\Windows\System32\drivers\etc\hosts</code>。</li>
+<li>添加以下内容：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1 example.local</span><br></pre></td></tr></table></figure></li>
+<li>保存文件。</li>
+</ol>
+<h2 id="访问本地站点"><a href="#访问本地站点" class="headerlink" title="访问本地站点"></a>访问本地站点</h2><p>在浏览器中访问 <code>https://example.local</code>。如果根证书已正确安装，你将不会看到任何安全警告。</p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ol>
+<li><strong>证书安全性</strong>：妥善保存私钥文件（如 <code>minica-key.pem</code> 和 <code>example.local/key.pem</code>），避免泄露。</li>
+<li><strong>域名管理</strong>：避免使用通用域名（如 <code>example.com</code>），推荐使用 <code>.local</code> 或 <code>.test</code> 后缀。</li>
+<li><strong>适配性</strong>：如需在多个系统间共享证书，请确保根证书和域名证书的路径一致。</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Freeman Kevin
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://freemankevin.uk/2025/01/10/Minica/" title="开发环境中生成自签名证书">https://freemankevin.uk/2025/01/10/Minica/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLW5kLzQuMC9jbg=="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Development/" rel="tag"># Development</a>
+              <a href="/tags/Minica/" rel="tag"># Minica</a>
+              <a href="/tags/Https/" rel="tag"># Https</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/01/09/Locust/" rel="prev" title="使用Locust进行Web应用性能测试：从入门到实践">
+                  <i class="fa fa-angle-left"></i> 使用Locust进行Web应用性能测试：从入门到实践
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/01/10/logrotate/" rel="next" title="Nginx 日志切割方案配置">
+                  Nginx 日志切割方案配置 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Freeman Kevin</span>
+  </div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL0ZyZWVtYW5LZXZpbi9GcmVlbWFuS2V2aW4uZ2l0aHViLmlv" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"freemankevin","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js" defer></script>
+
+</body>
+</html>

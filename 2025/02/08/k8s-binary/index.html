@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="3frXch6thZZdl3bIIbkBoQEXQVWw68nMWquSYiFpmhY">
+  <meta name="msvalidate.01" content="163141551EC7BC03EBD0FB765ED5C476">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Source+Code+Pro:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=DM+Mono:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=monospace:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"freemankevin.uk","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.25.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Load Disqus","order":-1}},"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"O3AB73GDVU","apiKey":"b3f1048d604fe9a6c9648855741c1e6d","indexName":"freemankevin","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="A personal tech blog focusing on DevOps, MLOps, and AIOps practices">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Kevin&#39;s Notes">
+<meta property="og:url" content="https://freemankevin.uk/">
+<meta property="og:site_name" content="Kevin&#39;s Notes">
+<meta property="og:description" content="A personal tech blog focusing on DevOps, MLOps, and AIOps practices">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://freemankevin.uk/images/avatar.jpg">
+<meta property="article:published_time" content="2025-02-08T08:23:25.000Z">
+<meta property="article:modified_time" content="2025-10-21T03:34:40.412Z">
+<meta property="article:author" content="Freeman Kevin">
+<meta property="article:tag" content="Debian">
+<meta property="article:tag" content="ETCD">
+<meta property="article:tag" content="Harbor">
+<meta property="article:tag" content="Kubernetes">
+<meta property="article:tag" content="NFS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://freemankevin.uk/images/avatar.jpg">
+
+
+<link rel="canonical" href="https://freemankevin.uk/2025/02/08/k8s-binary/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://freemankevin.uk/2025/02/08/k8s-binary/","path":"2025/02/08/k8s-binary/","title":"二进制方式部署Kubernetes 集群"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>二进制方式部署Kubernetes 集群 | Kevin's Notes</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4QX3P6CBBF"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-4QX3P6CBBF","only_pageview":false,"measure_protocol_api_secret":null,"enable":true}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/5.36.0/lite/builds/browser.umd.js" integrity="sha256-o49zoHLDPBm9WLg6AiliAVi3axCRTqe3ltTxLvhzAVg=" crossorigin="anonymous" defer></script><script src="/js/third-party/search/algolia-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+<!-- Google tag (gtag.js) - GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4QX3P6CBBF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4QX3P6CBBF', {
+    page_path: window.location.pathname,
+    send_page_view: true
+  });
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MPHHRS5F');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google Search Console verification -->
+<meta name="google-site-verification" content="3frXch6thZZdl3bIIbkBoQEXQVWw68nMWquSYiFpmhY" />
+
+<!-- Bing Site Verification -->
+<meta name="msvalidate.01" content="163141551EC7BC03EBD0FB765ED5C476" />
+
+<!-- SEO Meta Tags -->
+<meta name="description" content="A personal tech blog focusing on DevOps, MLOps, and AIOps practices">
+<meta name="keywords" content="DevOps, MLOps, AIOps, Kubernetes, Docker, CI/CD">
+<meta name="author" content="Freeman Kevin">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://freemankevin.uk/2025/02/08/k8s-binary/">
+
+<!-- Open Graph / Social Media Meta Tags -->
+<meta property="og:title" content="二进制方式部署Kubernetes 集群">
+<meta property="og:description" content="">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://freemankevin.uk/2025/02/08/k8s-binary/">
+<meta property="og:site_name" content="Kevin's Notes">
+
+<!-- Schema.org markup for Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://freemankevin.uk/2025/02/08/k8s-binary/"
+  },
+  "headline": "二进制方式部署Kubernetes 集群",
+  "description": "",
+  "author": {
+    "@type": "Person",
+    "name": "Freeman Kevin"
+  },
+  "datePublished": "1739003005000",
+  "dateModified": "1761017680412",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kevin's Notes",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://freemankevin.uk/images/avatar.jpg"
+    }
+  }
+}
+</script>
+
+<!-- Microsoft Clarity -->
+<script>
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "pxsoj8b2ce");
+</script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Kevin's Notes" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kevin's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E8%A7%84%E5%88%92"><span class="nav-number">1.</span> <span class="nav-text">部署规划</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%B8%85%E5%8D%95"><span class="nav-number">1.1.</span> <span class="nav-text">服务器清单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E8%A7%84%E5%88%92"><span class="nav-number">1.2.</span> <span class="nav-text">网络规划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E7%89%88%E6%9C%AC"><span class="nav-number">1.3.</span> <span class="nav-text">组件版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">系统初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%BD%AF%E4%BB%B6%E6%BA%90"><span class="nav-number">2.1.</span> <span class="nav-text">添加软件源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%9B%B4%E6%96%B0"><span class="nav-number">2.2.</span> <span class="nav-text">系统更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85"><span class="nav-number">2.3.</span> <span class="nav-text">基础工具安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E8%AF%AD%E8%A8%80%E9%85%8D%E7%BD%AE"><span class="nav-number">2.4.</span> <span class="nav-text">系统语言配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E9%85%8D%E7%BD%AE"><span class="nav-number">2.5.</span> <span class="nav-text">SSH远程访问配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell%E7%8E%AF%E5%A2%83%E4%BC%98%E5%8C%96"><span class="nav-number">2.6.</span> <span class="nav-text">Shell环境优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="nav-number">2.7.</span> <span class="nav-text">网络配置（可选）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96"><span class="nav-number">2.8.</span> <span class="nav-text">系统优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E4%BC%98%E5%8C%96"><span class="nav-number">2.9.</span> <span class="nav-text">系统服务优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%88%90%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.10.</span> <span class="nav-text">完成初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2"><span class="nav-number">2.11.</span> <span class="nav-text">自动化部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">2.12.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4"><span class="nav-number">2.13.</span> <span class="nav-text">故障排除</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AB%98%E5%8F%AF%E7%94%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E9%83%A8%E7%BD%B2"><span class="nav-number">3.</span> <span class="nav-text">高可用负载均衡部署</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-number">3.1.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Keepalived-%E9%83%A8%E7%BD%B2"><span class="nav-number">3.2.</span> <span class="nav-text">Keepalived 部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Keepalived"><span class="nav-number">3.2.1.</span> <span class="nav-text">安装 Keepalived</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E8%84%9A%E6%9C%AC"><span class="nav-number">3.2.2.</span> <span class="nav-text">配置健康检查脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E8%8A%82%E7%82%B9%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.3.</span> <span class="nav-text">主节点配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%87%E8%8A%82%E7%82%B9%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.4.</span> <span class="nav-text">备节点配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.2.5.</span> <span class="nav-text">启动服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HAProxy-%E9%83%A8%E7%BD%B2"><span class="nav-number">3.3.</span> <span class="nav-text">HAProxy 部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-HAProxy"><span class="nav-number">3.3.1.</span> <span class="nav-text">安装 HAProxy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-HAProxy"><span class="nav-number">3.3.2.</span> <span class="nav-text">配置 HAProxy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1-1"><span class="nav-number">3.3.3.</span> <span class="nav-text">启动服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E9%83%A8%E7%BD%B2"><span class="nav-number">3.4.</span> <span class="nav-text">验证部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4-1"><span class="nav-number">3.5.</span> <span class="nav-text">故障排除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-1"><span class="nav-number">3.6.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ETCD-%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2"><span class="nav-number">4.</span> <span class="nav-text">ETCD 集群部署</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87-1"><span class="nav-number">4.1.</span> <span class="nav-text">环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E9%85%8D%E7%BD%AE"><span class="nav-number">4.1.1.</span> <span class="nav-text">主机配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95"><span class="nav-number">4.1.2.</span> <span class="nav-text">配置免密登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">4.1.3.</span> <span class="nav-text">配置环境变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="nav-number">4.2.</span> <span class="nav-text">组件安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-CFSSL-%E5%B7%A5%E5%85%B7"><span class="nav-number">4.2.1.</span> <span class="nav-text">安装 CFSSL 工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-ETCD"><span class="nav-number">4.2.2.</span> <span class="nav-text">安装 ETCD</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-TLS-%E8%AF%81%E4%B9%A6"><span class="nav-number">4.3.</span> <span class="nav-text">配置 TLS 证书</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%AF%81%E4%B9%A6%E9%85%8D%E7%BD%AE"><span class="nav-number">4.3.1.</span> <span class="nav-text">创建证书配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6"><span class="nav-number">4.3.2.</span> <span class="nav-text">生成证书</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-ETCD-%E6%9C%8D%E5%8A%A1"><span class="nav-number">4.4.</span> <span class="nav-text">配置 ETCD 服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">4.4.1.</span> <span class="nav-text">创建服务配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1-2"><span class="nav-number">4.4.2.</span> <span class="nav-text">启动服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4%E9%AA%8C%E8%AF%81"><span class="nav-number">4.5.</span> <span class="nav-text">集群验证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4%E5%88%AB%E5%90%8D"><span class="nav-number">4.5.1.</span> <span class="nav-text">配置命令别名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E9%9B%86%E7%BE%A4%E7%8A%B6%E6%80%81"><span class="nav-number">4.5.2.</span> <span class="nav-text">检查集群状态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4%E5%A4%87%E4%BB%BD"><span class="nav-number">4.6.</span> <span class="nav-text">集群备份</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD"><span class="nav-number">4.6.1.</span> <span class="nav-text">配置自动备份</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4-2"><span class="nav-number">4.7.</span> <span class="nav-text">故障排除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5"><span class="nav-number">4.7.1.</span> <span class="nav-text">常见问题排查</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="nav-number">4.8.</span> <span class="nav-text">性能优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-2"><span class="nav-number">4.9.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Harbor-%E7%A7%81%E6%9C%89%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93%E9%83%A8%E7%BD%B2"><span class="nav-number">5.</span> <span class="nav-text">Harbor 私有镜像仓库部署</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87-2"><span class="nav-number">5.1.</span> <span class="nav-text">环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS-%E9%85%8D%E7%BD%AE"><span class="nav-number">5.1.1.</span> <span class="nav-text">DNS 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">5.1.2.</span> <span class="nav-text">存储配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">5.2.</span> <span class="nav-text">Docker 环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Docker"><span class="nav-number">5.2.1.</span> <span class="nav-text">安装 Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-Docker"><span class="nav-number">5.2.2.</span> <span class="nav-text">配置 Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Docker-Compose"><span class="nav-number">5.2.3.</span> <span class="nav-text">安装 Docker Compose</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Harbor-%E9%83%A8%E7%BD%B2"><span class="nav-number">5.3.</span> <span class="nav-text">Harbor 部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD-Harbor"><span class="nav-number">5.3.1.</span> <span class="nav-text">下载 Harbor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-Harbor"><span class="nav-number">5.3.2.</span> <span class="nav-text">配置 Harbor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-TLS-%E8%AF%81%E4%B9%A6-1"><span class="nav-number">5.3.3.</span> <span class="nav-text">配置 TLS 证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Harbor"><span class="nav-number">5.3.4.</span> <span class="nav-text">安装 Harbor</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE"><span class="nav-number">5.4.</span> <span class="nav-text">客户端配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-Docker-%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">5.4.1.</span> <span class="nav-text">配置 Docker 客户端</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%B4%E6%8A%A4%E7%AE%A1%E7%90%86"><span class="nav-number">5.5.</span> <span class="nav-text">维护管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%87%E4%BB%BD%E9%85%8D%E7%BD%AE"><span class="nav-number">5.5.1.</span> <span class="nav-text">备份配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%91%E6%8E%A7%E9%85%8D%E7%BD%AE"><span class="nav-number">5.5.2.</span> <span class="nav-text">监控配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4-3"><span class="nav-number">5.6.</span> <span class="nav-text">故障排除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="nav-number">5.6.1.</span> <span class="nav-text">常见问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-1"><span class="nav-number">5.7.</span> <span class="nav-text">性能优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-3"><span class="nav-number">5.8.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kubernetes-%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2"><span class="nav-number">6.</span> <span class="nav-text">Kubernetes 集群环境部署</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87-3"><span class="nav-number">6.1.</span> <span class="nav-text">环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E9%85%8D%E7%BD%AE-1"><span class="nav-number">6.1.1.</span> <span class="nav-text">主机配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE"><span class="nav-number">6.1.2.</span> <span class="nav-text">系统配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E5%AE%89%E8%A3%85-1"><span class="nav-number">6.2.</span> <span class="nav-text">组件安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%97%B6"><span class="nav-number">6.2.1.</span> <span class="nav-text">容器运行时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-CNI-%E6%8F%92%E4%BB%B6"><span class="nav-number">6.2.2.</span> <span class="nav-text">安装 CNI 插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-nerdctl"><span class="nav-number">6.2.3.</span> <span class="nav-text">安装 nerdctl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Kubernetes-%E7%BB%84%E4%BB%B6"><span class="nav-number">6.2.4.</span> <span class="nav-text">安装 Kubernetes 组件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%81%E4%B9%A6%E9%85%8D%E7%BD%AE"><span class="nav-number">6.3.</span> <span class="nav-text">证书配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96-1"><span class="nav-number">6.4.</span> <span class="nav-text">系统优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98"><span class="nav-number">6.4.1.</span> <span class="nav-text">性能调优</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA"><span class="nav-number">6.4.2.</span> <span class="nav-text">安全加固</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E9%83%A8%E7%BD%B2-1"><span class="nav-number">6.5.</span> <span class="nav-text">验证部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-4"><span class="nav-number">6.6.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kubernetes-%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2"><span class="nav-number">7.</span> <span class="nav-text">Kubernetes 集群部署</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E9%85%8D%E7%BD%AE"><span class="nav-number">7.1.</span> <span class="nav-text">初始化配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">7.1.1.</span> <span class="nav-text">创建集群配置文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">7.2.</span> <span class="nav-text">集群初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%BB%E8%8A%82%E7%82%B9"><span class="nav-number">7.2.1.</span> <span class="nav-text">初始化主节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%8A%82%E7%82%B9"><span class="nav-number">7.2.2.</span> <span class="nav-text">添加节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86"><span class="nav-number">7.2.3.</span> <span class="nav-text">节点标签管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="nav-number">7.3.</span> <span class="nav-text">网络配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Calico"><span class="nav-number">7.3.1.</span> <span class="nav-text">安装 Calico</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CoreDNS-%E9%85%8D%E7%BD%AE"><span class="nav-number">7.3.2.</span> <span class="nav-text">CoreDNS 配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E9%85%8D%E7%BD%AE"><span class="nav-number">7.4.</span> <span class="nav-text">组件配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9A%B4%E9%9C%B2%E7%BB%84%E4%BB%B6%E7%AB%AF%E5%8F%A3"><span class="nav-number">7.4.1.</span> <span class="nav-text">暴露组件端口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4%E9%AA%8C%E8%AF%81-1"><span class="nav-number">7.5.</span> <span class="nav-text">集群验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%B4%E6%8A%A4%E6%93%8D%E4%BD%9C"><span class="nav-number">7.6.</span> <span class="nav-text">维护操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E4%B9%A6%E6%9B%B4%E6%96%B0"><span class="nav-number">7.6.1.</span> <span class="nav-text">证书更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4%E5%8D%87%E7%BA%A7"><span class="nav-number">7.6.2.</span> <span class="nav-text">集群升级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%85%E9%9A%9C%E5%A4%84%E7%90%86"><span class="nav-number">7.7.</span> <span class="nav-text">故障处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E7%BD%AE%E8%8A%82%E7%82%B9"><span class="nav-number">7.7.1.</span> <span class="nav-text">重置节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5-1"><span class="nav-number">7.7.2.</span> <span class="nav-text">常见问题排查</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-5"><span class="nav-number">7.8.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NFS-StorageClass-%E9%83%A8%E7%BD%B2"><span class="nav-number">8.</span> <span class="nav-text">NFS StorageClass 部署</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">8.1.</span> <span class="nav-text">存储服务器配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-NFS-%E6%9C%8D%E5%8A%A1"><span class="nav-number">8.1.1.</span> <span class="nav-text">安装 NFS 服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">8.1.2.</span> <span class="nav-text">配置防火墙</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE-1"><span class="nav-number">8.2.</span> <span class="nav-text">客户端配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-NFS-%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">8.2.1.</span> <span class="nav-text">安装 NFS 客户端</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#StorageClass-%E9%83%A8%E7%BD%B2"><span class="nav-number">8.3.</span> <span class="nav-text">StorageClass 部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-NFS-Provisioner"><span class="nav-number">8.3.1.</span> <span class="nav-text">安装 NFS Provisioner</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E9%83%A8%E7%BD%B2-2"><span class="nav-number">8.3.2.</span> <span class="nav-text">验证部署</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%91%E6%8E%A7%E9%85%8D%E7%BD%AE-1"><span class="nav-number">8.4.</span> <span class="nav-text">监控配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-6"><span class="nav-number">8.5.</span> <span class="nav-text">注意事项</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Freeman Kevin"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Freeman Kevin</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZyZWVtYW5rZXZpbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;freemankevin"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly94LmNvbS9jaGF0b3BzMjAyMw==" title="Twitter → https:&#x2F;&#x2F;x.com&#x2F;chatops2023"><i class="fab fa-x fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9ic2t5LmFwcC9wcm9maWxlL2ZyZWVtYW5rZXZpbi5ic2t5LnNvY2lhbA==" title="Bluesky → https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;freemankevin.bsky.social"><i class="fab fa-bluesky fa-fw"></i>Bluesky</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9tYXN0b2Rvbi5zb2NpYWwvQGZyZWVtYW5rZXZpbg==" title="Mastodon → https:&#x2F;&#x2F;mastodon.social&#x2F;@freemankevin"><i class="fab fa-mastodon fa-fw"></i>Mastodon</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://freemankevin.uk/2025/02/08/k8s-binary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Freeman Kevin">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kevin's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="二进制方式部署Kubernetes 集群 | Kevin's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          二进制方式部署Kubernetes 集群
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-08 16:23:25" itemprop="dateCreated datePublished" datetime="2025-02-08T16:23:25+08:00">2025-02-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Kubernetes/" itemprop="url" rel="index"><span itemprop="name">Kubernetes</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2025/02/08/k8s-binary/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2025/02/08/k8s-binary/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 本文详细介绍如何使用二进制方式在 Debian 系统上搭建一个生产级别的高可用 Kubernetes 集群。</p>
+<span id="more"></span>
+
+<hr>
+<h1 id="部署规划"><a href="#部署规划" class="headerlink" title="部署规划"></a>部署规划</h1><h2 id="服务器清单"><a href="#服务器清单" class="headerlink" title="服务器清单"></a>服务器清单</h2><table>
+<thead>
+<tr>
+<th>角色</th>
+<th>主机名</th>
+<th>IP地址</th>
+<th>配置</th>
+<th>系统</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LB-1</td>
+<td>lb1.k8s.com</td>
+<td>192.168.171.134</td>
+<td>2C4G</td>
+<td>Debian 12</td>
+</tr>
+<tr>
+<td>LB-2</td>
+<td>lb2.k8s.com</td>
+<td>192.168.171.135</td>
+<td>2C4G</td>
+<td>Debian 12</td>
+</tr>
+<tr>
+<td>VIP</td>
+<td>-</td>
+<td>192.168.171.133</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>ETCD-1</td>
+<td>etcd1.k8s.com</td>
+<td>192.168.171.136</td>
+<td>4C8G</td>
+<td>Debian 12</td>
+</tr>
+<tr>
+<td>ETCD-2</td>
+<td>etcd2.k8s.com</td>
+<td>192.168.171.137</td>
+<td>4C8G</td>
+<td>Debian 12</td>
+</tr>
+<tr>
+<td>ETCD-3</td>
+<td>etcd3.k8s.com</td>
+<td>192.168.171.138</td>
+<td>4C8G</td>
+<td>Debian 12</td>
+</tr>
+<tr>
+<td>Master-1</td>
+<td>master1.k8s.com</td>
+<td>192.168.171.136</td>
+<td>4C8G</td>
+<td>Debian 12</td>
+</tr>
+<tr>
+<td>Master-2</td>
+<td>master2.k8s.com</td>
+<td>192.168.171.137</td>
+<td>4C8G</td>
+<td>Debian 12</td>
+</tr>
+<tr>
+<td>Master-3</td>
+<td>master3.k8s.com</td>
+<td>192.168.171.138</td>
+<td>4C8G</td>
+<td>Debian 12</td>
+</tr>
+<tr>
+<td>Worker-1</td>
+<td>worker1.k8s.com</td>
+<td>192.168.171.139</td>
+<td>8C16G</td>
+<td>Debian 12</td>
+</tr>
+<tr>
+<td>Harbor</td>
+<td>harbor.k8s.com</td>
+<td>192.168.171.50</td>
+<td>4C8G</td>
+<td>Debian 12</td>
+</tr>
+<tr>
+<td>NFS</td>
+<td>nfs.k8s.com</td>
+<td>192.168.171.140</td>
+<td>4C8G</td>
+<td>Debian 12</td>
+</tr>
+</tbody></table>
+<h2 id="网络规划"><a href="#网络规划" class="headerlink" title="网络规划"></a>网络规划</h2><ul>
+<li>节点网段: 192.168.171.0&#x2F;24</li>
+<li>Pod 网段: 10.244.0.0&#x2F;16</li>
+<li>Service 网段: 10.96.0.0&#x2F;12</li>
+<li>DNS 服务: CoreDNS</li>
+</ul>
+<h2 id="组件版本"><a href="#组件版本" class="headerlink" title="组件版本"></a>组件版本</h2><ul>
+<li>Kubernetes: v1.27.8</li>
+<li>Etcd: v3.5.9</li>
+<li>Docker: 24.0.7</li>
+<li>Containerd: 1.7.6</li>
+<li>Calico: v3.26.1</li>
+<li>CoreDNS: v1.10.1</li>
+<li>Harbor: v2.9.1</li>
+</ul>
+<hr>
+<h1 id="系统初始化"><a href="#系统初始化" class="headerlink" title="系统初始化"></a>系统初始化</h1><h2 id="添加软件源"><a href="#添加软件源" class="headerlink" title="添加软件源"></a>添加软件源</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">备份原始源文件</span></span><br><span class="line">cp /etc/apt/sources.list /etc/apt/sources.list.bak</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理并配置新的软件源</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除注释行和空行</span></span><br><span class="line">sed -i &#x27;/^#/d; /^$/d&#x27; /etc/apt/sources.list</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">注释掉原始行</span></span><br><span class="line">sed -i &#x27;s/^deb cdrom:\[Debian GNU\/Linux.*$/#&amp;/&#x27; /etc/apt/sources.list</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除旧的安全源</span></span><br><span class="line">sed -i &#x27;/^deb http:\/\/security.debian.org\/debian-security/d&#x27; /etc/apt/sources.list</span><br><span class="line">sed -i &#x27;/^deb-src http:\/\/security.debian.org\/debian-security/d&#x27; /etc/apt/sources.list</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加清华源</span></span><br><span class="line">cat &gt; /etc/apt/sources.list &lt;&lt; EOF</span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye main contrib non-free</span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye-updates main contrib non-free</span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye-backports main contrib non-free</span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/debian-security bullseye-security main contrib non-free</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">源码镜像（可选）</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">deb-src http://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye main contrib non-free</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">deb-src http://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye-updates main contrib non-free</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">deb-src http://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye-backports main contrib non-free</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">deb-src http://mirrors.tuna.tsinghua.edu.cn/debian-security bullseye-security main contrib non-free</span></span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<h2 id="系统更新"><a href="#系统更新" class="headerlink" title="系统更新"></a>系统更新</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">更新软件包索引</span></span><br><span class="line">apt update </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">升级所有已安装的软件包</span></span><br><span class="line">apt upgrade -y </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装重要的系统更新（如果有的话）</span></span><br><span class="line">apt dist-upgrade -y</span><br></pre></td></tr></table></figure>
+
+<h2 id="基础工具安装"><a href="#基础工具安装" class="headerlink" title="基础工具安装"></a>基础工具安装</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装基础工具包</span></span><br><span class="line">apt update</span><br><span class="line">apt install -y \</span><br><span class="line">    # 系统工具</span><br><span class="line">    apt-transport-https \</span><br><span class="line">    ca-certificates \</span><br><span class="line">    vim \</span><br><span class="line">    net-tools \</span><br><span class="line">    sudo \</span><br><span class="line">    telnet \</span><br><span class="line">    ufw \</span><br><span class="line">    iotop \</span><br><span class="line">    rsync \</span><br><span class="line">    unzip \</span><br><span class="line">    iputils-ping \</span><br><span class="line">    gawk \</span><br><span class="line">    sed \</span><br><span class="line">    cron \</span><br><span class="line">    gnupg \</span><br><span class="line">    locales \</span><br><span class="line">    curl \</span><br><span class="line">    wget \</span><br><span class="line">    tree \</span><br><span class="line">    htop \</span><br><span class="line">    nmon \</span><br><span class="line">    lsof \</span><br><span class="line">    # 网络工具</span><br><span class="line">    nfs-common \</span><br><span class="line">    sshpass \</span><br><span class="line">    software-properties-common \</span><br><span class="line">    # 系统监控</span><br><span class="line">    sysstat \</span><br><span class="line">    # 文本处理</span><br><span class="line">    jq \</span><br><span class="line">    # 版本控制</span><br><span class="line">    git</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理不需要的包</span></span><br><span class="line">apt autoremove -y</span><br></pre></td></tr></table></figure>
+
+<h2 id="系统语言配置"><a href="#系统语言配置" class="headerlink" title="系统语言配置"></a>系统语言配置</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成英文语言环境</span></span><br><span class="line">locale-gen en_US.UTF-8</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置系统默认语言</span></span><br><span class="line">cat &gt; /etc/default/locale &lt;&lt; EOF</span><br><span class="line">LC_ALL=en_US.utf8</span><br><span class="line">LANG=en_US.utf8</span><br><span class="line">LANGUAGE=en_US.utf8</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置语言生成</span></span><br><span class="line">sed -i &#x27;s/^zh_CN.UTF-8 UTF-8/#zh_CN.UTF-8 UTF-8/&#x27; /etc/locale.gen</span><br><span class="line">sed -i &#x27;s/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/&#x27; /etc/locale.gen</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重新生成语言文件</span></span><br><span class="line">locale-gen</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置环境变量</span></span><br><span class="line">echo &quot;export LANG=en_US.utf8&quot; &gt;&gt; /etc/profile</span><br><span class="line">echo &quot;export LANGUAGE=en_US.utf8&quot; &gt;&gt; /etc/profile</span><br><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<h2 id="SSH远程访问配置"><a href="#SSH远程访问配置" class="headerlink" title="SSH远程访问配置"></a>SSH远程访问配置</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置SSH允许root登录</span></span><br><span class="line">sed -ri &#x27;s/#PermitRootLogin prohibit-password/PermitRootLogin yes/&#x27; /etc/ssh/sshd_config</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">加强SSH安全配置</span></span><br><span class="line">cat &gt;&gt; /etc/ssh/sshd_config &lt;&lt; EOF</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">SSH认证配置</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">同时启用密码和密钥认证，便于初始化后的管理</span></span><br><span class="line">PasswordAuthentication yes</span><br><span class="line">PubkeyAuthentication yes</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置SSH协议版本</span></span><br><span class="line">Protocol 2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">限制最大认证尝试次数</span></span><br><span class="line">MaxAuthTries 3</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">禁用空密码</span></span><br><span class="line">PermitEmptyPasswords no</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置登录超时时间（秒）</span></span><br><span class="line">LoginGraceTime 60</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启用严格模式</span></span><br><span class="line">StrictModes yes</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安全加固建议（等系统完全配置好后可以考虑启用）：</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1. 禁用密码认证，只使用密钥认证</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">PasswordAuthentication no</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2. 限制允许登录的用户</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">AllowUsers your-user-name</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">3. 更改默认端口</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Port 2222</span></span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重启SSH服务</span></span><br><span class="line">systemctl restart ssh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">验证配置</span></span><br><span class="line">egrep &#x27;^PermitRootLogin&#x27; /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+
+<h2 id="Shell环境优化"><a href="#Shell环境优化" class="headerlink" title="Shell环境优化"></a>Shell环境优化</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置.bashrc</span></span><br><span class="line">cat &gt;&gt; ~/.bashrc &lt;&lt; EOF</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置命令别名</span></span><br><span class="line">alias ll=&#x27;ls -l&#x27;</span><br><span class="line">alias la=&#x27;ls -A&#x27;</span><br><span class="line">alias l=&#x27;ls -CF&#x27;</span><br><span class="line">alias vi=&#x27;vim&#x27;</span><br><span class="line">alias cls=&#x27;clear&#x27;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置命令历史记录</span></span><br><span class="line">HISTSIZE=5000</span><br><span class="line">HISTFILESIZE=10000</span><br><span class="line">HISTTIMEFORMAT=&quot;%F %T &quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置PS1提示符</span></span><br><span class="line">PS1=&#x27;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ &#x27;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启用颜色支持</span></span><br><span class="line">export LS_OPTIONS=&#x27;--color=auto&#x27;</span><br><span class="line">eval &quot;$(dircolors)&quot;</span><br><span class="line">alias ls=&#x27;ls $LS_OPTIONS&#x27;</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">应用新配置</span></span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<h2 id="网络配置（可选）"><a href="#网络配置（可选）" class="headerlink" title="网络配置（可选）"></a>网络配置（可选）</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置静态IP</span></span><br><span class="line">cat &gt; /etc/network/interfaces &lt;&lt; EOF</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">This file describes the network interfaces available on your system</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">and how to activate them. For more information, see interfaces(5).</span></span><br><span class="line"></span><br><span class="line">source /etc/network/interfaces.d/*</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">The loopback network interface</span></span><br><span class="line">auto lo</span><br><span class="line">iface lo inet loopback</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">The primary network interface</span></span><br><span class="line">auto ens32</span><br><span class="line">iface ens32 inet static</span><br><span class="line">    address 192.168.171.136</span><br><span class="line">    netmask 255.255.255.0</span><br><span class="line">    gateway 192.168.171.2</span><br><span class="line">    # DNS配置</span><br><span class="line">    dns-nameservers 8.8.8.8 8.8.4.4</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<h2 id="系统优化"><a href="#系统优化" class="headerlink" title="系统优化"></a>系统优化</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">关闭swap</span></span><br><span class="line">swapoff -a</span><br><span class="line">sed -i &#x27;/swap/d&#x27; /etc/fstab</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置系统限制</span></span><br><span class="line">cat &gt; /etc/security/limits.conf &lt;&lt; EOF</span><br><span class="line">* soft nofile 65535</span><br><span class="line">* hard nofile 65535</span><br><span class="line">* soft nproc 65535</span><br><span class="line">* hard nproc 65535</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">优化内核参数</span></span><br><span class="line">cat &gt; /etc/sysctl.d/99-sysctl.conf &lt;&lt; EOF</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">系统级别的最大文件句柄数</span></span><br><span class="line">fs.file-max = 2097152</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">TCP连接参数优化</span></span><br><span class="line">net.ipv4.tcp_max_syn_backlog = 8192</span><br><span class="line">net.core.somaxconn = 32768</span><br><span class="line">net.ipv4.tcp_timestamps = 1</span><br><span class="line">net.ipv4.tcp_fin_timeout = 30</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">内存参数优化</span></span><br><span class="line">vm.swappiness = 0</span><br><span class="line">vm.overcommit_memory = 1</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">应用内核参数</span></span><br><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+
+<h2 id="系统服务优化"><a href="#系统服务优化" class="headerlink" title="系统服务优化"></a>系统服务优化</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">禁用不需要的服务</span></span><br><span class="line">systemctl stop rpcbind</span><br><span class="line">systemctl disable rpcbind</span><br><span class="line">apt autoremove rpcbind -y</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置防火墙（UFW）</span></span><br><span class="line">ufw default deny incoming</span><br><span class="line">ufw default allow outgoing</span><br><span class="line">ufw allow ssh</span><br><span class="line">ufw allow 80/tcp</span><br><span class="line">ufw allow 443/tcp</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">根据需要添加其他端口</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启用防火墙</span></span><br><span class="line">ufw --force enable</span><br></pre></td></tr></table></figure>
+
+<h2 id="完成初始化"><a href="#完成初始化" class="headerlink" title="完成初始化"></a>完成初始化</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">同步文件系统</span></span><br><span class="line">sync</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重启系统使所有更改生效</span></span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<h2 id="自动化部署"><a href="#自动化部署" class="headerlink" title="自动化部署"></a>自动化部署</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建一个初始化脚本</span></span><br><span class="line">cat &gt; init-debian.sh &lt;&lt; &#x27;EOF&#x27;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Debian系统初始化脚本</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用方法: ./init-debian.sh</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查是否为root用户</span></span><br><span class="line">if [ &quot;$(id -u)&quot; != &quot;0&quot; ]; then</span><br><span class="line">   echo &quot;此脚本必须以root权限运行&quot; </span><br><span class="line">   exit 1</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这里放入上述所有配置步骤</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">...</span></span><br><span class="line"></span><br><span class="line">echo &quot;系统初始化完成，请重启服务器&quot;</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加执行权限</span></span><br><span class="line">chmod +x init-debian.sh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行脚本</span></span><br><span class="line">./init-debian.sh</span><br></pre></td></tr></table></figure>
+
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li>在执行初始化操作前，建议先备份重要数据</li>
+<li>修改网络配置时需要特别小心，错误的配置可能导致无法远程访问</li>
+<li>防火墙规则要根据实际需求配置</li>
+<li>建议保存一份配置文件的备份</li>
+<li>初始化完成后要及时修改root密码和SSH配置</li>
+</ol>
+<h2 id="故障排除"><a href="#故障排除" class="headerlink" title="故障排除"></a>故障排除</h2><p>如果在初始化过程中遇到问题，可以检查以下几点：</p>
+<ol>
+<li>查看系统日志：<code>journalctl -xe</code></li>
+<li>检查服务状态：<code>systemctl status &lt;服务名&gt;</code></li>
+<li>检查网络连接：<code>ping -c 4 8.8.8.8</code></li>
+<li>验证软件源可用性：<code>apt update</code></li>
+</ol>
+<hr>
+<h1 id="高可用负载均衡部署"><a href="#高可用负载均衡部署" class="headerlink" title="高可用负载均衡部署"></a>高可用负载均衡部署</h1><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">更新系统并安装基础工具</span></span><br><span class="line">apt-get update</span><br><span class="line">apt-get install -y \</span><br><span class="line">    psmisc \</span><br><span class="line">    curl \</span><br><span class="line">    wget \</span><br><span class="line">    net-tools \</span><br><span class="line">    ipvsadm \</span><br><span class="line">    ipset</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查网络配置</span></span><br><span class="line">ip a</span><br></pre></td></tr></table></figure>
+
+<h2 id="Keepalived-部署"><a href="#Keepalived-部署" class="headerlink" title="Keepalived 部署"></a>Keepalived 部署</h2><h3 id="安装-Keepalived"><a href="#安装-Keepalived" class="headerlink" title="安装 Keepalived"></a>安装 Keepalived</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在所有负载均衡节点上安装</span></span><br><span class="line">apt install -y keepalived</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置健康检查脚本"><a href="#配置健康检查脚本" class="headerlink" title="配置健康检查脚本"></a>配置健康检查脚本</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建健康检查脚本</span></span><br><span class="line">cat &gt; /etc/keepalived/check_apiserver.sh &lt;&lt; EOF</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">API_URL=&quot;https://192.168.171.133:6443/healthz&quot;</span><br><span class="line">TIMEOUT=3</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查API服务器健康状态</span></span><br><span class="line">if curl -k -s --connect-timeout $&#123;TIMEOUT&#125; $&#123;API_URL&#125; | grep -q &quot;ok&quot;; then</span><br><span class="line">    exit 0</span><br><span class="line">else</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加执行权限</span></span><br><span class="line">chmod +x /etc/keepalived/check_apiserver.sh</span><br></pre></td></tr></table></figure>
+
+<h3 id="主节点配置"><a href="#主节点配置" class="headerlink" title="主节点配置"></a>主节点配置</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置主节点的keepalived</span></span><br><span class="line">cat &gt; /etc/keepalived/keepalived.conf &lt;&lt; EOF</span><br><span class="line">! Configuration File for keepalived</span><br><span class="line">global_defs &#123;</span><br><span class="line">    router_id LVS_DEVEL</span><br><span class="line">    script_user root</span><br><span class="line">    enable_script_security</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">HAProxy进程检查</span></span><br><span class="line">vrrp_script check_haproxy &#123;</span><br><span class="line">    script &quot;/usr/bin/killall -0 haproxy&quot;</span><br><span class="line">    interval 2</span><br><span class="line">    weight 2</span><br><span class="line">    fall 2</span><br><span class="line">    rise 1</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">API服务器健康检查</span></span><br><span class="line">vrrp_script check_apiserver &#123;</span><br><span class="line">    script &quot;/etc/keepalived/check_apiserver.sh&quot;</span><br><span class="line">    interval 3</span><br><span class="line">    weight -2</span><br><span class="line">    fall 10</span><br><span class="line">    rise 2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state MASTER</span><br><span class="line">    interface ens192                # 根据实际网卡名修改</span><br><span class="line">    virtual_router_id 51</span><br><span class="line">    priority 101</span><br><span class="line">    advert_int 1</span><br><span class="line">    </span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass K8SHA_KA_AUTH    # 建议修改密码</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        192.168.171.133             # VIP地址</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    # 使用单播模式（推荐）</span><br><span class="line">    unicast_src_ip 192.168.171.134  # 本机IP（LB-1）</span><br><span class="line">    unicast_peer &#123;</span><br><span class="line">        192.168.171.135             # 对端IP（LB-2）</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    # 配置追踪脚本</span><br><span class="line">    track_script &#123;</span><br><span class="line">        check_apiserver</span><br><span class="line">        check_haproxy</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<h3 id="备节点配置"><a href="#备节点配置" class="headerlink" title="备节点配置"></a>备节点配置</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置备节点的keepalived</span></span><br><span class="line">cat &gt; /etc/keepalived/keepalived.conf &lt;&lt; EOF</span><br><span class="line">! Configuration File for keepalived</span><br><span class="line">global_defs &#123;</span><br><span class="line">    router_id LVS_DEVEL</span><br><span class="line">    script_user root</span><br><span class="line">    enable_script_security</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_script check_haproxy &#123;</span><br><span class="line">    script &quot;/usr/bin/killall -0 haproxy&quot;</span><br><span class="line">    interval 2</span><br><span class="line">    weight 2</span><br><span class="line">    fall 2</span><br><span class="line">    rise 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_script check_apiserver &#123;</span><br><span class="line">    script &quot;/etc/keepalived/check_apiserver.sh&quot;</span><br><span class="line">    interval 3</span><br><span class="line">    weight -2</span><br><span class="line">    fall 10</span><br><span class="line">    rise 2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state BACKUP</span><br><span class="line">    interface ens192                # 根据实际网卡名修改</span><br><span class="line">    virtual_router_id 51</span><br><span class="line">    priority 100</span><br><span class="line">    advert_int 1</span><br><span class="line">    </span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass K8SHA_KA_AUTH    # 与主节点保持一致</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        192.168.171.133             # VIP地址</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    unicast_src_ip 192.168.171.135  # 本机IP（LB-2）</span><br><span class="line">    unicast_peer &#123;</span><br><span class="line">        192.168.171.134             # 对端IP（LB-1）</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    track_script &#123;</span><br><span class="line">        check_apiserver</span><br><span class="line">        check_haproxy</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查配置文件语法</span></span><br><span class="line">keepalived -t -f /etc/keepalived/keepalived.conf</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动并设置开机自启</span></span><br><span class="line">systemctl start keepalived</span><br><span class="line">systemctl enable keepalived</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查服务状态</span></span><br><span class="line">systemctl status keepalived</span><br></pre></td></tr></table></figure>
+
+<h2 id="HAProxy-部署"><a href="#HAProxy-部署" class="headerlink" title="HAProxy 部署"></a>HAProxy 部署</h2><h3 id="安装-HAProxy"><a href="#安装-HAProxy" class="headerlink" title="安装 HAProxy"></a>安装 HAProxy</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在所有负载均衡节点上安装</span></span><br><span class="line">apt install -y haproxy</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置-HAProxy"><a href="#配置-HAProxy" class="headerlink" title="配置 HAProxy"></a>配置 HAProxy</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">备份原配置</span></span><br><span class="line">cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建新配置</span></span><br><span class="line">cat &gt; /etc/haproxy/haproxy.cfg &lt;&lt; EOF</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">---------------------------------------------------------------------</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Global settings</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">---------------------------------------------------------------------</span></span><br><span class="line">global</span><br><span class="line">    log /dev/log local0</span><br><span class="line">    log /dev/log local1 notice</span><br><span class="line">    daemon</span><br><span class="line">    maxconn 100000</span><br><span class="line">    user haproxy</span><br><span class="line">    group haproxy</span><br><span class="line">    stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">---------------------------------------------------------------------</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Default settings</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">---------------------------------------------------------------------</span></span><br><span class="line">defaults</span><br><span class="line">    log     global</span><br><span class="line">    mode    tcp</span><br><span class="line">    option  dontlognull</span><br><span class="line">    timeout connect 5000ms</span><br><span class="line">    timeout client  50000ms</span><br><span class="line">    timeout server  50000ms</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">---------------------------------------------------------------------</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Statistics settings</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">---------------------------------------------------------------------</span></span><br><span class="line">listen stats</span><br><span class="line">    bind *:9090</span><br><span class="line">    mode http</span><br><span class="line">    stats enable</span><br><span class="line">    stats uri /stats</span><br><span class="line">    stats refresh 30s</span><br><span class="line">    stats auth admin:Admin@123.com    # 访问统计页面的用户名和密码</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">---------------------------------------------------------------------</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Frontend configuration <span class="keyword">for</span> API server</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">---------------------------------------------------------------------</span></span><br><span class="line">frontend k8s-apiserver</span><br><span class="line">    bind *:6443</span><br><span class="line">    mode tcp</span><br><span class="line">    option tcplog</span><br><span class="line">    default_backend k8s-apiserver</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">---------------------------------------------------------------------</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Backend configuration <span class="keyword">for</span> API server</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">---------------------------------------------------------------------</span></span><br><span class="line">backend k8s-apiserver</span><br><span class="line">    mode tcp</span><br><span class="line">    option tcp-check</span><br><span class="line">    balance roundrobin</span><br><span class="line">    default-server inter 10s downinter 5s rise 2 fall 2 slowstart 60s maxconn 250 maxqueue 256 weight 100</span><br><span class="line">    server master1 192.168.171.136:6443 check</span><br><span class="line">    server master2 192.168.171.137:6443 check</span><br><span class="line">    server master3 192.168.171.138:6443 check</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动服务-1"><a href="#启动服务-1" class="headerlink" title="启动服务"></a>启动服务</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查配置文件语法</span></span><br><span class="line">haproxy -f /etc/haproxy/haproxy.cfg -c</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动并设置开机自启</span></span><br><span class="line">systemctl start haproxy</span><br><span class="line">systemctl enable haproxy</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查服务状态</span></span><br><span class="line">systemctl status haproxy</span><br></pre></td></tr></table></figure>
+
+<h2 id="验证部署"><a href="#验证部署" class="headerlink" title="验证部署"></a>验证部署</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查VIP是否生效</span></span><br><span class="line">ip a | grep 192.168.1.110</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查HAProxy统计页面</span></span><br><span class="line">curl -u admin:Admin@123.com http://localhost:9090/stats</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">测试API服务器访问</span></span><br><span class="line">curl -k https://192.168.171.133:6443/healthz</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">测试故障转移</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1. 在主节点上停止HAProxy</span></span><br><span class="line">systemctl stop haproxy</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2. 观察VIP是否漂移到备节点</span></span><br><span class="line">ip a</span><br></pre></td></tr></table></figure>
+
+<h2 id="故障排除-1"><a href="#故障排除-1" class="headerlink" title="故障排除"></a>故障排除</h2><ol>
+<li>Keepalived 故障排查：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查日志</span></span><br><span class="line">journalctl -u keepalived -f</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查配置</span></span><br><span class="line">keepalived -t -f /etc/keepalived/keepalived.conf</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查网络接口</span></span><br><span class="line">ip a</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>HAProxy 故障排查：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查日志</span></span><br><span class="line">journalctl -u haproxy -f</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查配置</span></span><br><span class="line">haproxy -f /etc/haproxy/haproxy.cfg -c</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查端口监听</span></span><br><span class="line">netstat -ntlp | grep haproxy</span><br></pre></td></tr></table></figure>
+
+<h2 id="注意事项-1"><a href="#注意事项-1" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li><p>网络配置：</p>
+<ul>
+<li>确保防火墙允许VRRP协议（端口112）</li>
+<li>允许HAProxy监听端口（6443, 9090）</li>
+<li>检查网卡名称是否正确</li>
+</ul>
+</li>
+<li><p>安全建议：</p>
+<ul>
+<li>修改Keepalived认证密码</li>
+<li>更改HAProxy统计页面的访问凭据</li>
+<li>限制HAProxy统计页面的访问IP</li>
+</ul>
+</li>
+<li><p>维护建议：</p>
+<ul>
+<li>定期检查服务状态</li>
+<li>监控日志信息</li>
+<li>定期测试故障转移功能</li>
+</ul>
+</li>
+<li><p>性能优化：</p>
+<ul>
+<li>根据实际负载调整HAProxy的连接数限制</li>
+<li>适当调整超时时间</li>
+<li>监控系统资源使用情况</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h1 id="ETCD-集群部署"><a href="#ETCD-集群部署" class="headerlink" title="ETCD 集群部署"></a>ETCD 集群部署</h1><h2 id="环境准备-1"><a href="#环境准备-1" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="主机配置"><a href="#主机配置" class="headerlink" title="主机配置"></a>主机配置</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改主机名</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在 etcd1 上执行</span></span><br><span class="line">hostnamectl set-hostname etcd1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在 etcd2 上执行</span></span><br><span class="line">hostnamectl set-hostname etcd2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在 etcd3 上执行</span></span><br><span class="line">hostnamectl set-hostname etcd3</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置 hosts 解析</span></span><br><span class="line">cat &gt;&gt; /etc/hosts &lt;&lt; EOF</span><br><span class="line">192.168.171.136 etcd1</span><br><span class="line">192.168.171.137 etcd2</span><br><span class="line">192.168.171.138 etcd3</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置免密登录"><a href="#配置免密登录" class="headerlink" title="配置免密登录"></a>配置免密登录</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在 etcd1 上执行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成密钥对</span></span><br><span class="line">ssh-keygen -t rsa -b 2048 -N &quot;&quot; -f ~/.ssh/id_rsa</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">分发公钥</span></span><br><span class="line">for host in etcd1 etcd2 etcd3; do</span><br><span class="line">    sshpass -p &#x27;your_password&#x27; ssh-copy-id -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pub &quot;root@$host&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在所有节点上执行</span></span><br><span class="line">cat &gt;&gt; /etc/profile &lt;&lt; EOF</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ETCD API 版本</span></span><br><span class="line">export ETCDCTL_API=3</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<h2 id="组件安装"><a href="#组件安装" class="headerlink" title="组件安装"></a>组件安装</h2><h3 id="安装-CFSSL-工具"><a href="#安装-CFSSL-工具" class="headerlink" title="安装 CFSSL 工具"></a>安装 CFSSL 工具</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在所有节点上执行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装 CFSSL（下载地址：https://github.com/cloudflare/cfssl/releases）</span></span><br><span class="line">cp cfssl_1.6.3_linux_amd64 /usr/local/bin/cfssl</span><br><span class="line">cp cfssljson_1.6.3_linux_amd64 /usr/local/bin/cfssljson</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加执行权限</span></span><br><span class="line">chmod +x /usr/local/bin/cfssl /usr/local/bin/cfssljson</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">验证安装</span></span><br><span class="line">cfssl version</span><br><span class="line">cfssljson -version</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-ETCD"><a href="#安装-ETCD" class="headerlink" title="安装 ETCD"></a>安装 ETCD</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在所有节点上执行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置环境变量</span></span><br><span class="line">export ETCD_VER=v3.5.9</span><br><span class="line">export DOWNLOAD_URL=&quot;https://github.com/etcd-io/etcd/releases/download&quot;</span><br><span class="line">export INSTALL_DIR=&quot;/usr/local/bin&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下载 ETCD 二进制文件</span></span><br><span class="line">wget $&#123;DOWNLOAD_URL&#125;/$&#123;ETCD_VER&#125;/etcd-$&#123;ETCD_VER&#125;-linux-amd64.tar.gz</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">验证下载文件完整性</span></span><br><span class="line">wget $&#123;DOWNLOAD_URL&#125;/$&#123;ETCD_VER&#125;/etcd-$&#123;ETCD_VER&#125;-linux-amd64.tar.gz.asc</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果需要验证签名</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">gpg --verify etcd-<span class="variable">$&#123;ETCD_VER&#125;</span>-linux-amd64.tar.gz.asc</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解压安装包</span></span><br><span class="line">tar -xzf etcd-$&#123;ETCD_VER&#125;-linux-amd64.tar.gz -C /tmp/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">复制二进制文件到安装目录</span></span><br><span class="line">cp /tmp/etcd-$&#123;ETCD_VER&#125;-linux-amd64/etcd* $&#123;INSTALL_DIR&#125;/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理临时文件</span></span><br><span class="line">rm -rf /tmp/etcd-$&#123;ETCD_VER&#125;-linux-amd64* etcd-$&#123;ETCD_VER&#125;-linux-amd64.tar.gz*</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建数据目录</span></span><br><span class="line">mkdir -p /data/etcd</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">验证安装</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;INSTALL_DIR&#125;/etcd --version</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;INSTALL_DIR&#125;/etcdctl version</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="配置-TLS-证书"><a href="#配置-TLS-证书" class="headerlink" title="配置 TLS 证书"></a>配置 TLS 证书</h2><h3 id="创建证书配置"><a href="#创建证书配置" class="headerlink" title="创建证书配置"></a>创建证书配置</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在 etcd1 上执行</span></span><br><span class="line">mkdir -p /etc/etcd/ssl</span><br><span class="line">cd /etc/etcd/ssl</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建 CA 配置文件</span></span><br><span class="line">cat &gt; ca-config.json &lt;&lt; EOF</span><br><span class="line">&#123;</span><br><span class="line">    &quot;signing&quot;: &#123;</span><br><span class="line">        &quot;default&quot;: &#123;</span><br><span class="line">            &quot;expiry&quot;: &quot;876000h&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;profiles&quot;: &#123;</span><br><span class="line">            &quot;server&quot;: &#123;</span><br><span class="line">                &quot;expiry&quot;: &quot;876000h&quot;,</span><br><span class="line">                &quot;usages&quot;: [</span><br><span class="line">                    &quot;signing&quot;,</span><br><span class="line">                    &quot;key encipherment&quot;,</span><br><span class="line">                    &quot;server auth&quot;,</span><br><span class="line">                    &quot;client auth&quot;</span><br><span class="line">                ]</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;client&quot;: &#123;</span><br><span class="line">                &quot;expiry&quot;: &quot;876000h&quot;,</span><br><span class="line">                &quot;usages&quot;: [</span><br><span class="line">                    &quot;signing&quot;,</span><br><span class="line">                    &quot;key encipherment&quot;,</span><br><span class="line">                    &quot;client auth&quot;</span><br><span class="line">                ]</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;peer&quot;: &#123;</span><br><span class="line">                &quot;expiry&quot;: &quot;876000h&quot;,</span><br><span class="line">                &quot;usages&quot;: [</span><br><span class="line">                    &quot;signing&quot;,</span><br><span class="line">                    &quot;key encipherment&quot;,</span><br><span class="line">                    &quot;server auth&quot;,</span><br><span class="line">                    &quot;client auth&quot;</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建 CA 证书请求文件</span></span><br><span class="line">cat &gt; etcd-ca-csr.json &lt;&lt; EOF</span><br><span class="line">&#123;</span><br><span class="line">    &quot;key&quot;: &#123;</span><br><span class="line">        &quot;algo&quot;: &quot;rsa&quot;,</span><br><span class="line">        &quot;size&quot;: 4096</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;names&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;C&quot;: &quot;CN&quot;,</span><br><span class="line">            &quot;L&quot;: &quot;Beijing&quot;,</span><br><span class="line">            &quot;ST&quot;: &quot;Beijing&quot;,</span><br><span class="line">            &quot;O&quot;: &quot;k8s&quot;,</span><br><span class="line">            &quot;OU&quot;: &quot;System&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建客户端证书请求文件</span></span><br><span class="line">cat &gt; client-csr.json &lt;&lt; EOF</span><br><span class="line">&#123;</span><br><span class="line">    &quot;CN&quot;: &quot;client&quot;,</span><br><span class="line">    &quot;key&quot;: &#123;</span><br><span class="line">        &quot;algo&quot;: &quot;rsa&quot;,</span><br><span class="line">        &quot;size&quot;: 2048</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建服务端证书请求文件</span></span><br><span class="line">cat &gt; etcd-server-csr.json &lt;&lt; EOF</span><br><span class="line">&#123;</span><br><span class="line">    &quot;CN&quot;: &quot;etcd-server&quot;,</span><br><span class="line">    &quot;hosts&quot;: [</span><br><span class="line">        &quot;192.168.171.136&quot;,</span><br><span class="line">        &quot;192.168.171.137&quot;,</span><br><span class="line">        &quot;192.168.171.138&quot;,</span><br><span class="line">        &quot;127.0.0.1&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;key&quot;: &#123;</span><br><span class="line">        &quot;algo&quot;: &quot;rsa&quot;,</span><br><span class="line">        &quot;size&quot;: 2048</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;names&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;C&quot;: &quot;CN&quot;,</span><br><span class="line">            &quot;L&quot;: &quot;Beijing&quot;,</span><br><span class="line">            &quot;O&quot;: &quot;etcd-cluster&quot;,</span><br><span class="line">            &quot;OU&quot;: &quot;System&quot;,</span><br><span class="line">            &quot;ST&quot;: &quot;Beijing&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建对等证书请求文件</span></span><br><span class="line">cat &gt; etcd-peer-csr.json &lt;&lt; EOF</span><br><span class="line">&#123;</span><br><span class="line">    &quot;CN&quot;: &quot;etcd-peer&quot;,</span><br><span class="line">    &quot;hosts&quot;: [</span><br><span class="line">        &quot;192.168.171.136&quot;,</span><br><span class="line">        &quot;192.168.171.137&quot;,</span><br><span class="line">        &quot;192.168.171.138&quot;,</span><br><span class="line">        &quot;127.0.0.1&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;key&quot;: &#123;</span><br><span class="line">        &quot;algo&quot;: &quot;rsa&quot;,</span><br><span class="line">        &quot;size&quot;: 2048</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;names&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;C&quot;: &quot;CN&quot;,</span><br><span class="line">            &quot;L&quot;: &quot;Beijing&quot;,</span><br><span class="line">            &quot;O&quot;: &quot;etcd-cluster&quot;,</span><br><span class="line">            &quot;OU&quot;: &quot;System&quot;,</span><br><span class="line">            &quot;ST&quot;: &quot;Beijing&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<h3 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在 etcd1 上执行</span></span><br><span class="line">cd /etc/etcd/ssl</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成 CA 证书</span></span><br><span class="line">cfssl gencert -initca etcd-ca-csr.json | cfssljson -bare etcd-ca</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成客户端证书</span></span><br><span class="line">cfssl gencert \</span><br><span class="line">    -ca=etcd-ca.pem \</span><br><span class="line">    -ca-key=etcd-ca-key.pem \</span><br><span class="line">    -config=ca-config.json \</span><br><span class="line">    -profile=client client-csr.json | cfssljson -bare client</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成服务端证书</span></span><br><span class="line">cfssl gencert \</span><br><span class="line">    -ca=etcd-ca.pem \</span><br><span class="line">    -ca-key=etcd-ca-key.pem \</span><br><span class="line">    -config=ca-config.json \</span><br><span class="line">    -profile=server etcd-server-csr.json | cfssljson -bare etcd-server</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成对等证书</span></span><br><span class="line">cfssl gencert \</span><br><span class="line">    -ca=etcd-ca.pem \</span><br><span class="line">    -ca-key=etcd-ca-key.pem \</span><br><span class="line">    -config=ca-config.json \</span><br><span class="line">    -profile=peer etcd-peer-csr.json | cfssljson -bare etcd-peer</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">分发证书到其他节点</span></span><br><span class="line">for host in etcd2 etcd3; do</span><br><span class="line">    ssh $host &quot;mkdir -p /etc/etcd/ssl&quot;</span><br><span class="line">    scp /etc/etcd/ssl/* $host:/etc/etcd/ssl/</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置-ETCD-服务"><a href="#配置-ETCD-服务" class="headerlink" title="配置 ETCD 服务"></a>配置 ETCD 服务</h2><h3 id="创建服务配置文件"><a href="#创建服务配置文件" class="headerlink" title="创建服务配置文件"></a>创建服务配置文件</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在 etcd1 上执行</span></span><br><span class="line">cat &gt; /lib/systemd/system/etcd.service &lt;&lt; EOF</span><br><span class="line">[Unit]</span><br><span class="line">Description=Etcd Server</span><br><span class="line">After=network.target</span><br><span class="line">After=network-online.target</span><br><span class="line">Wants=network-online.target</span><br><span class="line">Before=kube-apiserver.service</span><br><span class="line">Documentation=https://github.com/coreos</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=notify</span><br><span class="line">WorkingDirectory=/data/etcd/</span><br><span class="line">ExecStart=/usr/local/bin/etcd \\</span><br><span class="line">  --name=etcd1 \\</span><br><span class="line">  --cert-file=/etc/etcd/ssl/etcd-server.pem \\</span><br><span class="line">  --key-file=/etc/etcd/ssl/etcd-server-key.pem \\</span><br><span class="line">  --peer-cert-file=/etc/etcd/ssl/etcd-peer.pem \\</span><br><span class="line">  --peer-key-file=/etc/etcd/ssl/etcd-peer-key.pem \\</span><br><span class="line">  --trusted-ca-file=/etc/etcd/ssl/etcd-ca.pem \\</span><br><span class="line">  --peer-trusted-ca-file=/etc/etcd/ssl/etcd-ca.pem \\</span><br><span class="line">  --initial-advertise-peer-urls=https://192.168.171.136:2380 \\</span><br><span class="line">  --listen-peer-urls=https://192.168.171.136:2380 \\</span><br><span class="line">  --listen-client-urls=https://192.168.171.136:2379 \\</span><br><span class="line">  --advertise-client-urls=https://192.168.171.136:2379 \\</span><br><span class="line">  --initial-cluster-token=etcd-cluster-0 \\</span><br><span class="line">  --initial-cluster=etcd1=https://192.168.171.136:2380,etcd2=https://192.168.171.137:2380,etcd3=https://192.168.171.138:2380 \\</span><br><span class="line">  --initial-cluster-state=new \\</span><br><span class="line">  --data-dir=/data/etcd \\</span><br><span class="line">  --snapshot-count=50000 \\</span><br><span class="line">  --auto-compaction-retention=1 \\</span><br><span class="line">  --max-request-bytes=10485760 \\</span><br><span class="line">  --quota-backend-bytes=8589934592</span><br><span class="line">Restart=always</span><br><span class="line">RestartSec=15</span><br><span class="line">LimitNOFILE=65536</span><br><span class="line">OOMScoreAdjust=-999</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">分发到其他节点并修改配置</span></span><br><span class="line">for host in etcd2 etcd3; do</span><br><span class="line">    scp /lib/systemd/system/etcd.service $host:/lib/systemd/system/</span><br><span class="line">    ssh $host &quot;sed -i &#x27;s/etcd1/$host/g; s/192.168.171.136/192.168.171.$(expr 136 + $(echo $host | cut -c5))/g&#x27; /lib/systemd/system/etcd.service&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动服务-2"><a href="#启动服务-2" class="headerlink" title="启动服务"></a>启动服务</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在所有节点上执行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建数据目录</span></span><br><span class="line">mkdir -p /data/etcd</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重载服务配置</span></span><br><span class="line">systemctl daemon-reload</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动并设置开机自启</span></span><br><span class="line">systemctl enable --now etcd</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看服务状态</span></span><br><span class="line">systemctl status etcd</span><br></pre></td></tr></table></figure>
+
+<h2 id="集群验证"><a href="#集群验证" class="headerlink" title="集群验证"></a>集群验证</h2><h3 id="配置命令别名"><a href="#配置命令别名" class="headerlink" title="配置命令别名"></a>配置命令别名</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在所有节点上执行</span></span><br><span class="line">cat &gt;&gt; ~/.bashrc &lt;&lt; EOF</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ETCD 集群操作别名</span></span><br><span class="line">alias etcdctl=&#x27;etcdctl \\</span><br><span class="line">    --endpoints=192.168.171.136:2379,192.168.171.137:2379,192.168.171.138:2379 \\</span><br><span class="line">    --cacert=/etc/etcd/ssl/etcd-ca.pem \\</span><br><span class="line">    --cert=/etc/etcd/ssl/etcd-server.pem \\</span><br><span class="line">    --key=/etc/etcd/ssl/etcd-server-key.pem&#x27;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<h3 id="检查集群状态"><a href="#检查集群状态" class="headerlink" title="检查集群状态"></a>检查集群状态</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看集群成员</span></span><br><span class="line">etcdctl member list -w table</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看集群健康状态</span></span><br><span class="line">etcdctl endpoint health -w table</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">写入测试数据</span></span><br><span class="line">etcdctl put test &quot;hello etcd&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">读取测试数据</span></span><br><span class="line">etcdctl get test</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除测试数据</span></span><br><span class="line">etcdctl del test</span><br></pre></td></tr></table></figure>
+
+<h2 id="集群备份"><a href="#集群备份" class="headerlink" title="集群备份"></a>集群备份</h2><h3 id="配置自动备份"><a href="#配置自动备份" class="headerlink" title="配置自动备份"></a>配置自动备份</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建备份目录</span></span><br><span class="line">mkdir -p /data/etcd-backups</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建备份脚本</span></span><br><span class="line">cat &gt; /data/etcd-backups/etcd-backup.sh &lt;&lt; EOF</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">备份配置</span></span><br><span class="line">BACKUP_DIR=&quot;/data/etcd-backups&quot;</span><br><span class="line">DATE=\$(date +%Y%m%d%H%M%S)</span><br><span class="line">LOG_FILE=&quot;\$&#123;BACKUP_DIR&#125;/backup-\$&#123;DATE&#125;.log&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">备份命令</span></span><br><span class="line">/usr/local/bin/etcdctl \\</span><br><span class="line">    --endpoints=192.168.171.136:2379 \\</span><br><span class="line">    --cacert=/etc/etcd/ssl/etcd-ca.pem \\</span><br><span class="line">    --cert=/etc/etcd/ssl/etcd-server.pem \\</span><br><span class="line">    --key=/etc/etcd/ssl/etcd-server-key.pem \\</span><br><span class="line">    snapshot save \$&#123;BACKUP_DIR&#125;/backup-\$&#123;DATE&#125;.db &gt; \$&#123;LOG_FILE&#125; 2&gt;&amp;1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理旧备份</span></span><br><span class="line">find \$&#123;BACKUP_DIR&#125; -name &quot;backup-*.db&quot; -mtime +7 -delete</span><br><span class="line">find \$&#123;BACKUP_DIR&#125; -name &quot;backup-*.log&quot; -mtime +7 -delete</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加执行权限</span></span><br><span class="line">chmod +x /data/etcd-backups/etcd-backup.sh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加定时任务</span></span><br><span class="line">echo &quot;0 2 * * * /data/etcd-backups/etcd-backup.sh&quot; &gt;&gt; /var/spool/cron/crontabs/root</span><br></pre></td></tr></table></figure>
+
+<h2 id="故障排除-2"><a href="#故障排除-2" class="headerlink" title="故障排除"></a>故障排除</h2><h3 id="常见问题排查"><a href="#常见问题排查" class="headerlink" title="常见问题排查"></a>常见问题排查</h3><ol>
+<li>证书问题：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查证书有效期</span></span><br><span class="line">openssl x509 -in /etc/etcd/ssl/etcd-server.pem -text -noout | grep -A2 Validity</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查证书权限</span></span><br><span class="line">ls -l /etc/etcd/ssl/</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>网络问题：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查端口监听</span></span><br><span class="line">netstat -ntlp | grep etcd</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查端口连通性</span></span><br><span class="line">for port in 2379 2380; do</span><br><span class="line">    for host in 192.168.171.136 192.168.171.137 192.168.171.138; do</span><br><span class="line">        echo &quot;Testing $host:$port...&quot;</span><br><span class="line">        nc -zv $host $port</span><br><span class="line">    done</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>日志排查：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看实时日志</span></span><br><span class="line">journalctl -u etcd -f</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看错误日志</span></span><br><span class="line">journalctl -u etcd -p err</span><br></pre></td></tr></table></figure>
+
+<h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><ol>
+<li>系统参数优化：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">调整系统限制</span></span><br><span class="line">cat &gt;&gt; /etc/security/limits.conf &lt;&lt; EOF</span><br><span class="line">* soft nofile 65536</span><br><span class="line">* hard nofile 65536</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">调整内核参数</span></span><br><span class="line">cat &gt;&gt; /etc/sysctl.conf &lt;&lt; EOF</span><br><span class="line">net.ipv4.ip_local_port_range = 1024 65000</span><br><span class="line">net.core.somaxconn = 32768</span><br><span class="line">net.core.netdev_max_backlog = 16384</span><br><span class="line">net.ipv4.tcp_max_syn_backlog = 8096</span><br><span class="line">net.ipv4.tcp_tw_reuse = 1</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>ETCD 参数优化：</li>
+</ol>
+<ul>
+<li>适当调整 <code>--snapshot-count</code></li>
+<li>根据实际情况调整 <code>--quota-backend-bytes</code></li>
+<li>配置合适的 <code>--auto-compaction-retention</code></li>
+</ul>
+<h2 id="注意事项-2"><a href="#注意事项-2" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li><p>安全建议：</p>
+<ul>
+<li>定期更新证书</li>
+<li>限制访问权限</li>
+<li>配置防火墙规则</li>
+</ul>
+</li>
+<li><p>维护建议：</p>
+<ul>
+<li>定期备份数据</li>
+<li>监控集群状态</li>
+<li>及时清理历史数据</li>
+</ul>
+</li>
+<li><p>性能建议：</p>
+<ul>
+<li>使用 SSD 存储</li>
+<li>独立的磁盘空间</li>
+<li>足够的内存配置</li>
+</ul>
+</li>
+<li><p>高可用建议：</p>
+<ul>
+<li>节点跨机架部署</li>
+<li>配置监控告警</li>
+<li>定期进行故障演练</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h1 id="Harbor-私有镜像仓库部署"><a href="#Harbor-私有镜像仓库部署" class="headerlink" title="Harbor 私有镜像仓库部署"></a>Harbor 私有镜像仓库部署</h1><h2 id="环境准备-2"><a href="#环境准备-2" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="DNS-配置"><a href="#DNS-配置" class="headerlink" title="DNS 配置"></a>DNS 配置</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置本地解析</span></span><br><span class="line">cat &gt;&gt; /etc/hosts &lt;&lt; EOF</span><br><span class="line">192.168.171.50 harbor.k8s.com</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改主机名</span></span><br><span class="line">hostnamectl set-hostname harbor.k8s.com</span><br></pre></td></tr></table></figure>
+
+<h3 id="存储配置"><a href="#存储配置" class="headerlink" title="存储配置"></a>存储配置</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装 LVM 工具</span></span><br><span class="line">apt-get update</span><br><span class="line">apt-get install -y lvm2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建物理卷</span></span><br><span class="line">pvcreate /dev/sdb1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建卷组</span></span><br><span class="line">vgcreate data_vg /dev/sdb1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建逻辑卷</span></span><br><span class="line">lvcreate -l +100%FREE -n data_lv data_vg</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">格式化逻辑卷</span></span><br><span class="line">mkfs.ext4 /dev/data_vg/data_lv</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理旧配置</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">sed -i <span class="string">&#x27;/\/data/d&#x27;</span> /etc/fstab</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置挂载</span></span><br><span class="line">echo &quot;/dev/data_vg/data_lv /data ext4 defaults 0 0&quot; &gt;&gt; /etc/fstab</span><br><span class="line">mkdir -p /data</span><br><span class="line">mount -a</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">验证挂载</span></span><br><span class="line">df -h /data</span><br></pre></td></tr></table></figure>
+
+<h2 id="Docker-环境配置"><a href="#Docker-环境配置" class="headerlink" title="Docker 环境配置"></a>Docker 环境配置</h2><h3 id="安装-Docker"><a href="#安装-Docker" class="headerlink" title="安装 Docker"></a>安装 Docker</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装依赖包</span></span><br><span class="line">apt-get update</span><br><span class="line">apt-get install -y \</span><br><span class="line">    apt-transport-https \</span><br><span class="line">    ca-certificates \</span><br><span class="line">    curl \</span><br><span class="line">    gnupg \</span><br><span class="line">    lsb-release</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加 Docker 官方 GPG 密钥</span></span><br><span class="line">curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加 Docker 软件源</span></span><br><span class="line">echo &quot;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable&quot; | tee /etc/apt/sources.list.d/docker.list &gt; /dev/null</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装 Docker</span></span><br><span class="line">apt-get update</span><br><span class="line">apt-get install -y docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置-Docker"><a href="#配置-Docker" class="headerlink" title="配置 Docker"></a>配置 Docker</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建 Docker 配置目录</span></span><br><span class="line">mkdir -p /etc/docker</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置 Docker daemon</span></span><br><span class="line">cat &gt; /etc/docker/daemon.json &lt;&lt; &#x27;EOF&#x27;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;https://ustc-edu-cn.mirror.aliyuncs.com&quot;],</span><br><span class="line">  &quot;debug&quot;: false,</span><br><span class="line">  &quot;ip-forward&quot;: true,</span><br><span class="line">  &quot;ipv6&quot;: false,</span><br><span class="line">  &quot;live-restore&quot;: true,</span><br><span class="line">  &quot;log-driver&quot;: &quot;json-file&quot;,</span><br><span class="line">  &quot;log-level&quot;: &quot;warn&quot;,</span><br><span class="line">  &quot;log-opts&quot;: &#123;</span><br><span class="line">    &quot;max-size&quot;: &quot;100m&quot;,</span><br><span class="line">    &quot;max-file&quot;: &quot;2&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;selinux-enabled&quot;: false,</span><br><span class="line">  &quot;experimental&quot;: true,</span><br><span class="line">  &quot;storage-driver&quot;: &quot;overlay2&quot;,</span><br><span class="line">  &quot;metrics-addr&quot;: &quot;0.0.0.0:9323&quot;,</span><br><span class="line">  &quot;data-root&quot;: &quot;/data/docker&quot;,</span><br><span class="line">  &quot;default-ulimits&quot;: &#123;</span><br><span class="line">    &quot;nofile&quot;: &#123;</span><br><span class="line">      &quot;Name&quot;: &quot;nofile&quot;,</span><br><span class="line">      &quot;Hard&quot;: 65536,</span><br><span class="line">      &quot;Soft&quot;: 65536</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;exec-opts&quot;: [&quot;native.cgroupdriver=systemd&quot;]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重启 Docker 服务</span></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker</span><br><span class="line">systemctl enable docker</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-Docker-Compose"><a href="#安装-Docker-Compose" class="headerlink" title="安装 Docker Compose"></a>安装 Docker Compose</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下载 Docker Compose</span></span><br><span class="line">COMPOSE_VERSION=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep &#x27;tag_name&#x27; | cut -d\&quot; -f4)</span><br><span class="line">curl -L &quot;https://github.com/docker/compose/releases/download/$&#123;COMPOSE_VERSION&#125;/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加执行权限</span></span><br><span class="line">chmod +x /usr/local/bin/docker-compose</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">验证安装</span></span><br><span class="line">docker-compose version</span><br></pre></td></tr></table></figure>
+
+<h2 id="Harbor-部署"><a href="#Harbor-部署" class="headerlink" title="Harbor 部署"></a>Harbor 部署</h2><h3 id="下载-Harbor"><a href="#下载-Harbor" class="headerlink" title="下载 Harbor"></a>下载 Harbor</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置 Harbor 版本</span></span><br><span class="line">export HARBOR_VERSION=&quot;v2.9.1&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下载 Harbor 安装包</span></span><br><span class="line">wget https://github.com/goharbor/harbor/releases/download/$&#123;HARBOR_VERSION&#125;/harbor-offline-installer-$&#123;HARBOR_VERSION&#125;.tgz</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解压安装包</span></span><br><span class="line">tar xzvf harbor-offline-installer-$&#123;HARBOR_VERSION&#125;.tgz -C /data</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置-Harbor"><a href="#配置-Harbor" class="headerlink" title="配置 Harbor"></a>配置 Harbor</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建配置文件</span></span><br><span class="line">cp /data/harbor/harbor.yml.tmpl /data/harbor/harbor.yml</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改配置文件</span></span><br><span class="line">cat &gt; /data/harbor/harbor.yml &lt;&lt; EOF</span><br><span class="line">hostname: harbor.k8s.com</span><br><span class="line">https:</span><br><span class="line">  certificate: /data/harbor/ssl/harbor.k8s.com.crt</span><br><span class="line">  private_key: /data/harbor/ssl/harbor.k8s.com.key</span><br><span class="line">harbor_admin_password: Harbor@123.com</span><br><span class="line">data_volume: /data/harbor/harbor-data</span><br><span class="line">log:</span><br><span class="line">  location: /data/harbor/harbor-logs</span><br><span class="line">  level: info</span><br><span class="line">  local:</span><br><span class="line">    rotate_count: 50</span><br><span class="line">    rotate_size: 200M</span><br><span class="line">database:</span><br><span class="line">  password: root123</span><br><span class="line">  max_idle_conns: 100</span><br><span class="line">  max_open_conns: 900</span><br><span class="line">storage_service:</span><br><span class="line">  ca_bundle: /etc/ssl/certs/ca-certificates.crt</span><br><span class="line">  redirect:</span><br><span class="line">    disabled: false</span><br><span class="line">  cache:</span><br><span class="line">    enabled: true</span><br><span class="line">    expire_hours: 24</span><br><span class="line">trivy:</span><br><span class="line">  enabled: true</span><br><span class="line">  ignore_unfixed: false</span><br><span class="line">  skip_update: false</span><br><span class="line">  offline_scan: false</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置-TLS-证书-1"><a href="#配置-TLS-证书-1" class="headerlink" title="配置 TLS 证书"></a>配置 TLS 证书</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建证书目录</span></span><br><span class="line">mkdir -p /data/harbor/ssl</span><br><span class="line">cd /data/harbor/ssl</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成 CA 私钥和证书</span></span><br><span class="line">openssl genrsa -out ca.key 4096</span><br><span class="line">openssl req -x509 -new -nodes -sha512 -days 3650 \</span><br><span class="line">    -subj &quot;/C=CN/ST=Beijing/L=Beijing/O=example/OU=Personal/CN=harbor.k8s.com&quot; \</span><br><span class="line">    -key ca.key \</span><br><span class="line">    -out ca.crt</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成服务器私钥</span></span><br><span class="line">openssl genrsa -out harbor.k8s.com.key 4096</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成证书签名请求</span></span><br><span class="line">openssl req -sha512 -new \</span><br><span class="line">    -subj &quot;/C=CN/ST=Beijing/L=Beijing/O=example/OU=Personal/CN=harbor.k8s.com&quot; \</span><br><span class="line">    -key harbor.k8s.com.key \</span><br><span class="line">    -out harbor.k8s.com.csr</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置证书扩展信息</span></span><br><span class="line">cat &gt; v3.ext &lt;&lt; EOF</span><br><span class="line">authorityKeyIdentifier=keyid,issuer</span><br><span class="line">basicConstraints=CA:FALSE</span><br><span class="line">keyUsage=digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment</span><br><span class="line">extendedKeyUsage=serverAuth</span><br><span class="line">subjectAltName=@alt_names</span><br><span class="line"></span><br><span class="line">[alt_names]</span><br><span class="line">DNS.1=harbor.k8s.com</span><br><span class="line">DNS.2=harbor</span><br><span class="line">IP.1=192.168.171.50</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成服务器证书</span></span><br><span class="line">openssl x509 -req -sha512 -days 3650 \</span><br><span class="line">    -extfile v3.ext \</span><br><span class="line">    -CA ca.crt -CAkey ca.key -CAcreateserial \</span><br><span class="line">    -in harbor.k8s.com.csr \</span><br><span class="line">    -out harbor.k8s.com.crt</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成客户端证书</span></span><br><span class="line">openssl x509 -inform PEM -in harbor.k8s.com.crt -out harbor.k8s.com.cert</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置 Docker 证书</span></span><br><span class="line">mkdir -p /etc/docker/certs.d/harbor.k8s.com/</span><br><span class="line">cp ca.crt /etc/docker/certs.d/harbor.k8s.com/</span><br><span class="line">cp harbor.k8s.com.cert /etc/docker/certs.d/harbor.k8s.com/</span><br><span class="line">cp harbor.k8s.com.key /etc/docker/certs.d/harbor.k8s.com/</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-Harbor"><a href="#安装-Harbor" class="headerlink" title="安装 Harbor"></a>安装 Harbor</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd /data/harbor</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装 Harbor</span></span><br><span class="line">./prepare --with-trivy</span><br><span class="line">./install.sh --with-trivy</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">验证安装</span></span><br><span class="line">docker ps</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">测试登录</span></span><br><span class="line">docker login -u admin -p &#x27;Harbor@123.com&#x27; harbor.k8s.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h2><h3 id="配置-Docker-客户端"><a href="#配置-Docker-客户端" class="headerlink" title="配置 Docker 客户端"></a>配置 Docker 客户端</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">复制证书到客户端</span></span><br><span class="line">mkdir -p /etc/docker/certs.d/harbor.k8s.com/</span><br><span class="line">scp harbor-server:/etc/docker/certs.d/harbor.k8s.com/* /etc/docker/certs.d/harbor.k8s.com/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重启 Docker 服务</span></span><br><span class="line">systemctl restart docker</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">测试登录</span></span><br><span class="line">docker login harbor.k8s.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="维护管理"><a href="#维护管理" class="headerlink" title="维护管理"></a>维护管理</h2><h3 id="备份配置"><a href="#备份配置" class="headerlink" title="备份配置"></a>备份配置</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建备份脚本</span></span><br><span class="line">cat &gt; /data/harbor/backup.sh &lt;&lt; &#x27;EOF&#x27;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">BACKUP_DIR=&quot;/data/harbor/backups&quot;</span><br><span class="line">DATE=$(date +%Y%m%d_%H%M%S)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建备份目录</span></span><br><span class="line">mkdir -p $&#123;BACKUP_DIR&#125;/$&#123;DATE&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">停止服务</span></span><br><span class="line">cd /data/harbor</span><br><span class="line">docker-compose down</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">备份数据</span></span><br><span class="line">tar czf $&#123;BACKUP_DIR&#125;/$&#123;DATE&#125;/harbor_data.tar.gz /data/harbor/harbor-data</span><br><span class="line">tar czf $&#123;BACKUP_DIR&#125;/$&#123;DATE&#125;/harbor_config.tar.gz /data/harbor/harbor.yml /data/harbor/ssl</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动服务</span></span><br><span class="line">docker-compose up -d</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理旧备份</span></span><br><span class="line">find $&#123;BACKUP_DIR&#125; -type d -mtime +7 -exec rm -rf &#123;&#125; \;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">记录备份日志</span></span><br><span class="line">echo &quot;Backup completed at $(date &#x27;+%Y-%m-%d %H:%M:%S&#x27;)&quot; &gt;&gt; /data/harbor/harbor-logs/backup.log</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加执行权限</span></span><br><span class="line">chmod +x /data/harbor/backup.sh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建日志目录</span></span><br><span class="line">mkdir -p /data/harbor/harbor-logs</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加到 root 用户的定时任务</span></span><br><span class="line">(crontab -l 2&gt;/dev/null; echo &quot;0 2 * * * /data/harbor/backup.sh &gt; /dev/null 2&gt;&amp;1&quot;) | crontab -</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">验证定时任务</span></span><br><span class="line">crontab -l</span><br></pre></td></tr></table></figure>
+
+<h3 id="监控配置"><a href="#监控配置" class="headerlink" title="监控配置"></a>监控配置</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建监控脚本</span></span><br><span class="line">cat &gt; /data/harbor/monitor.sh &lt;&lt; &#x27;EOF&#x27;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查 Harbor 服务状态</span></span><br><span class="line">check_harbor() &#123;</span><br><span class="line">    local containers=$(docker ps --format &#x27;&#123;&#123;.Names&#125;&#125;&#x27; | grep &#x27;^harbor-&#x27;)</span><br><span class="line">    if [ $(echo &quot;$containers&quot; | wc -l) -lt 7 ]; then</span><br><span class="line">        echo &quot;Warning: Some Harbor containers are not running&quot;</span><br><span class="line">        return 1</span><br><span class="line">    fi</span><br><span class="line">    return 0</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查存储空间</span></span><br><span class="line">check_storage() &#123;</span><br><span class="line">    local usage=$(df -h /data | awk &#x27;NR==2 &#123;print $5&#125;&#x27; | sed &#x27;s/%//&#x27;)</span><br><span class="line">    if [ $usage -gt 80 ]; then</span><br><span class="line">        echo &quot;Warning: Storage usage is above 80%&quot;</span><br><span class="line">        return 1</span><br><span class="line">    fi</span><br><span class="line">    return 0</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">主检查逻辑</span></span><br><span class="line">main() &#123;</span><br><span class="line">    check_harbor || echo &quot;Harbor service check failed&quot;</span><br><span class="line">    check_storage || echo &quot;Storage check failed&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">chmod +x /data/harbor/monitor.sh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加到 crontab</span></span><br><span class="line">echo &quot;*/5 * * * * /data/harbor/monitor.sh &gt;&gt; /data/harbor/harbor-logs/monitor.log 2&gt;&amp;1&quot; &gt;&gt; /var/spool/cron/crontabs/root</span><br></pre></td></tr></table></figure>
+
+<h2 id="故障排除-3"><a href="#故障排除-3" class="headerlink" title="故障排除"></a>故障排除</h2><h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h3><ol>
+<li>证书问题：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查证书有效期</span></span><br><span class="line">openssl x509 -in /data/harbor/ssl/harbor.k8s.com.crt -text -noout | grep -A2 Validity</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查证书配置</span></span><br><span class="line">ls -l /etc/docker/certs.d/harbor.k8s.com/</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>存储问题：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查存储空间</span></span><br><span class="line">df -h /data</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查 Docker 存储</span></span><br><span class="line">docker system df</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>服务问题：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查服务状态</span></span><br><span class="line">cd /data/harbor</span><br><span class="line">docker-compose ps</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看服务日志</span></span><br><span class="line">docker-compose logs</span><br></pre></td></tr></table></figure>
+
+<h2 id="性能优化-1"><a href="#性能优化-1" class="headerlink" title="性能优化"></a>性能优化</h2><ol>
+<li>系统优化：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">调整系统限制</span></span><br><span class="line">cat &gt;&gt; /etc/security/limits.conf &lt;&lt; EOF</span><br><span class="line">* soft nofile 65535</span><br><span class="line">* hard nofile 65535</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">调整内核参数</span></span><br><span class="line">cat &gt;&gt; /etc/sysctl.conf &lt;&lt; EOF</span><br><span class="line">net.ipv4.ip_local_port_range = 1024 65000</span><br><span class="line">net.core.somaxconn = 32768</span><br><span class="line">fs.file-max = 1000000</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Docker 优化：</li>
+</ol>
+<ul>
+<li>配置合适的日志轮转策略</li>
+<li>使用高性能存储</li>
+<li>定期清理未使用的镜像和容器</li>
+</ul>
+<h2 id="注意事项-3"><a href="#注意事项-3" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li><p>安全建议：</p>
+<ul>
+<li>及时更新系统和组件</li>
+<li>定期轮换密码和证书</li>
+<li>限制访问权限</li>
+<li>配置防火墙规则</li>
+</ul>
+</li>
+<li><p>维护建议：</p>
+<ul>
+<li>定期备份数据</li>
+<li>监控系统资源</li>
+<li>及时清理垃圾数据</li>
+<li>保持日志分析</li>
+</ul>
+</li>
+<li><p>高可用建议：</p>
+<ul>
+<li>配置负载均衡</li>
+<li>实现数据备份</li>
+<li>监控告警配置</li>
+<li>故障恢复演练</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h1 id="Kubernetes-集群环境部署"><a href="#Kubernetes-集群环境部署" class="headerlink" title="Kubernetes 集群环境部署"></a>Kubernetes 集群环境部署</h1><h2 id="环境准备-3"><a href="#环境准备-3" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="主机配置-1"><a href="#主机配置-1" class="headerlink" title="主机配置"></a>主机配置</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置主机名</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Master 节点</span></span><br><span class="line">hostnamectl set-hostname master1.k8s.com</span><br><span class="line">hostnamectl set-hostname master2.k8s.com</span><br><span class="line">hostnamectl set-hostname master3.k8s.com</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Worker 节点</span></span><br><span class="line">hostnamectl set-hostname worker1.k8s.com</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置 DNS 解析</span></span><br><span class="line">cat &gt;&gt; /etc/hosts &lt;&lt; EOF</span><br><span class="line">192.168.171.136 etcd1</span><br><span class="line">192.168.171.50  harbor harbor.k8s.com</span><br><span class="line">192.168.171.136 master1 master1.k8s.com</span><br><span class="line">192.168.171.137 master2 master2.k8s.com</span><br><span class="line">192.168.171.138 master3 master3.k8s.com</span><br><span class="line">192.168.171.139 worker1 worker1.k8s.com</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置免密登录</span></span><br><span class="line">ssh-keygen -t rsa -b 2048 -N &quot;&quot; -f ~/.ssh/id_rsa</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">分发公钥</span></span><br><span class="line">for host in harbor etcd1 master&#123;1..3&#125; worker1; do</span><br><span class="line">    sshpass -p &#x27;your_password&#x27; ssh-copy-id -o StrictHostKeyChecking=no root@$&#123;host&#125;</span><br><span class="line">done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">分发hosts文件</span></span><br><span class="line">for host in master&#123;2..3&#125; worker1; do</span><br><span class="line">    scp /etc/hosts $&#123;host&#125;:/etc/</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h3 id="系统配置"><a href="#系统配置" class="headerlink" title="系统配置"></a>系统配置</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在所有节点上执行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">关闭 swap</span></span><br><span class="line">swapoff -a</span><br><span class="line">sed -i &#x27;/swap/d&#x27; /etc/fstab</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">加载内核模块</span></span><br><span class="line">cat &gt; /etc/modules-load.d/k8s.conf &lt;&lt; EOF</span><br><span class="line">overlay</span><br><span class="line">br_netfilter</span><br><span class="line">ip_vs</span><br><span class="line">ip_vs_rr</span><br><span class="line">ip_vs_wrr</span><br><span class="line">ip_vs_sh</span><br><span class="line">nf_conntrack</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">加载模块</span></span><br><span class="line">modprobe overlay</span><br><span class="line">modprobe br_netfilter</span><br><span class="line">modprobe ip_vs</span><br><span class="line">modprobe ip_vs_rr</span><br><span class="line">modprobe ip_vs_wrr</span><br><span class="line">modprobe ip_vs_sh</span><br><span class="line">modprobe nf_conntrack</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">更新内核设置</span></span><br><span class="line">cat &gt; /etc/sysctl.d/k8s.conf &lt;&lt; EOF</span><br><span class="line">net.bridge.bridge-nf-call-iptables  = 1</span><br><span class="line">net.bridge.bridge-nf-call-ip6tables = 1</span><br><span class="line">net.ipv4.ip_forward                 = 1</span><br><span class="line">vm.swappiness                       = 0</span><br><span class="line">fs.file-max                         = 1000000</span><br><span class="line">net.ipv4.ip_local_port_range       = 1024 65000</span><br><span class="line">net.ipv4.tcp_tw_reuse              = 1</span><br><span class="line">net.ipv4.tcp_fin_timeout           = 30</span><br><span class="line">net.core.somaxconn                 = 32768</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">sysctl --system</span><br></pre></td></tr></table></figure>
+
+<h2 id="组件安装-1"><a href="#组件安装-1" class="headerlink" title="组件安装"></a>组件安装</h2><h3 id="容器运行时"><a href="#容器运行时" class="headerlink" title="容器运行时"></a>容器运行时</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装 containerd</span></span><br><span class="line">export CONTAINERD_VERSION=&quot;1.7.6&quot;</span><br><span class="line">wget https://github.com/containerd/containerd/releases/download/v$&#123;CONTAINERD_VERSION&#125;/containerd-$&#123;CONTAINERD_VERSION&#125;-linux-amd64.tar.gz</span><br><span class="line">tar Cxzvf /usr/local containerd-$&#123;CONTAINERD_VERSION&#125;-linux-amd64.tar.gz</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置 containerd 服务</span></span><br><span class="line">wget https://raw.githubusercontent.com/containerd/containerd/main/containerd.service -O /usr/local/lib/systemd/system/containerd.service</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成默认配置</span></span><br><span class="line">mkdir -p /etc/containerd</span><br><span class="line">containerd config default &gt; /etc/containerd/config.toml</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改配置</span></span><br><span class="line">sed -i &#x27;s|/var/lib/containerd|/data/containerd|g&#x27; /etc/containerd/config.toml</span><br><span class="line">sed -i &#x27;s|k8s.gcr.io/pause:3.6|registry.aliyuncs.com/google_containers/pause:3.9|g&#x27; /etc/containerd/config.toml</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加镜像仓库配置</span></span><br><span class="line">cat &gt;&gt; /etc/containerd/config.toml &lt;&lt; EOF</span><br><span class="line">      [plugins.&quot;io.containerd.grpc.v1.cri&quot;.registry.mirrors.&quot;docker.io&quot;]</span><br><span class="line">        endpoint = [&quot;https://docker.mirrors.ustc.edu.cn&quot;,&quot;http://hub-mirror.c.163.com&quot;]</span><br><span class="line">      [plugins.&quot;io.containerd.grpc.v1.cri&quot;.registry.mirrors.&quot;gcr.io&quot;]</span><br><span class="line">        endpoint = [&quot;https://gcr.mirrors.ustc.edu.cn&quot;]</span><br><span class="line">      [plugins.&quot;io.containerd.grpc.v1.cri&quot;.registry.mirrors.&quot;k8s.gcr.io&quot;]</span><br><span class="line">        endpoint = [&quot;https://gcr.mirrors.ustc.edu.cn/google-containers/&quot;]</span><br><span class="line">      [plugins.&quot;io.containerd.grpc.v1.cri&quot;.registry.mirrors.&quot;quay.io&quot;]</span><br><span class="line">        endpoint = [&quot;https://quay.mirrors.ustc.edu.cn&quot;]</span><br><span class="line">      [plugins.&quot;io.containerd.grpc.v1.cri&quot;.registry.mirrors.&quot;harbor.k8s.com&quot;]</span><br><span class="line">        endpoint = [&quot;https://harbor.k8s.com&quot;]</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动服务</span></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl enable --now containerd</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-CNI-插件"><a href="#安装-CNI-插件" class="headerlink" title="安装 CNI 插件"></a>安装 CNI 插件</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下载并安装 CNI 插件</span></span><br><span class="line">CNI_VERSION=&quot;v1.2.0&quot;</span><br><span class="line">wget https://github.com/containernetworking/plugins/releases/download/$&#123;CNI_VERSION&#125;/cni-plugins-linux-amd64-$&#123;CNI_VERSION&#125;.tgz</span><br><span class="line">mkdir -p /opt/cni/bin</span><br><span class="line">tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-$&#123;CNI_VERSION&#125;.tgz</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-nerdctl"><a href="#安装-nerdctl" class="headerlink" title="安装 nerdctl"></a>安装 nerdctl</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下载并安装 nerdctl</span></span><br><span class="line">NERDCTL_VERSION=&quot;1.6.2&quot;</span><br><span class="line">wget https://github.com/containerd/nerdctl/releases/download/v$&#123;NERDCTL_VERSION&#125;/nerdctl-full-$&#123;NERDCTL_VERSION&#125;-linux-amd64.tar.gz</span><br><span class="line">tar Cxzvf /usr/local nerdctl-full-$&#123;NERDCTL_VERSION&#125;-linux-amd64.tar.gz</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置别名</span></span><br><span class="line">cat &gt;&gt; /etc/profile &lt;&lt; EOF</span><br><span class="line">alias docker=&#x27;nerdctl --namespace k8s.io&#x27;</span><br><span class="line">alias docker-compose=&#x27;nerdctl compose&#x27;</span><br><span class="line">alias crictl=&#x27;crictl --runtime-endpoint unix:///var/run/containerd/containerd.sock&#x27;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">source /etc/profile</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置 nerdctl</span></span><br><span class="line">mkdir -p /etc/nerdctl</span><br><span class="line">cat &gt; /etc/nerdctl/nerdctl.toml &lt;&lt; EOF</span><br><span class="line">namespace = &quot;k8s.io&quot;</span><br><span class="line">insecure_registry = true</span><br><span class="line">cni_path = &quot;/opt/cni/bin/&quot;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-Kubernetes-组件"><a href="#安装-Kubernetes-组件" class="headerlink" title="安装 Kubernetes 组件"></a>安装 Kubernetes 组件</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加 Kubernetes 软件源</span></span><br><span class="line">curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -</span><br><span class="line">cat &gt; /etc/apt/sources.list.d/kubernetes.list &lt;&lt; EOF</span><br><span class="line">deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装指定版本</span></span><br><span class="line">export KUBE_VERSION=&quot;1.27.8&quot;</span><br><span class="line">apt update</span><br><span class="line">apt install -y kubelet=$&#123;KUBE_VERSION&#125;-00 kubeadm=$&#123;KUBE_VERSION&#125;-00 kubectl=$&#123;KUBE_VERSION&#125;-00</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">锁定版本</span></span><br><span class="line">apt-mark hold kubelet kubeadm kubectl</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启用自动补全</span></span><br><span class="line">apt install -y bash-completion</span><br><span class="line">echo &#x27;source &lt;(kubectl completion bash)&#x27; &gt;&gt; ~/.bashrc</span><br><span class="line">source ~/.bashrc</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">预拉取镜像</span></span><br><span class="line">kubeadm config images pull --kubernetes-version=v$&#123;KUBE_VERSION&#125; \</span><br><span class="line">    --image-repository=&#x27;registry.aliyuncs.com/google_containers&#x27;</span><br></pre></td></tr></table></figure>
+
+<h2 id="证书配置"><a href="#证书配置" class="headerlink" title="证书配置"></a>证书配置</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建证书目录</span></span><br><span class="line">mkdir -p /etc/kubernetes/pki/etcd</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">复制 ETCD 证书</span></span><br><span class="line">scp etcd1:/etc/etcd/ssl/etcd-ca.pem /etc/kubernetes/pki/etcd/</span><br><span class="line">scp etcd1:/etc/etcd/ssl/client.pem /etc/kubernetes/pki/apiserver-etcd-client.pem</span><br><span class="line">scp etcd1:/etc/etcd/ssl/client-key.pem /etc/kubernetes/pki/apiserver-etcd-client-key.pem</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">复制 Harbor 证书</span></span><br><span class="line">mkdir -p /etc/tls/harbor/</span><br><span class="line">scp -r harbor:/etc/docker/certs.d/harbor.k8s.com /etc/tls/harbor/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">更新系统证书</span></span><br><span class="line">cp /etc/tls/harbor/harbor.k8s.com/ca.crt /usr/local/share/ca-certificates/</span><br><span class="line">cp /etc/tls/harbor/harbor.k8s.com/harbor.k8s.com.cert /usr/local/share/ca-certificates/</span><br><span class="line">update-ca-certificates</span><br></pre></td></tr></table></figure>
+
+<h2 id="系统优化-1"><a href="#系统优化-1" class="headerlink" title="系统优化"></a>系统优化</h2><h3 id="性能调优"><a href="#性能调优" class="headerlink" title="性能调优"></a>性能调优</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">调整系统限制</span></span><br><span class="line">cat &gt;&gt; /etc/security/limits.conf &lt;&lt; EOF</span><br><span class="line">* soft nofile 65536</span><br><span class="line">* hard nofile 65536</span><br><span class="line">* soft nproc 65536</span><br><span class="line">* hard nproc 65536</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">调整内核参数</span></span><br><span class="line">cat &gt;&gt; /etc/sysctl.conf &lt;&lt; EOF</span><br><span class="line">net.ipv4.tcp_max_syn_backlog = 8192</span><br><span class="line">net.core.somaxconn = 32768</span><br><span class="line">net.ipv4.tcp_timestamps = 1</span><br><span class="line">net.ipv4.tcp_fin_timeout = 30</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+
+<h3 id="安全加固"><a href="#安全加固" class="headerlink" title="安全加固"></a>安全加固</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">禁用不必要的服务</span></span><br><span class="line">systemctl stop apparmor</span><br><span class="line">systemctl disable apparmor</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置防火墙规则</span></span><br><span class="line">ufw allow 6443/tcp  # Kubernetes API</span><br><span class="line">ufw allow 2379/tcp  # etcd client API</span><br><span class="line">ufw allow 2380/tcp  # etcd peer API</span><br><span class="line">ufw allow 10250/tcp # Kubelet API</span><br><span class="line">ufw allow 10251/tcp # kube-scheduler</span><br><span class="line">ufw allow 10252/tcp # kube-controller-manager</span><br></pre></td></tr></table></figure>
+
+<h2 id="验证部署-1"><a href="#验证部署-1" class="headerlink" title="验证部署"></a>验证部署</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">验证模块加载</span></span><br><span class="line">lsmod | grep -e br_netfilter -e overlay -e ip_vs</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">验证端口</span></span><br><span class="line">netstat -ntlp | grep -e containerd -e kubelet</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">验证镜像</span></span><br><span class="line">crictl images</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">验证 Kubernetes 组件</span></span><br><span class="line">systemctl status kubelet</span><br><span class="line">kubectl version --client</span><br><span class="line">kubeadm version</span><br></pre></td></tr></table></figure>
+
+<h2 id="注意事项-4"><a href="#注意事项-4" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li><p>网络要求：</p>
+<ul>
+<li>节点间网络互通</li>
+<li>可访问外网（用于下载组件）</li>
+<li>防火墙开放必要端口</li>
+</ul>
+</li>
+<li><p>安全建议：</p>
+<ul>
+<li>及时更新系统和组件</li>
+<li>使用最新的稳定版本</li>
+<li>配置适当的安全策略</li>
+</ul>
+</li>
+<li><p>维护建议：</p>
+<ul>
+<li>定期检查系统资源</li>
+<li>监控关键组件状态</li>
+<li>保持日志分析和审计</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h1 id="Kubernetes-集群部署"><a href="#Kubernetes-集群部署" class="headerlink" title="Kubernetes 集群部署"></a>Kubernetes 集群部署</h1><h2 id="初始化配置"><a href="#初始化配置" class="headerlink" title="初始化配置"></a>初始化配置</h2><h3 id="创建集群配置文件"><a href="#创建集群配置文件" class="headerlink" title="创建集群配置文件"></a>创建集群配置文件</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在 master1 节点上执行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成默认配置</span></span><br><span class="line">kubeadm config print init-defaults &gt; kubeadm-init.yaml</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改配置文件</span></span><br><span class="line">cat &gt; kubeadm-init.yaml &lt;&lt; EOF</span><br><span class="line">apiVersion: kubeadm.k8s.io/v1beta3</span><br><span class="line">kind: InitConfiguration</span><br><span class="line">localAPIEndpoint:</span><br><span class="line">  advertiseAddress: 192.168.171.136</span><br><span class="line">  bindPort: 6443</span><br><span class="line">nodeRegistration:</span><br><span class="line">  criSocket: unix:///var/run/containerd/containerd.sock</span><br><span class="line">  taints:</span><br><span class="line">    - effect: NoSchedule</span><br><span class="line">      key: node-role.kubernetes.io/control-plane</span><br><span class="line">---</span><br><span class="line">apiVersion: kubeadm.k8s.io/v1beta3</span><br><span class="line">kind: ClusterConfiguration</span><br><span class="line">certificatesDir: /etc/kubernetes/pki</span><br><span class="line">clusterName: kubernetes</span><br><span class="line">controllerManager: &#123;&#125;</span><br><span class="line">dns:</span><br><span class="line">  type: CoreDNS</span><br><span class="line">etcd:</span><br><span class="line">  external:</span><br><span class="line">    endpoints:</span><br><span class="line">      - https://192.168.171.136:2379</span><br><span class="line">      - https://192.168.171.137:2379</span><br><span class="line">      - https://192.168.171.138:2379</span><br><span class="line">    caFile: /etc/kubernetes/pki/etcd/etcd-ca.pem</span><br><span class="line">    certFile: /etc/kubernetes/pki/apiserver-etcd-client.pem</span><br><span class="line">    keyFile: /etc/kubernetes/pki/apiserver-etcd-client-key.pem</span><br><span class="line">kubernetesVersion: 1.27.8</span><br><span class="line">imageRepository: registry.aliyuncs.com/google_containers</span><br><span class="line">networking:</span><br><span class="line">  serviceSubnet: 10.96.0.0/12</span><br><span class="line">  podSubnet: 10.244.0.0/16</span><br><span class="line">---</span><br><span class="line">apiVersion: kubeproxy.config.k8s.io/v1alpha1</span><br><span class="line">kind: KubeProxyConfiguration</span><br><span class="line">mode: ipvs</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<h2 id="集群初始化"><a href="#集群初始化" class="headerlink" title="集群初始化"></a>集群初始化</h2><h3 id="初始化主节点"><a href="#初始化主节点" class="headerlink" title="初始化主节点"></a>初始化主节点</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在 master1 节点上执行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">初始化集群</span></span><br><span class="line">kubeadm init --config=kubeadm-init.yaml --upload-certs</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置 kubectl</span></span><br><span class="line">mkdir -p $HOME/.kube</span><br><span class="line">cp -i /etc/kubernetes/admin.conf $HOME/.kube/config</span><br><span class="line">chown $(id -u):$(id -g) $HOME/.kube/config</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置环境变量</span></span><br><span class="line">echo &quot;export KUBECONFIG=/etc/kubernetes/admin.conf&quot; &gt;&gt; /etc/profile</span><br><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加节点"><a href="#添加节点" class="headerlink" title="添加节点"></a>添加节点</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在其他 master 节点上执行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">加入控制平面节点</span></span><br><span class="line">kubeadm join 192.168.171.136:6443 --token &lt;token&gt; \</span><br><span class="line">    --discovery-token-ca-cert-hash sha256:&lt;hash&gt; \</span><br><span class="line">    --control-plane --certificate-key &lt;key&gt; \</span><br><span class="line">    --cri-socket=unix:///var/run/containerd/containerd.sock</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在 worker 节点上执行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">加入工作节点</span></span><br><span class="line">kubeadm join 192.168.171.136:6443 --token &lt;token&gt; \</span><br><span class="line">    --discovery-token-ca-cert-hash sha256:&lt;hash&gt; \</span><br><span class="line">    --cri-socket=unix:///var/run/containerd/containerd.sock</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置环境变量</span></span><br><span class="line">echo &quot;export KUBECONFIG=/etc/kubernetes/admin.conf&quot; &gt;&gt; /etc/profile</span><br><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<h3 id="节点标签管理"><a href="#节点标签管理" class="headerlink" title="节点标签管理"></a>节点标签管理</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加 worker 标签</span></span><br><span class="line">kubectl label nodes worker1.k8s.com node-role.kubernetes.io/worker=</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加污点</span></span><br><span class="line">kubectl taint nodes master1.k8s.com node-role.kubernetes.io/control-plane=:NoSchedule</span><br><span class="line">kubectl taint nodes master2.k8s.com node-role.kubernetes.io/control-plane=:NoSchedule</span><br><span class="line">kubectl taint nodes master3.k8s.com node-role.kubernetes.io/control-plane=:NoSchedule</span><br></pre></td></tr></table></figure>
+
+<h2 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h2><h3 id="安装-Calico"><a href="#安装-Calico" class="headerlink" title="安装 Calico"></a>安装 Calico</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加 Helm 仓库</span></span><br><span class="line">helm repo add projectcalico https://docs.tigera.io/calico/charts</span><br><span class="line">helm repo update</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建配置文件</span></span><br><span class="line">cat &gt; calico-values.yaml &lt;&lt; EOF</span><br><span class="line">installation:</span><br><span class="line">  cni:</span><br><span class="line">    type: Calico</span><br><span class="line">  ipPools:</span><br><span class="line">  - cidr: 10.244.0.0/16</span><br><span class="line">    encapsulation: IPIP</span><br><span class="line">    natOutgoing: true</span><br><span class="line">    nodeSelector: all()</span><br><span class="line">  registry: docker.io</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装 Calico</span></span><br><span class="line">helm install calico projectcalico/tigera-operator -f calico-values.yaml</span><br></pre></td></tr></table></figure>
+
+<h3 id="CoreDNS-配置"><a href="#CoreDNS-配置" class="headerlink" title="CoreDNS 配置"></a>CoreDNS 配置</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置 CoreDNS</span></span><br><span class="line">kubectl -n kube-system get cm coredns -o yaml &gt; coredns-cm.yaml</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改配置</span></span><br><span class="line">cat &gt; coredns-cm.yaml &lt;&lt; EOF</span><br><span class="line">apiVersion: v1</span><br><span class="line">data:</span><br><span class="line">  Corefile: |</span><br><span class="line">    .:53 &#123;</span><br><span class="line">        errors</span><br><span class="line">        health &#123;</span><br><span class="line">           lameduck 5s</span><br><span class="line">        &#125;</span><br><span class="line">        hosts &#123;</span><br><span class="line">          192.168.171.50 harbor.k8s.com</span><br><span class="line">          fallthrough</span><br><span class="line">        &#125;</span><br><span class="line">        ready</span><br><span class="line">        kubernetes cluster.local in-addr.arpa ip6.arpa &#123;</span><br><span class="line">           pods insecure</span><br><span class="line">           fallthrough in-addr.arpa ip6.arpa</span><br><span class="line">           ttl 30</span><br><span class="line">        &#125;</span><br><span class="line">        prometheus :9153</span><br><span class="line">        forward . /etc/resolv.conf &#123;</span><br><span class="line">           max_concurrent 1000</span><br><span class="line">        &#125;</span><br><span class="line">        cache 30</span><br><span class="line">        loop</span><br><span class="line">        reload</span><br><span class="line">        loadbalance</span><br><span class="line">    &#125;</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">应用配置</span></span><br><span class="line">kubectl apply -f coredns-cm.yaml</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重启 CoreDNS</span></span><br><span class="line">kubectl -n kube-system delete pod -l k8s-app=kube-dns</span><br></pre></td></tr></table></figure>
+
+<h2 id="组件配置"><a href="#组件配置" class="headerlink" title="组件配置"></a>组件配置</h2><h3 id="暴露组件端口"><a href="#暴露组件端口" class="headerlink" title="暴露组件端口"></a>暴露组件端口</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在所有 master 节点上执行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改 kube-scheduler 配置</span></span><br><span class="line">sed -i &#x27;s/- --bind-address=127.0.0.1/- --bind-address=0.0.0.0/&#x27; /etc/kubernetes/manifests/kube-scheduler.yaml</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改 kube-controller-manager 配置</span></span><br><span class="line">sed -i &#x27;s/- --bind-address=127.0.0.1/- --bind-address=0.0.0.0/&#x27; /etc/kubernetes/manifests/kube-controller-manager.yaml</span><br></pre></td></tr></table></figure>
+
+<h2 id="集群验证-1"><a href="#集群验证-1" class="headerlink" title="集群验证"></a>集群验证</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">验证集群状态</span></span><br><span class="line">kubectl get nodes</span><br><span class="line">kubectl get pods -A</span><br><span class="line">kubectl cluster-info</span><br><span class="line">kubectl get componentstatuses</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">验证网络</span></span><br><span class="line">kubectl run test-nginx --image=nginx</span><br><span class="line">kubectl expose pod test-nginx --port=80 --type=NodePort</span><br><span class="line">curl http://&lt;node-ip&gt;:&lt;node-port&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="维护操作"><a href="#维护操作" class="headerlink" title="维护操作"></a>维护操作</h2><h3 id="证书更新"><a href="#证书更新" class="headerlink" title="证书更新"></a>证书更新</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看证书过期时间</span></span><br><span class="line">kubeadm certs check-expiration</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">更新证书</span></span><br><span class="line">kubeadm certs renew all</span><br></pre></td></tr></table></figure>
+
+<h3 id="集群升级"><a href="#集群升级" class="headerlink" title="集群升级"></a>集群升级</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">升级 kubeadm</span></span><br><span class="line">apt-mark unhold kubeadm</span><br><span class="line">apt-get update</span><br><span class="line">apt-get install -y kubeadm=&lt;version&gt;</span><br><span class="line">apt-mark hold kubeadm</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">升级控制平面</span></span><br><span class="line">kubeadm upgrade plan</span><br><span class="line">kubeadm upgrade apply v&lt;version&gt;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">升级 kubelet 和 kubectl</span></span><br><span class="line">apt-mark unhold kubelet kubectl</span><br><span class="line">apt-get install -y kubelet=&lt;version&gt; kubectl=&lt;version&gt;</span><br><span class="line">apt-mark hold kubelet kubectl</span><br><span class="line">systemctl restart kubelet</span><br></pre></td></tr></table></figure>
+
+<h2 id="故障处理"><a href="#故障处理" class="headerlink" title="故障处理"></a>故障处理</h2><h3 id="重置节点"><a href="#重置节点" class="headerlink" title="重置节点"></a>重置节点</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理节点</span></span><br><span class="line">kubeadm reset</span><br><span class="line">iptables -F &amp;&amp; iptables -X</span><br><span class="line">iptables -t nat -F &amp;&amp; iptables -t nat -X</span><br><span class="line">iptables -t mangle -F &amp;&amp; iptables -t mangle -X</span><br><span class="line">ipvsadm --clear</span><br><span class="line">rm -rf /etc/kubernetes/ /var/lib/kubelet/ /var/lib/etcd/</span><br></pre></td></tr></table></figure>
+
+<h3 id="常见问题排查-1"><a href="#常见问题排查-1" class="headerlink" title="常见问题排查"></a>常见问题排查</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看组件日志</span></span><br><span class="line">journalctl -xeu kubelet</span><br><span class="line">kubectl logs -n kube-system &lt;pod-name&gt;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查网络</span></span><br><span class="line">kubectl exec -it &lt;pod-name&gt; -- ping &lt;service-name&gt;</span><br><span class="line">kubectl get endpoints &lt;service-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="注意事项-5"><a href="#注意事项-5" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li><p>高可用配置：</p>
+<ul>
+<li>至少部署三个 master 节点</li>
+<li>使用负载均衡器</li>
+<li>配置外部 etcd 集群</li>
+</ul>
+</li>
+<li><p>安全建议：</p>
+<ul>
+<li>及时更新组件版本</li>
+<li>配置网络策略</li>
+<li>使用 RBAC 控制访问</li>
+<li>定期备份 etcd 数据</li>
+</ul>
+</li>
+<li><p>性能优化：</p>
+<ul>
+<li>合理配置资源限制</li>
+<li>优化网络配置</li>
+<li>监控系统性能</li>
+</ul>
+</li>
+<li><p>运维建议：</p>
+<ul>
+<li>实施监控告警</li>
+<li>定期进行备份</li>
+<li>制定故障恢复预案</li>
+<li>保持文档更新</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h1 id="NFS-StorageClass-部署"><a href="#NFS-StorageClass-部署" class="headerlink" title="NFS StorageClass 部署"></a>NFS StorageClass 部署</h1><h2 id="存储服务器配置"><a href="#存储服务器配置" class="headerlink" title="存储服务器配置"></a>存储服务器配置</h2><h3 id="安装-NFS-服务"><a href="#安装-NFS-服务" class="headerlink" title="安装 NFS 服务"></a>安装 NFS 服务</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装 NFS 服务器</span></span><br><span class="line">apt-get update</span><br><span class="line">apt-get install -y nfs-kernel-server</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建共享目录</span></span><br><span class="line">mkdir -p /data/ifs/kubernetes</span><br><span class="line">chown -R nobody:nogroup /data/ifs/kubernetes</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置共享权限</span></span><br><span class="line">cat &gt;&gt; /etc/exports &lt;&lt; EOF</span><br><span class="line">/data/ifs/kubernetes 192.168.171.0/24(no_root_squash,rw,sync,no_subtree_check)</span><br><span class="line">EOF</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动服务</span></span><br><span class="line">systemctl enable --now nfs-kernel-server</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">验证配置</span></span><br><span class="line">exportfs -av</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置防火墙"><a href="#配置防火墙" class="headerlink" title="配置防火墙"></a>配置防火墙</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">允许 NFS 相关端口</span></span><br><span class="line">ufw allow 2049/tcp  # NFS</span><br><span class="line">ufw allow 111/tcp   # portmapper</span><br><span class="line">ufw allow 111/udp</span><br><span class="line">ufw allow 32765:32768/tcp  # NFS 动态端口</span><br><span class="line">ufw allow 32765:32768/udp</span><br></pre></td></tr></table></figure>
+
+<h2 id="客户端配置-1"><a href="#客户端配置-1" class="headerlink" title="客户端配置"></a>客户端配置</h2><h3 id="安装-NFS-客户端"><a href="#安装-NFS-客户端" class="headerlink" title="安装 NFS 客户端"></a>安装 NFS 客户端</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在所有 Kubernetes 节点上执行</span></span><br><span class="line">apt-get update</span><br><span class="line">apt-get install -y nfs-common</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置 NFS 服务器解析</span></span><br><span class="line">echo &quot;192.168.171.140 nfs.k8s.com&quot; &gt;&gt; /etc/hosts</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">验证 NFS 挂载</span></span><br><span class="line">showmount -e nfs.k8s.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="StorageClass-部署"><a href="#StorageClass-部署" class="headerlink" title="StorageClass 部署"></a>StorageClass 部署</h2><h3 id="安装-NFS-Provisioner"><a href="#安装-NFS-Provisioner" class="headerlink" title="安装 NFS Provisioner"></a>安装 NFS Provisioner</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建命名空间</span></span><br><span class="line">kubectl create namespace nfs-provisioner</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建 ServiceAccount</span></span><br><span class="line">cat &gt; rbac.yaml &lt;&lt; EOF</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: ServiceAccount</span><br><span class="line">metadata:</span><br><span class="line">  name: nfs-client-provisioner</span><br><span class="line">  namespace: nfs-provisioner</span><br><span class="line">---</span><br><span class="line">kind: ClusterRole</span><br><span class="line">apiVersion: rbac.authorization.k8s.io/v1</span><br><span class="line">metadata:</span><br><span class="line">  name: nfs-client-provisioner-runner</span><br><span class="line">rules:</span><br><span class="line">  - apiGroups: [&quot;&quot;]</span><br><span class="line">    resources: [&quot;nodes&quot;]</span><br><span class="line">    verbs: [&quot;get&quot;, &quot;list&quot;, &quot;watch&quot;]</span><br><span class="line">  - apiGroups: [&quot;&quot;]</span><br><span class="line">    resources: [&quot;persistentvolumes&quot;]</span><br><span class="line">    verbs: [&quot;get&quot;, &quot;list&quot;, &quot;watch&quot;, &quot;create&quot;, &quot;delete&quot;]</span><br><span class="line">  - apiGroups: [&quot;&quot;]</span><br><span class="line">    resources: [&quot;persistentvolumeclaims&quot;]</span><br><span class="line">    verbs: [&quot;get&quot;, &quot;list&quot;, &quot;watch&quot;, &quot;update&quot;]</span><br><span class="line">  - apiGroups: [&quot;storage.k8s.io&quot;]</span><br><span class="line">    resources: [&quot;storageclasses&quot;]</span><br><span class="line">    verbs: [&quot;get&quot;, &quot;list&quot;, &quot;watch&quot;]</span><br><span class="line">  - apiGroups: [&quot;&quot;]</span><br><span class="line">    resources: [&quot;events&quot;]</span><br><span class="line">    verbs: [&quot;create&quot;, &quot;update&quot;, &quot;patch&quot;]</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">kubectl apply -f rbac.yaml</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建 Deployment</span></span><br><span class="line">cat &gt; deployment.yaml &lt;&lt; EOF</span><br><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  name: nfs-client-provisioner</span><br><span class="line">  namespace: nfs-provisioner</span><br><span class="line">spec:</span><br><span class="line">  replicas: 1</span><br><span class="line">  strategy:</span><br><span class="line">    type: Recreate</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: nfs-client-provisioner</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:</span><br><span class="line">        app: nfs-client-provisioner</span><br><span class="line">    spec:</span><br><span class="line">      serviceAccountName: nfs-client-provisioner</span><br><span class="line">      containers:</span><br><span class="line">        - name: nfs-client-provisioner</span><br><span class="line">          image: registry.aliyuncs.com/google_containers/sig-storage/nfs-subdir-external-provisioner:v4.0.2</span><br><span class="line">          volumeMounts:</span><br><span class="line">            - name: nfs-client-root</span><br><span class="line">              mountPath: /persistentvolumes</span><br><span class="line">          env:</span><br><span class="line">            - name: PROVISIONER_NAME</span><br><span class="line">              value: k8s-sigs.io/nfs-subdir-external-provisioner</span><br><span class="line">            - name: NFS_SERVER</span><br><span class="line">              value: nfs.k8s.com</span><br><span class="line">            - name: NFS_PATH</span><br><span class="line">              value: /data/ifs/kubernetes</span><br><span class="line">      volumes:</span><br><span class="line">        - name: nfs-client-root</span><br><span class="line">          nfs:</span><br><span class="line">            server: nfs.k8s.com</span><br><span class="line">            path: /data/ifs/kubernetes</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">kubectl apply -f deployment.yaml</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建 StorageClass</span></span><br><span class="line">cat &gt; storageclass.yaml &lt;&lt; EOF</span><br><span class="line">apiVersion: storage.k8s.io/v1</span><br><span class="line">kind: StorageClass</span><br><span class="line">metadata:</span><br><span class="line">  name: nfs-client</span><br><span class="line">  annotations:</span><br><span class="line">    storageclass.kubernetes.io/is-default-class: &quot;true&quot;</span><br><span class="line">provisioner: k8s-sigs.io/nfs-subdir-external-provisioner</span><br><span class="line">parameters:</span><br><span class="line">  archiveOnDelete: &quot;false&quot;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">kubectl apply -f storageclass.yaml</span><br></pre></td></tr></table></figure>
+
+<h3 id="验证部署-2"><a href="#验证部署-2" class="headerlink" title="验证部署"></a>验证部署</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建测试 PVC</span></span><br><span class="line">cat &gt; test-claim.yaml &lt;&lt; EOF</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: PersistentVolumeClaim</span><br><span class="line">metadata:</span><br><span class="line">  name: test-claim</span><br><span class="line">spec:</span><br><span class="line">  accessModes:</span><br><span class="line">    - ReadWriteMany</span><br><span class="line">  resources:</span><br><span class="line">    requests:</span><br><span class="line">      storage: 1Mi</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">kubectl apply -f test-claim.yaml</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建测试 Pod</span></span><br><span class="line">cat &gt; test-pod.yaml &lt;&lt; EOF</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: test-pod</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">    - name: test-pod</span><br><span class="line">      image: busybox</span><br><span class="line">      command:</span><br><span class="line">        - &quot;/bin/sh&quot;</span><br><span class="line">      args:</span><br><span class="line">        - &quot;-c&quot;</span><br><span class="line">        - &quot;touch /mnt/SUCCESS &amp;&amp; exit 0 || exit 1&quot;</span><br><span class="line">      volumeMounts:</span><br><span class="line">        - name: nfs-pvc</span><br><span class="line">          mountPath: &quot;/mnt&quot;</span><br><span class="line">  restartPolicy: &quot;Never&quot;</span><br><span class="line">  volumes:</span><br><span class="line">    - name: nfs-pvc</span><br><span class="line">      persistentVolumeClaim:</span><br><span class="line">        claimName: test-claim</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">kubectl apply -f test-pod.yaml</span><br></pre></td></tr></table></figure>
+
+<h2 id="监控配置-1"><a href="#监控配置-1" class="headerlink" title="监控配置"></a>监控配置</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建监控脚本</span></span><br><span class="line">cat &gt; /usr/local/bin/monitor-nfs.sh &lt;&lt; &#x27;EOF&#x27;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查 NFS 服务状态</span></span><br><span class="line">check_nfs_service() &#123;</span><br><span class="line">    if ! systemctl is-active --quiet nfs-kernel-server; then</span><br><span class="line">        echo &quot;NFS service is not running&quot;</span><br><span class="line">        return 1</span><br><span class="line">    fi</span><br><span class="line">    return 0</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查存储空间</span></span><br><span class="line">check_storage() &#123;</span><br><span class="line">    local usage=$(df -h /data/ifs/kubernetes | awk &#x27;NR==2 &#123;print $5&#125;&#x27; | sed &#x27;s/%//&#x27;)</span><br><span class="line">    if [ $usage -gt 80 ]; then</span><br><span class="line">        echo &quot;Storage usage is above 80%&quot;</span><br><span class="line">        return 1</span><br><span class="line">    fi</span><br><span class="line">    return 0</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查 NFS 挂载点</span></span><br><span class="line">check_mounts() &#123;</span><br><span class="line">    if ! mountpoint -q /data/ifs/kubernetes; then</span><br><span class="line">        echo &quot;NFS directory is not mounted&quot;</span><br><span class="line">        return 1</span><br><span class="line">    fi</span><br><span class="line">    return 0</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">主检查逻辑</span></span><br><span class="line">main() &#123;</span><br><span class="line">    check_nfs_service || echo &quot;NFS service check failed&quot;</span><br><span class="line">    check_storage || echo &quot;Storage check failed&quot;</span><br><span class="line">    check_mounts || echo &quot;Mount check failed&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">chmod +x /usr/local/bin/monitor-nfs.sh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加到 crontab</span></span><br><span class="line">(crontab -l 2&gt;/dev/null; echo &quot;*/5 * * * * /usr/local/bin/monitor-nfs.sh &gt;&gt; /var/log/nfs-monitor.log 2&gt;&amp;1&quot;) | crontab -</span><br></pre></td></tr></table></figure>
+
+<h2 id="注意事项-6"><a href="#注意事项-6" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li><p>性能优化：</p>
+<ul>
+<li>使用 SSD 存储</li>
+<li>调整 NFS 缓存参数</li>
+<li>配置合适的网络带宽</li>
+</ul>
+</li>
+<li><p>安全建议：</p>
+<ul>
+<li>限制 NFS 访问IP</li>
+<li>配置防火墙规则</li>
+<li>定期更新系统</li>
+</ul>
+</li>
+<li><p>维护建议：</p>
+<ul>
+<li>定期备份数据</li>
+<li>监控存储使用量</li>
+<li>及时清理无用数据</li>
+</ul>
+</li>
+<li><p>高可用建议：</p>
+<ul>
+<li>配置 NFS 服务器集群</li>
+<li>使用网络存储备份</li>
+<li>配置自动故障转移</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Freeman Kevin
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://freemankevin.uk/2025/02/08/k8s-binary/" title="二进制方式部署Kubernetes 集群">https://freemankevin.uk/2025/02/08/k8s-binary/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLW5kLzQuMC9jbg=="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Debian/" rel="tag"># Debian</a>
+              <a href="/tags/Harbor/" rel="tag"># Harbor</a>
+              <a href="/tags/Kubernetes/" rel="tag"># Kubernetes</a>
+              <a href="/tags/ETCD/" rel="tag"># ETCD</a>
+              <a href="/tags/NFS/" rel="tag"># NFS</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/02/07/maven-nexus/" rel="prev" title="Maven 私有仓库使用规范">
+                  <i class="fa fa-angle-left"></i> Maven 私有仓库使用规范
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/03/05/vim/" rel="next" title="Vim 常用配置说明文档">
+                  Vim 常用配置说明文档 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Freeman Kevin</span>
+  </div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL0ZyZWVtYW5LZXZpbi9GcmVlbWFuS2V2aW4uZ2l0aHViLmlv" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"freemankevin","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js" defer></script>
+
+</body>
+</html>

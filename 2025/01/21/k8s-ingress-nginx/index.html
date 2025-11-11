@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="3frXch6thZZdl3bIIbkBoQEXQVWw68nMWquSYiFpmhY">
+  <meta name="msvalidate.01" content="163141551EC7BC03EBD0FB765ED5C476">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Source+Code+Pro:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=DM+Mono:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=monospace:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"freemankevin.uk","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.25.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Load Disqus","order":-1}},"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"O3AB73GDVU","apiKey":"b3f1048d604fe9a6c9648855741c1e6d","indexName":"freemankevin","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="A personal tech blog focusing on DevOps, MLOps, and AIOps practices">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Kevin&#39;s Notes">
+<meta property="og:url" content="https://freemankevin.uk/">
+<meta property="og:site_name" content="Kevin&#39;s Notes">
+<meta property="og:description" content="A personal tech blog focusing on DevOps, MLOps, and AIOps practices">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://freemankevin.uk/images/avatar.jpg">
+<meta property="article:published_time" content="2025-01-21T07:57:25.000Z">
+<meta property="article:modified_time" content="2025-10-21T03:34:40.413Z">
+<meta property="article:author" content="Freeman Kevin">
+<meta property="article:tag" content="Ingress-NGINX">
+<meta property="article:tag" content="KubeSphere">
+<meta property="article:tag" content="TLS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://freemankevin.uk/images/avatar.jpg">
+
+
+<link rel="canonical" href="https://freemankevin.uk/2025/01/21/k8s-ingress-nginx/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://freemankevin.uk/2025/01/21/k8s-ingress-nginx/","path":"2025/01/21/k8s-ingress-nginx/","title":"如何在Kubernetes 环境中安装 INGRESS-NGINX"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>如何在Kubernetes 环境中安装 INGRESS-NGINX | Kevin's Notes</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4QX3P6CBBF"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-4QX3P6CBBF","only_pageview":false,"measure_protocol_api_secret":null,"enable":true}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/5.36.0/lite/builds/browser.umd.js" integrity="sha256-o49zoHLDPBm9WLg6AiliAVi3axCRTqe3ltTxLvhzAVg=" crossorigin="anonymous" defer></script><script src="/js/third-party/search/algolia-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+<!-- Google tag (gtag.js) - GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4QX3P6CBBF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4QX3P6CBBF', {
+    page_path: window.location.pathname,
+    send_page_view: true
+  });
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MPHHRS5F');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google Search Console verification -->
+<meta name="google-site-verification" content="3frXch6thZZdl3bIIbkBoQEXQVWw68nMWquSYiFpmhY" />
+
+<!-- Bing Site Verification -->
+<meta name="msvalidate.01" content="163141551EC7BC03EBD0FB765ED5C476" />
+
+<!-- SEO Meta Tags -->
+<meta name="description" content="A personal tech blog focusing on DevOps, MLOps, and AIOps practices">
+<meta name="keywords" content="DevOps, MLOps, AIOps, Kubernetes, Docker, CI/CD">
+<meta name="author" content="Freeman Kevin">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://freemankevin.uk/2025/01/21/k8s-ingress-nginx/">
+
+<!-- Open Graph / Social Media Meta Tags -->
+<meta property="og:title" content="如何在Kubernetes 环境中安装 INGRESS-NGINX">
+<meta property="og:description" content="">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://freemankevin.uk/2025/01/21/k8s-ingress-nginx/">
+<meta property="og:site_name" content="Kevin's Notes">
+
+<!-- Schema.org markup for Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://freemankevin.uk/2025/01/21/k8s-ingress-nginx/"
+  },
+  "headline": "如何在Kubernetes 环境中安装 INGRESS-NGINX",
+  "description": "",
+  "author": {
+    "@type": "Person",
+    "name": "Freeman Kevin"
+  },
+  "datePublished": "1737446245000",
+  "dateModified": "1761017680413",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kevin's Notes",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://freemankevin.uk/images/avatar.jpg"
+    }
+  }
+}
+</script>
+
+<!-- Microsoft Clarity -->
+<script>
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "pxsoj8b2ce");
+</script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Kevin's Notes" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kevin's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%89%E5%8F%96-Helm-%E5%8C%85"><span class="nav-number">1.</span> <span class="nav-text">拉取 Helm 包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0-Helm-%E4%BB%93%E5%BA%93"><span class="nav-number">1.1.</span> <span class="nav-text">添加 Helm 仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E5%B9%B6%E6%8B%89%E5%8F%96%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E7%9A%84-Helm-%E5%8C%85"><span class="nav-number">1.2.</span> <span class="nav-text">搜索并拉取指定版本的 Helm 包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B-Helm-%E5%8C%85"><span class="nav-number">1.3.</span> <span class="nav-text">解压 Helm 包</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-values-yaml"><span class="nav-number">2.</span> <span class="nav-text">修改配置文件 values.yaml</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E8%BE%91-values-yaml-%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">编辑 values.yaml 文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-ingress-nginx-%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">安装 ingress-nginx 控制器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%B9%B6%E6%B5%8B%E8%AF%95-Ingress"><span class="nav-number">4.</span> <span class="nav-text">配置并测试 Ingress</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1"><span class="nav-number">4.1.</span> <span class="nav-text">创建一个简单的应用服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-Ingress-%E8%B5%84%E6%BA%90"><span class="nav-number">4.2.</span> <span class="nav-text">创建 Ingress 资源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-kubectl-port-forward-%E8%BF%9B%E8%A1%8C%E6%9C%AC%E5%9C%B0%E8%AE%BF%E9%97%AE"><span class="nav-number">4.3.</span> <span class="nav-text">使用 kubectl port-forward 进行本地访问</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-TLS%EF%BC%88HTTPS%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">配置 TLS（HTTPS）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-TLS-%E8%AF%81%E4%B9%A6"><span class="nav-number">5.1.</span> <span class="nav-text">创建 TLS 证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-Kubernetes-TLS-Secret"><span class="nav-number">5.2.</span> <span class="nav-text">创建 Kubernetes TLS Secret</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-Ingress-%E4%BD%BF%E7%94%A8-TLS"><span class="nav-number">5.3.</span> <span class="nav-text">配置 Ingress 使用 TLS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95-TLS-%E9%85%8D%E7%BD%AE"><span class="nav-number">5.4.</span> <span class="nav-text">测试 TLS 配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%9C%AC%E5%9C%B0-DNS%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">配置本地 DNS（可选）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-A"><span class="nav-number">8.</span> <span class="nav-text">Q &amp; A</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Freeman Kevin"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Freeman Kevin</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZyZWVtYW5rZXZpbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;freemankevin"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly94LmNvbS9jaGF0b3BzMjAyMw==" title="Twitter → https:&#x2F;&#x2F;x.com&#x2F;chatops2023"><i class="fab fa-x fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9ic2t5LmFwcC9wcm9maWxlL2ZyZWVtYW5rZXZpbi5ic2t5LnNvY2lhbA==" title="Bluesky → https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;freemankevin.bsky.social"><i class="fab fa-bluesky fa-fw"></i>Bluesky</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9tYXN0b2Rvbi5zb2NpYWwvQGZyZWVtYW5rZXZpbg==" title="Mastodon → https:&#x2F;&#x2F;mastodon.social&#x2F;@freemankevin"><i class="fab fa-mastodon fa-fw"></i>Mastodon</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://freemankevin.uk/2025/01/21/k8s-ingress-nginx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Freeman Kevin">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kevin's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="如何在Kubernetes 环境中安装 INGRESS-NGINX | Kevin's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何在Kubernetes 环境中安装 INGRESS-NGINX
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-01-21 15:57:25" itemprop="dateCreated datePublished" datetime="2025-01-21T15:57:25+08:00">2025-01-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Kubernetes/" itemprop="url" rel="index"><span itemprop="name">Kubernetes</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2025/01/21/k8s-ingress-nginx/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2025/01/21/k8s-ingress-nginx/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 本文将详细介绍如何在 Kubernetes 中部署 Ingress-NGINX 控制器，并配置 HTTP 和 HTTPS 访问。通过 Helm 工具，您可以快速安装并设置 NGINX 来代理外部流量，同时暴露 NodePort 服务。我们还会讲解如何配置 TLS 安全连接，并使用 Kubernetes Secret 来存储证书，确保数据传输加密。跟着本文的步骤走，您就能顺利完成 Ingress 部署，让集群应用访问更加便捷安全。</p>
+<span id="more"></span>
+
+<h3 id="拉取-Helm-包"><a href="#拉取-Helm-包" class="headerlink" title="拉取 Helm 包"></a>拉取 Helm 包</h3><p>首先，添加 <code>ingress-nginx</code> 官方仓库并更新仓库信息，接着拉取所需的 Helm 包。</p>
+<h4 id="添加-Helm-仓库"><a href="#添加-Helm-仓库" class="headerlink" title="添加 Helm 仓库"></a>添加 Helm 仓库</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx</span><br><span class="line">helm repo update</span><br></pre></td></tr></table></figure>
+
+<h4 id="搜索并拉取指定版本的-Helm-包"><a href="#搜索并拉取指定版本的-Helm-包" class="headerlink" title="搜索并拉取指定版本的 Helm 包"></a>搜索并拉取指定版本的 Helm 包</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">helm search repo ingress-nginx/ingress-nginx -l  <span class="comment"># 查看所有版本</span></span><br><span class="line">helm pull ingress-nginx/ingress-nginx --version 4.8.3  <span class="comment"># 拉取指定版本</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="解压-Helm-包"><a href="#解压-Helm-包" class="headerlink" title="解压 Helm 包"></a>解压 Helm 包</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar xf ingress-nginx-4.8.3.tgz</span><br><span class="line"><span class="built_in">cd</span> ingress-nginx</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改配置文件-values-yaml"><a href="#修改配置文件-values-yaml" class="headerlink" title="修改配置文件 values.yaml"></a>修改配置文件 <code>values.yaml</code></h3><p>在安装之前，您可能需要根据需求修改 <code>values.yaml</code> 文件，以配置 <code>ingress-nginx</code> 控制器的行为。常见的配置修改包括暴露 NodePort 端口。</p>
+<h4 id="编辑-values-yaml-文件"><a href="#编辑-values-yaml-文件" class="headerlink" title="编辑 values.yaml 文件"></a>编辑 <code>values.yaml</code> 文件</h4><p>修改 <code>values.yaml</code> 文件中的 <code>service</code> 配置，将 <code>type</code> 设置为 <code>NodePort</code>，并配置 <code>nodePorts</code>。</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">service:</span></span><br><span class="line">  <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">NodePort</span>  <span class="comment"># 设置为 NodePort 类型</span></span><br><span class="line">  <span class="attr">nodePorts:</span></span><br><span class="line">    <span class="attr">http:</span> <span class="string">&quot;30886&quot;</span>  <span class="comment"># HTTP 端口</span></span><br><span class="line">    <span class="attr">https:</span> <span class="string">&quot;30887&quot;</span>  <span class="comment"># HTTPS 端口</span></span><br><span class="line">    <span class="attr">tcp:</span> &#123;&#125;  <span class="comment"># TCP 端口配置（如果需要）</span></span><br><span class="line">    <span class="attr">udp:</span> &#123;&#125;  <span class="comment"># UDP 端口配置（如果需要）</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-ingress-nginx-控制器"><a href="#安装-ingress-nginx-控制器" class="headerlink" title="安装 ingress-nginx 控制器"></a>安装 <code>ingress-nginx</code> 控制器</h3><p>安装 <code>ingress-nginx</code> 控制器并创建一个 <code>ingress-nginx</code> 命名空间：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">helm upgrade --install ingress-nginx ./ingress-nginx --namespace ingress-nginx --create-namespace</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后，您将看到类似以下输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Release &quot;ingress-nginx&quot; does not exist. Installing it now.</span><br><span class="line">NAME: ingress-nginx</span><br><span class="line">LAST DEPLOYED: Sat Dec 23 11:00:59 2023</span><br><span class="line">NAMESPACE: ingress-nginx</span><br><span class="line">STATUS: deployed</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置并测试-Ingress"><a href="#配置并测试-Ingress" class="headerlink" title="配置并测试 Ingress"></a>配置并测试 Ingress</h3><h4 id="创建一个简单的应用服务"><a href="#创建一个简单的应用服务" class="headerlink" title="创建一个简单的应用服务"></a>创建一个简单的应用服务</h4><p>为测试 <code>Ingress</code> 控制器，首先创建一个简单的 HTTP 服务：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl create deployment demo --image=httpd --port=80</span><br><span class="line">kubectl expose deployment demo</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建-Ingress-资源"><a href="#创建-Ingress-资源" class="headerlink" title="创建 Ingress 资源"></a>创建 Ingress 资源</h4><p>创建一个 <code>Ingress</code> 资源，配置一个简单的路由规则，指向刚才暴露的 <code>demo</code> 服务：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl create ingress demo-localhost --class=nginx \</span><br><span class="line">  --rule=<span class="string">&quot;demo.localdev.me/*=demo:80&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="使用-kubectl-port-forward-进行本地访问"><a href="#使用-kubectl-port-forward-进行本地访问" class="headerlink" title="使用 kubectl port-forward 进行本地访问"></a>使用 <code>kubectl port-forward</code> 进行本地访问</h4><p>通过 <code>port-forward</code> 将 Ingress 控制器暴露到本地端口：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl port-forward --namespace=ingress-nginx service/ingress-nginx-controller 8080:80</span><br></pre></td></tr></table></figure>
+
+<p>接着，您可以通过以下方式测试：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl --resolve demo.localdev.me:8080:127.0.0.1 http://demo.localdev.me:8080</span><br></pre></td></tr></table></figure>
+
+<p>您应当看到：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;html&gt;&lt;body&gt;&lt;h1&gt;It works!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置-TLS（HTTPS）"><a href="#配置-TLS（HTTPS）" class="headerlink" title="配置 TLS（HTTPS）"></a>配置 TLS（HTTPS）</h3><p>为了启用 HTTPS，需要创建一个包含证书和私钥的 Kubernetes Secret，并在 <code>Ingress</code> 资源中引用该 Secret。</p>
+<h4 id="创建-TLS-证书"><a href="#创建-TLS-证书" class="headerlink" title="创建 TLS 证书"></a>创建 TLS 证书</h4><p>如果您没有现成的证书，可以使用 <code>openssl</code> 创建一个自签名证书（仅用于测试）：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout demo-tls.key -out demo-tls.crt</span><br></pre></td></tr></table></figure>
+
+<p>这将生成 <code>demo-tls.crt</code> 和 <code>demo-tls.key</code> 文件。</p>
+<h4 id="创建-Kubernetes-TLS-Secret"><a href="#创建-Kubernetes-TLS-Secret" class="headerlink" title="创建 Kubernetes TLS Secret"></a>创建 Kubernetes TLS Secret</h4><p>使用以下命令将证书和私钥创建为 Kubernetes Secret：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl create secret tls demo-tls-secret \</span><br><span class="line">  --cert=demo-tls.crt \</span><br><span class="line">  --key=demo-tls.key \</span><br><span class="line">  --namespace=default</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置-Ingress-使用-TLS"><a href="#配置-Ingress-使用-TLS" class="headerlink" title="配置 Ingress 使用 TLS"></a>配置 Ingress 使用 TLS</h4><p>编辑您的 <code>Ingress</code> 配置，引用刚刚创建的 <code>demo-tls-secret</code>：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Ingress</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">demo-tls-ingress</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">default</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">ingressClassName:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">rules:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">host:</span> <span class="string">www.demo.io</span></span><br><span class="line">    <span class="attr">http:</span></span><br><span class="line">      <span class="attr">paths:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">pathType:</span> <span class="string">Prefix</span></span><br><span class="line">        <span class="attr">path:</span> <span class="string">/</span></span><br><span class="line">        <span class="attr">backend:</span></span><br><span class="line">          <span class="attr">service:</span></span><br><span class="line">            <span class="attr">name:</span> <span class="string">demo</span></span><br><span class="line">            <span class="attr">port:</span></span><br><span class="line">              <span class="attr">number:</span> <span class="number">80</span></span><br><span class="line">  <span class="attr">tls:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">hosts:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">www.demo.io</span></span><br><span class="line">    <span class="attr">secretName:</span> <span class="string">demo-tls-secret</span>  <span class="comment"># 引用 TLS Secret</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="测试-TLS-配置"><a href="#测试-TLS-配置" class="headerlink" title="测试 TLS 配置"></a>测试 TLS 配置</h4><p>在 <code>Ingress</code> 配置完成后，您可以通过浏览器访问 <code>https://www.demo.io</code> 来验证 HTTPS 是否正常工作。如果一切配置正确，您应该能够安全地访问您的服务。</p>
+<h3 id="配置本地-DNS（可选）"><a href="#配置本地-DNS（可选）" class="headerlink" title="配置本地 DNS（可选）"></a>配置本地 DNS（可选）</h3><p>如果您希望使用自定义域名访问服务，可以修改本地 <code>hosts</code> 文件，将域名指向相应的 IP 地址：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;192.168.1.120 www.demo.io&quot;</span> | <span class="built_in">sudo</span> <span class="built_in">tee</span> -a /etc/hosts</span><br></pre></td></tr></table></figure>
+
+<p>之后，通过浏览器访问 <code>http://www.demo.io:30886/</code> 或 <code>https://www.demo.io:30887/</code> 来验证服务。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过以上步骤，您成功安装并配置了 <code>ingress-nginx</code> 控制器，并通过 Kubernetes Secret 配置了 TLS 加密连接，确保了流量的安全传输。您还可以根据实际需求调整端口、证书和域名等配置，进一步优化您的部署。</p>
+<h3 id="Q-A"><a href="#Q-A" class="headerlink" title="Q &amp; A"></a>Q &amp; A</h3><ol>
+<li><p><strong>如何修改暴露端口？</strong><br>您可以通过编辑 <code>values.yaml</code> 文件中的 <code>nodePorts</code> 配置项，来修改暴露的端口号。</p>
+</li>
+<li><p><strong>如何启用 TLS？</strong><br>在 <code>Ingress</code> 配置文件中添加 <code>tls</code> 部分，并确保 Secret 包含有效的证书和私钥。</p>
+</li>
+<li><p><strong>如果使用自签名证书？</strong><br>使用自签名证书时，浏览器可能会显示不受信任的警告，您可以忽略这个警告，或者在浏览器中将证书添加到信任列表。</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Freeman Kevin
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://freemankevin.uk/2025/01/21/k8s-ingress-nginx/" title="如何在Kubernetes 环境中安装 INGRESS-NGINX">https://freemankevin.uk/2025/01/21/k8s-ingress-nginx/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLW5kLzQuMC9jbg=="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/TLS/" rel="tag"># TLS</a>
+              <a href="/tags/KubeSphere/" rel="tag"># KubeSphere</a>
+              <a href="/tags/Ingress-NGINX/" rel="tag"># Ingress-NGINX</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/01/15/k8s-argocd/" rel="prev" title="如何在Kubernetes 环境中部署ArgoCD">
+                  <i class="fa fa-angle-left"></i> 如何在Kubernetes 环境中部署ArgoCD
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/01/21/k8s-kubesphere/" rel="next" title="如何在Kubernetes 环境中安装 KubeSphere">
+                  如何在Kubernetes 环境中安装 KubeSphere <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Freeman Kevin</span>
+  </div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL0ZyZWVtYW5LZXZpbi9GcmVlbWFuS2V2aW4uZ2l0aHViLmlv" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"freemankevin","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js" defer></script>
+
+</body>
+</html>

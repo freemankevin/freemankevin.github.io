@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="3frXch6thZZdl3bIIbkBoQEXQVWw68nMWquSYiFpmhY">
+  <meta name="msvalidate.01" content="163141551EC7BC03EBD0FB765ED5C476">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Source+Code+Pro:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=DM+Mono:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=monospace:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"freemankevin.uk","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.25.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Load Disqus","order":-1}},"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"O3AB73GDVU","apiKey":"b3f1048d604fe9a6c9648855741c1e6d","indexName":"freemankevin","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="A personal tech blog focusing on DevOps, MLOps, and AIOps practices">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Kevin&#39;s Notes">
+<meta property="og:url" content="https://freemankevin.uk/">
+<meta property="og:site_name" content="Kevin&#39;s Notes">
+<meta property="og:description" content="A personal tech blog focusing on DevOps, MLOps, and AIOps practices">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://freemankevin.uk/images/avatar.jpg">
+<meta property="article:published_time" content="2025-01-21T09:32:25.000Z">
+<meta property="article:modified_time" content="2025-10-21T03:34:40.410Z">
+<meta property="article:author" content="Freeman Kevin">
+<meta property="article:tag" content="CICD">
+<meta property="article:tag" content="Development">
+<meta property="article:tag" content="GitLab">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://freemankevin.uk/images/avatar.jpg">
+
+
+<link rel="canonical" href="https://freemankevin.uk/2025/01/21/gitlab-cicd/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://freemankevin.uk/2025/01/21/gitlab-cicd/","path":"2025/01/21/gitlab-cicd/","title":"GitLab 配置优化与 CICD 集成指南"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>GitLab 配置优化与 CICD 集成指南 | Kevin's Notes</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4QX3P6CBBF"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-4QX3P6CBBF","only_pageview":false,"measure_protocol_api_secret":null,"enable":true}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/5.36.0/lite/builds/browser.umd.js" integrity="sha256-o49zoHLDPBm9WLg6AiliAVi3axCRTqe3ltTxLvhzAVg=" crossorigin="anonymous" defer></script><script src="/js/third-party/search/algolia-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+<!-- Google tag (gtag.js) - GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4QX3P6CBBF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4QX3P6CBBF', {
+    page_path: window.location.pathname,
+    send_page_view: true
+  });
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MPHHRS5F');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google Search Console verification -->
+<meta name="google-site-verification" content="3frXch6thZZdl3bIIbkBoQEXQVWw68nMWquSYiFpmhY" />
+
+<!-- Bing Site Verification -->
+<meta name="msvalidate.01" content="163141551EC7BC03EBD0FB765ED5C476" />
+
+<!-- SEO Meta Tags -->
+<meta name="description" content="A personal tech blog focusing on DevOps, MLOps, and AIOps practices">
+<meta name="keywords" content="DevOps, MLOps, AIOps, Kubernetes, Docker, CI/CD">
+<meta name="author" content="Freeman Kevin">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://freemankevin.uk/2025/01/21/gitlab-cicd/">
+
+<!-- Open Graph / Social Media Meta Tags -->
+<meta property="og:title" content="GitLab 配置优化与 CICD 集成指南">
+<meta property="og:description" content="">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://freemankevin.uk/2025/01/21/gitlab-cicd/">
+<meta property="og:site_name" content="Kevin's Notes">
+
+<!-- Schema.org markup for Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://freemankevin.uk/2025/01/21/gitlab-cicd/"
+  },
+  "headline": "GitLab 配置优化与 CICD 集成指南",
+  "description": "",
+  "author": {
+    "@type": "Person",
+    "name": "Freeman Kevin"
+  },
+  "datePublished": "1737451945000",
+  "dateModified": "1761017680410",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kevin's Notes",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://freemankevin.uk/images/avatar.jpg"
+    }
+  }
+}
+</script>
+
+<!-- Microsoft Clarity -->
+<script>
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "pxsoj8b2ce");
+</script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Kevin's Notes" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kevin's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#GitLab-%E6%B7%BB%E5%8A%A0%E5%86%85%E7%BD%91%E4%BF%A1%E4%BB%BB"><span class="nav-number">1.</span> <span class="nav-text">GitLab 添加内网信任</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84"><span class="nav-number">1.1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.2.</span> <span class="nav-text">操作步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitLab-%E9%9B%86%E6%88%90-ArgoCD"><span class="nav-number">2.</span> <span class="nav-text">GitLab 集成 ArgoCD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84-1"><span class="nav-number">2.1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4-1"><span class="nav-number">2.2.</span> <span class="nav-text">操作步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitLab-%E9%9B%86%E6%88%90-Minio"><span class="nav-number">3.</span> <span class="nav-text">GitLab 集成 Minio</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84-2"><span class="nav-number">3.1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4-2"><span class="nav-number">3.2.</span> <span class="nav-text">操作步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitLab-%E9%9B%86%E6%88%90-Harbor"><span class="nav-number">4.</span> <span class="nav-text">GitLab 集成 Harbor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84-3"><span class="nav-number">4.1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4-3"><span class="nav-number">4.2.</span> <span class="nav-text">操作步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitLab-%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F%E9%99%90%E5%88%B6%E8%B0%83%E6%95%B4"><span class="nav-number">5.</span> <span class="nav-text">GitLab 文件大小限制调整</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84-4"><span class="nav-number">5.1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4-4"><span class="nav-number">5.2.</span> <span class="nav-text">操作步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitLab-%E9%9B%86%E6%88%90-CICD"><span class="nav-number">6.</span> <span class="nav-text">GitLab 集成 CICD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84-5"><span class="nav-number">6.1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4-5"><span class="nav-number">6.2.</span> <span class="nav-text">操作步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitLab-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="nav-number">7.</span> <span class="nav-text">GitLab 性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84-6"><span class="nav-number">7.1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4-6"><span class="nav-number">7.2.</span> <span class="nav-text">操作步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitLab-%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA"><span class="nav-number">8.</span> <span class="nav-text">GitLab 安全加固</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84-7"><span class="nav-number">8.1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4-7"><span class="nav-number">8.2.</span> <span class="nav-text">操作步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitLab-%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D"><span class="nav-number">9.</span> <span class="nav-text">GitLab 备份与恢复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84-8"><span class="nav-number">9.1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4-8"><span class="nav-number">9.2.</span> <span class="nav-text">操作步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitLab-%E6%97%A5%E5%BF%97%E4%B8%8E%E7%9B%91%E6%8E%A7"><span class="nav-number">10.</span> <span class="nav-text">GitLab 日志与监控</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84-9"><span class="nav-number">10.1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4-9"><span class="nav-number">10.2.</span> <span class="nav-text">操作步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number">11.</span> <span class="nav-text">结语</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Freeman Kevin"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Freeman Kevin</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZyZWVtYW5rZXZpbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;freemankevin"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly94LmNvbS9jaGF0b3BzMjAyMw==" title="Twitter → https:&#x2F;&#x2F;x.com&#x2F;chatops2023"><i class="fab fa-x fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9ic2t5LmFwcC9wcm9maWxlL2ZyZWVtYW5rZXZpbi5ic2t5LnNvY2lhbA==" title="Bluesky → https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;freemankevin.bsky.social"><i class="fab fa-bluesky fa-fw"></i>Bluesky</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9tYXN0b2Rvbi5zb2NpYWwvQGZyZWVtYW5rZXZpbg==" title="Mastodon → https:&#x2F;&#x2F;mastodon.social&#x2F;@freemankevin"><i class="fab fa-mastodon fa-fw"></i>Mastodon</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://freemankevin.uk/2025/01/21/gitlab-cicd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Freeman Kevin">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kevin's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="GitLab 配置优化与 CICD 集成指南 | Kevin's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GitLab 配置优化与 CICD 集成指南
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-01-21 17:32:25" itemprop="dateCreated datePublished" datetime="2025-01-21T17:32:25+08:00">2025-01-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Development/" itemprop="url" rel="index"><span itemprop="name">Development</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2025/01/21/gitlab-cicd/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2025/01/21/gitlab-cicd/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 本文档旨在提供 GitLab 配置优化、集成最佳实践、安全加固、备份与恢复策略以及监控方法，帮助团队在使用 GitLab 进行源代码管理和持续集成&#x2F;持续交付（CICD）时提升性能、安全性及稳定性。</p>
+<span id="more"></span>
+
+<h2 id="GitLab-添加内网信任"><a href="#GitLab-添加内网信任" class="headerlink" title="GitLab 添加内网信任"></a>GitLab 添加内网信任</h2><h3 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h3><p>为 GitLab 配置内网信任，允许 GitLab 访问内网服务。</p>
+<h3 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h3><ol>
+<li>进入 GitLab 管理员界面。</li>
+<li>进入设置页面，选择 <strong>网络</strong>。</li>
+<li>进入 <strong>出站请求</strong>，勾选以下选项：<ul>
+<li>允许来自 <strong>webhooks</strong> 和集成对本地网络的请求</li>
+<li>允许系统钩子向本地网络发送请求</li>
+</ul>
+</li>
+<li>在空白框中粘贴需要调用的内网IP、域名。</li>
+<li>登录 GitLab 服务器，编辑 <strong>&#x2F;etc&#x2F;hosts</strong> 文件，添加自定义域名映射。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">192.168.x.x traefik.k8scluster.com</span><br><span class="line">192.168.x.x harbor.dockerregistry.com</span><br><span class="line">192.168.x.x argocd.k8scluster.com</span><br><span class="line">192.168.x.x grpc.argocd.k8scluster.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="GitLab-集成-ArgoCD"><a href="#GitLab-集成-ArgoCD" class="headerlink" title="GitLab 集成 ArgoCD"></a>GitLab 集成 ArgoCD</h2><h3 id="目的-1"><a href="#目的-1" class="headerlink" title="目的"></a>目的</h3><p>通过 GitLab 与 ArgoCD 集成，实现流水线中对 ArgoCD 应用的自动化操作，同时隐藏 ArgoCD 真实服务器信息。</p>
+<h3 id="操作步骤-1"><a href="#操作步骤-1" class="headerlink" title="操作步骤"></a>操作步骤</h3><ol>
+<li>进入项目组页面，选择 <strong>设置</strong> -&gt; <strong>CI&#x2F;CD</strong> -&gt; <strong>变量</strong>。</li>
+<li>添加以下变量：<ul>
+<li><strong>ARGOCD_USERNAME</strong>: 自定义值，勾选 Masked</li>
+<li><strong>ARGOCD_SERVER</strong>: 自定义值，勾选 Masked</li>
+<li><strong>ARGOCD_PASSWORD</strong>: 自定义值，勾选 Masked</li>
+</ul>
+</li>
+</ol>
+<h2 id="GitLab-集成-Minio"><a href="#GitLab-集成-Minio" class="headerlink" title="GitLab 集成 Minio"></a>GitLab 集成 Minio</h2><h3 id="目的-2"><a href="#目的-2" class="headerlink" title="目的"></a>目的</h3><p>将构建的制品存储到 Minio，减轻 GitLab 服务器的负担。</p>
+<h3 id="操作步骤-2"><a href="#操作步骤-2" class="headerlink" title="操作步骤"></a>操作步骤</h3><ol>
+<li><p>修改 GitLab 配置文件：</p>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/gitlab/gitlab.rb</span><br><span class="line">gitlab_rails[&#x27;artifacts_enabled&#x27;] = true</span><br><span class="line">gitlab_rails[&#x27;artifacts_object_store_enabled&#x27;] = true</span><br><span class="line">gitlab_rails[&#x27;artifacts_object_store_remote_directory&#x27;] = &#x27;gitlab-artifacts&#x27;</span><br><span class="line">gitlab_rails[&#x27;artifacts_object_store_connection&#x27;] = &#123;</span><br><span class="line">&#x27;provider&#x27; =&gt; &#x27;AWS&#x27;,</span><br><span class="line">&#x27;region&#x27; =&gt; &#x27;us-east-1&#x27;,</span><br><span class="line">&#x27;aws_access_key_id&#x27; =&gt; &#x27;your_access_key&#x27;,</span><br><span class="line">&#x27;aws_secret_access_key&#x27; =&gt; &#x27;your_secret_key&#x27;,</span><br><span class="line">&#x27;endpoint&#x27; =&gt; &#x27;http://&lt;minio_server&gt;:9000&#x27;,</span><br><span class="line">&#x27;path_style&#x27; =&gt; true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重载配置：</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo gitlab-ctl reconfigure</span><br></pre></td></tr></table></figure>
+
+<h2 id="GitLab-集成-Harbor"><a href="#GitLab-集成-Harbor" class="headerlink" title="GitLab 集成 Harbor"></a>GitLab 集成 Harbor</h2><h3 id="目的-3"><a href="#目的-3" class="headerlink" title="目的"></a>目的</h3><p>将构建的 Docker 镜像直接推送到 Harbor，无需重复配置。</p>
+<h3 id="操作步骤-3"><a href="#操作步骤-3" class="headerlink" title="操作步骤"></a>操作步骤</h3><ol>
+<li>进入 <strong>管理界面</strong> 或 <strong>项目组管理界面</strong>，选择 <strong>设置</strong> -&gt; <strong>集成</strong>。</li>
+<li>添加 Harbor 集成，输入以下信息：<ul>
+<li><strong>域名</strong>：Harbor 地址</li>
+<li><strong>项目名称</strong>：目标项目</li>
+<li><strong>用户</strong>：使用机器人名称</li>
+<li><strong>用户密码</strong>：Harbor 认证密码</li>
+</ul>
+</li>
+</ol>
+<h2 id="GitLab-文件大小限制调整"><a href="#GitLab-文件大小限制调整" class="headerlink" title="GitLab 文件大小限制调整"></a>GitLab 文件大小限制调整</h2><h3 id="目的-4"><a href="#目的-4" class="headerlink" title="目的"></a>目的</h3><p>调整 GitLab 上传文件的大小限制，以适应大文件的上传需求。</p>
+<h3 id="操作步骤-4"><a href="#操作步骤-4" class="headerlink" title="操作步骤"></a>操作步骤</h3><ol>
+<li><p>进入 <strong>管理员界面</strong> 或 <strong>项目组页面</strong>，选择 <strong>设置</strong> -&gt; <strong>CI&#x2F;CD</strong> -&gt; <strong>流水线通用设置</strong>，调整 <strong>最大工件大小</strong>。</p>
+</li>
+<li><p>如果以上设置无效，修改 GitLab 服务器配置文件：</p>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/gitlab/gitlab.rb</span><br><span class="line">nginx[&#x27;client_max_body_size&#x27;] = &#x27;200m&#x27;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重载配置：</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo gitlab-ctl reconfigure</span><br></pre></td></tr></table></figure>
+
+<h2 id="GitLab-集成-CICD"><a href="#GitLab-集成-CICD" class="headerlink" title="GitLab 集成 CICD"></a>GitLab 集成 CICD</h2><h3 id="目的-5"><a href="#目的-5" class="headerlink" title="目的"></a>目的</h3><p>配置 GitLab CI&#x2F;CD，使机器人能够自动化更新代码。</p>
+<h3 id="操作步骤-5"><a href="#操作步骤-5" class="headerlink" title="操作步骤"></a>操作步骤</h3><ol>
+<li>进入项目页面，选择 <strong>设置</strong> -&gt; <strong>访问令牌</strong>，创建一个长期有效的开发者身份令牌。</li>
+<li>进入 <strong>CI&#x2F;CD</strong> -&gt; <strong>变量</strong>，添加以下变量：<ul>
+<li><strong>GITLAB_CI_TOKEN</strong>: 自定义值，勾选 Masked</li>
+</ul>
+</li>
+</ol>
+<h2 id="GitLab-性能优化"><a href="#GitLab-性能优化" class="headerlink" title="GitLab 性能优化"></a>GitLab 性能优化</h2><h3 id="目的-6"><a href="#目的-6" class="headerlink" title="目的"></a>目的</h3><p>优化 GitLab 性能，提高并发处理能力，减少响应时间。</p>
+<h3 id="操作步骤-6"><a href="#操作步骤-6" class="headerlink" title="操作步骤"></a>操作步骤</h3><ol>
+<li><strong>优化数据库</strong>：调整 PostgreSQL 配置，增加 <code>shared_buffers</code> 和 <code>work_mem</code> 设置：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/gitlab/postgresql.conf</span><br><span class="line">shared_buffers = 1GB</span><br><span class="line">work_mem = 64MB</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>启用 Redis 缓存</strong>：配置 GitLab 使用 Redis 缓存：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/gitlab/gitlab.rb</span><br><span class="line">gitlab_rails[&#x27;redis_host&#x27;] = &#x27;localhost&#x27;</span><br><span class="line">gitlab_rails[&#x27;redis_port&#x27;] = 6379</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p><strong>使用 SSD 存储</strong>：为 GitLab 配置 SSD 存储，提高 I&#x2F;O 性能。</p>
+</li>
+<li><p><strong>优化 Nginx 配置</strong>：调整 Nginx 设置，提高吞吐量：</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/gitlab/nginx/gitlab-http.conf</span><br><span class="line">worker_processes auto;</span><br><span class="line">worker_connections 4096;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li><strong>分离 GitLab 服务</strong>：将 GitLab 服务分离到不同服务器，减轻单台服务器负担。</li>
+</ol>
+<h2 id="GitLab-安全加固"><a href="#GitLab-安全加固" class="headerlink" title="GitLab 安全加固"></a>GitLab 安全加固</h2><h3 id="目的-7"><a href="#目的-7" class="headerlink" title="目的"></a>目的</h3><p>加强 GitLab 的安全性，防止潜在的安全漏洞。</p>
+<h3 id="操作步骤-7"><a href="#操作步骤-7" class="headerlink" title="操作步骤"></a>操作步骤</h3><ol>
+<li><strong>启用 HTTPS</strong>：为 GitLab 配置 SSL，确保数据传输加密：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/gitlab/gitlab.rb</span><br><span class="line">external_url &#x27;https://gitlab.example.com&#x27;</span><br><span class="line">nginx[&#x27;ssl_certificate&#x27;] = &quot;/etc/ssl/certs/gitlab.crt&quot;</span><br><span class="line">nginx[&#x27;ssl_certificate_key&#x27;] = &quot;/etc/ssl/private/gitlab.key&quot;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p><strong>启用双因素认证（2FA）</strong>：在 GitLab 设置页面启用 2FA。</p>
+</li>
+<li><p><strong>使用 LDAP 或 OAuth 实现企业认证</strong>：</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/gitlab/gitlab.rb</span><br><span class="line">gitlab_rails[&#x27;ldap_enabled&#x27;] = true</span><br><span class="line">gitlab_rails[&#x27;ldap_servers&#x27;] = YAML.load &lt;&lt;-EOS</span><br><span class="line">main:</span><br><span class="line">  label: &#x27;LDAP&#x27;</span><br><span class="line">  host: &#x27;_your_ldap_server_&#x27;</span><br><span class="line">  port: 389</span><br><span class="line">  uid: &#x27;sAMAccountName&#x27;</span><br><span class="line">  bind_dn: &#x27;CN=bind_user,CN=Users,DC=example,DC=com&#x27;</span><br><span class="line">  password: &#x27;_your_password_&#x27;</span><br><span class="line">EOS</span><br></pre></td></tr></table></figure>
+
+<h2 id="GitLab-备份与恢复"><a href="#GitLab-备份与恢复" class="headerlink" title="GitLab 备份与恢复"></a>GitLab 备份与恢复</h2><h3 id="目的-8"><a href="#目的-8" class="headerlink" title="目的"></a>目的</h3><p>配置自动备份，以确保 GitLab 数据的安全性。</p>
+<h3 id="操作步骤-8"><a href="#操作步骤-8" class="headerlink" title="操作步骤"></a>操作步骤</h3><ol>
+<li><strong>配置自动备份</strong>：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/gitlab/gitlab.rb</span><br><span class="line">gitlab_rails[&#x27;backup_path&#x27;] = &#x27;/var/opt/gitlab/backups&#x27;</span><br><span class="line">gitlab_rails[&#x27;backup_keep_time&#x27;] = 604800  # 保留7天备份</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置 crontab 定期备份</span></span><br><span class="line">crontab -e</span><br><span class="line">0 2 * * * gitlab-rake gitlab:backup:create</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>恢复备份</strong>：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo gitlab-rake gitlab:backup:restore BACKUP=timestamp_of_backup</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong>备份恢复测试</strong>：定期进行恢复测试，确保备份数据可用。</li>
+</ol>
+<h2 id="GitLab-日志与监控"><a href="#GitLab-日志与监控" class="headerlink" title="GitLab 日志与监控"></a>GitLab 日志与监控</h2><h3 id="目的-9"><a href="#目的-9" class="headerlink" title="目的"></a>目的</h3><p>通过日志管理和监控 GitLab 服务，及时发现和解决问题。</p>
+<h3 id="操作步骤-9"><a href="#操作步骤-9" class="headerlink" title="操作步骤"></a>操作步骤</h3><ol>
+<li><strong>配置日志收集</strong>：使用 <code>logrotate</code> 管理 GitLab 日志文件：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/logrotate.d/gitlab</span><br><span class="line">/var/log/gitlab/*.log &#123;</span><br><span class="line">    daily</span><br><span class="line">    rotate 7</span><br><span class="line">    compress</span><br><span class="line">    missingok</span><br><span class="line">    notifempty</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p><strong>使用 Prometheus 和 Grafana 监控 GitLab</strong>：通过 Prometheus 集成监控 GitLab 性能，使用 Grafana 展示数据。</p>
+</li>
+<li><p><strong>设置邮件通知</strong>：配置 GitLab 邮件通知，及时了解系统状态。</p>
+</li>
+</ol>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>本文档涵盖了 GitLab 的常见配置优化、集成 CICD、备份恢复、安全加固和监控等方面。通过这些操作，您可以有效提升 GitLab 的性能、安全性和可靠性。如果您有任何问题或进一步的需求，欢迎留言讨论。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Freeman Kevin
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://freemankevin.uk/2025/01/21/gitlab-cicd/" title="GitLab 配置优化与 CICD 集成指南">https://freemankevin.uk/2025/01/21/gitlab-cicd/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLW5kLzQuMC9jbg=="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Development/" rel="tag"># Development</a>
+              <a href="/tags/GitLab/" rel="tag"># GitLab</a>
+              <a href="/tags/CICD/" rel="tag"># CICD</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/01/21/docker-runner/" rel="prev" title="如何在 Docker 环境中部署 GitLab Runner">
+                  <i class="fa fa-angle-left"></i> 如何在 Docker 环境中部署 GitLab Runner
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/02/07/maven-nexus/" rel="next" title="Maven 私有仓库使用规范">
+                  Maven 私有仓库使用规范 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Freeman Kevin</span>
+  </div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL0ZyZWVtYW5LZXZpbi9GcmVlbWFuS2V2aW4uZ2l0aHViLmlv" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"freemankevin","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js" defer></script>
+
+</body>
+</html>

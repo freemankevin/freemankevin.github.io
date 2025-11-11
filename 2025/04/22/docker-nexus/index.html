@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="3frXch6thZZdl3bIIbkBoQEXQVWw68nMWquSYiFpmhY">
+  <meta name="msvalidate.01" content="163141551EC7BC03EBD0FB765ED5C476">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Source+Code+Pro:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=DM+Mono:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=monospace:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"freemankevin.uk","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.25.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Load Disqus","order":-1}},"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"O3AB73GDVU","apiKey":"b3f1048d604fe9a6c9648855741c1e6d","indexName":"freemankevin","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="A personal tech blog focusing on DevOps, MLOps, and AIOps practices">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Kevin&#39;s Notes">
+<meta property="og:url" content="https://freemankevin.uk/">
+<meta property="og:site_name" content="Kevin&#39;s Notes">
+<meta property="og:description" content="A personal tech blog focusing on DevOps, MLOps, and AIOps practices">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://freemankevin.uk/images/avatar.jpg">
+<meta property="article:published_time" content="2025-04-22T07:14:25.000Z">
+<meta property="article:modified_time" content="2025-10-21T03:34:40.408Z">
+<meta property="article:author" content="Freeman Kevin">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="Maven">
+<meta property="article:tag" content="Nexus">
+<meta property="article:tag" content="PostgreSQL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://freemankevin.uk/images/avatar.jpg">
+
+
+<link rel="canonical" href="https://freemankevin.uk/2025/04/22/docker-nexus/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://freemankevin.uk/2025/04/22/docker-nexus/","path":"2025/04/22/docker-nexus/","title":"在 Docker 环境中部署 Nexus 仓库"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>在 Docker 环境中部署 Nexus 仓库 | Kevin's Notes</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4QX3P6CBBF"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-4QX3P6CBBF","only_pageview":false,"measure_protocol_api_secret":null,"enable":true}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/5.36.0/lite/builds/browser.umd.js" integrity="sha256-o49zoHLDPBm9WLg6AiliAVi3axCRTqe3ltTxLvhzAVg=" crossorigin="anonymous" defer></script><script src="/js/third-party/search/algolia-search.js" defer></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+
+
+<!-- Google tag (gtag.js) - GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4QX3P6CBBF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4QX3P6CBBF', {
+    page_path: window.location.pathname,
+    send_page_view: true
+  });
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MPHHRS5F');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google Search Console verification -->
+<meta name="google-site-verification" content="3frXch6thZZdl3bIIbkBoQEXQVWw68nMWquSYiFpmhY" />
+
+<!-- Bing Site Verification -->
+<meta name="msvalidate.01" content="163141551EC7BC03EBD0FB765ED5C476" />
+
+<!-- SEO Meta Tags -->
+<meta name="description" content="A personal tech blog focusing on DevOps, MLOps, and AIOps practices">
+<meta name="keywords" content="DevOps, MLOps, AIOps, Kubernetes, Docker, CI/CD">
+<meta name="author" content="Freeman Kevin">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://freemankevin.uk/2025/04/22/docker-nexus/">
+
+<!-- Open Graph / Social Media Meta Tags -->
+<meta property="og:title" content="在 Docker 环境中部署 Nexus 仓库">
+<meta property="og:description" content="">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://freemankevin.uk/2025/04/22/docker-nexus/">
+<meta property="og:site_name" content="Kevin's Notes">
+
+<!-- Schema.org markup for Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://freemankevin.uk/2025/04/22/docker-nexus/"
+  },
+  "headline": "在 Docker 环境中部署 Nexus 仓库",
+  "description": "",
+  "author": {
+    "@type": "Person",
+    "name": "Freeman Kevin"
+  },
+  "datePublished": "1745306065000",
+  "dateModified": "1761017680408",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kevin's Notes",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://freemankevin.uk/images/avatar.jpg"
+    }
+  }
+}
+</script>
+
+<!-- Microsoft Clarity -->
+<script>
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "pxsoj8b2ce");
+</script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Kevin's Notes" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kevin's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Quick notes</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%88%9B%E5%BB%BA"><span class="nav-number">1.1.</span> <span class="nav-text">目录结构创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.</span> <span class="nav-text">环境变量配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-Compose%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">Docker Compose配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2"><span class="nav-number">3.</span> <span class="nav-text">服务部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BDDocker%E9%95%9C%E5%83%8F%EF%BC%88%E7%A6%BB%E7%BA%BF%E7%8E%AF%E5%A2%83%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">加载Docker镜像（离线环境）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.2.</span> <span class="nav-text">启动服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%86%E7%A0%81%E9%87%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">密码重置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%91%E6%8E%A7%E4%B8%8E%E9%AA%8C%E8%AF%81"><span class="nav-number">5.</span> <span class="nav-text">监控与验证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5"><span class="nav-number">5.1.</span> <span class="nav-text">服务健康检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E6%A3%80%E6%9F%A5"><span class="nav-number">5.2.</span> <span class="nav-text">日志检查</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE"><span class="nav-number">6.</span> <span class="nav-text">性能优化建议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5"><span class="nav-number">7.</span> <span class="nav-text">常见问题排查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">8.</span> <span class="nav-text">结论</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Freeman Kevin"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Freeman Kevin</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZyZWVtYW5rZXZpbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;freemankevin"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly94LmNvbS9jaGF0b3BzMjAyMw==" title="Twitter → https:&#x2F;&#x2F;x.com&#x2F;chatops2023"><i class="fab fa-x fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9ic2t5LmFwcC9wcm9maWxlL2ZyZWVtYW5rZXZpbi5ic2t5LnNvY2lhbA==" title="Bluesky → https:&#x2F;&#x2F;bsky.app&#x2F;profile&#x2F;freemankevin.bsky.social"><i class="fab fa-bluesky fa-fw"></i>Bluesky</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9tYXN0b2Rvbi5zb2NpYWwvQGZyZWVtYW5rZXZpbg==" title="Mastodon → https:&#x2F;&#x2F;mastodon.social&#x2F;@freemankevin"><i class="fab fa-mastodon fa-fw"></i>Mastodon</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://freemankevin.uk/2025/04/22/docker-nexus/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Freeman Kevin">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kevin's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="在 Docker 环境中部署 Nexus 仓库 | Kevin's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          在 Docker 环境中部署 Nexus 仓库
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-04-22 15:14:25" itemprop="dateCreated datePublished" datetime="2025-04-22T15:14:25+08:00">2025-04-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Development/" itemprop="url" rel="index"><span itemprop="name">Development</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2025/04/22/docker-nexus/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2025/04/22/docker-nexus/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nexus是一个功能强大的仓库管理工具，用于托管Maven工件、Docker镜像等。本文将详细介绍如何在Docker环境中部署Nexus仓库管理器，并集成PostgreSQL数据库、快照清理服务和数据库备份服务。</p>
+<span id="more"></span>
+
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="目录结构创建"><a href="#目录结构创建" class="headerlink" title="目录结构创建"></a>目录结构创建</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建Nexus数据目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p ./nexus/sonatype-work</span><br><span class="line"><span class="built_in">chmod</span> -R 755 ./nexus/sonatype-work</span><br><span class="line"><span class="built_in">chown</span> -R 200:200 ./nexus/sonatype-work</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建Nexus密钥目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p ./nexus/secret</span><br><span class="line"><span class="built_in">cat</span> &gt; ./nexus/secret/nexus-secrets.json &lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">  &quot;active&quot;: &quot;nexus-key&quot;,</span></span><br><span class="line"><span class="string">  &quot;keys&quot;: [</span></span><br><span class="line"><span class="string">    &#123;</span></span><br><span class="line"><span class="string">      &quot;id&quot;: &quot;nexus-key&quot;,</span></span><br><span class="line"><span class="string">      &quot;key&quot;: &quot;$(openssl rand -base64 32)&quot;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  ]</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置权限</span></span><br><span class="line"><span class="built_in">chmod</span> 600 ./nexus/secret/nexus-secrets.json</span><br><span class="line"><span class="built_in">chown</span> 200:200 ./nexus/secret/nexus-secrets.json</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建PostgreSQL目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p ./postgres/data ./postgres/dbbackups</span><br><span class="line"><span class="built_in">chmod</span> -R 755 ./postgres/data ./postgres/dbbackups</span><br><span class="line"><span class="built_in">chown</span> -R 101:103 ./postgres/data ./postgres/dbbackups</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="环境变量配置"><a href="#环境变量配置" class="headerlink" title="环境变量配置"></a>环境变量配置</h3><p>创建<code>.env</code>文件：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Nexus配置</span></span><br><span class="line"><span class="attr">NEXUS_PORT</span>=<span class="number">8081</span></span><br><span class="line"><span class="attr">NEXUS_IMAGE</span>=sonatype/nexus3:<span class="number">3.79</span>.<span class="number">0</span></span><br><span class="line"><span class="attr">NEXUS_PASS</span>=Admin@gmail.<span class="number">123</span>.com</span><br><span class="line"><span class="attr">HEALTHCHECK_PORT</span>=<span class="number">8000</span></span><br><span class="line"><span class="attr">NEXUS_URL</span>=http://<span class="number">192.168</span>.<span class="number">1.100</span>:<span class="number">8081</span></span><br><span class="line"><span class="attr">NEXUS_USER</span>=admin</span><br><span class="line"><span class="attr">REPOSITORY_NAME</span>=maven-snapshots</span><br><span class="line"></span><br><span class="line"><span class="comment"># PostgreSQL配置</span></span><br><span class="line"><span class="attr">POSTGRES_PORT</span>=<span class="number">5432</span></span><br><span class="line"><span class="attr">POSTGRES_USER</span>=nexus</span><br><span class="line"><span class="attr">POSTGRES_PASS</span>=Nexus@gmail.<span class="number">123</span>.com</span><br><span class="line"><span class="attr">POSTGRES_DB</span>=nexus</span><br><span class="line"><span class="attr">POSTGRES_IMAGE</span>=kartoza/postgis:<span class="number">17</span>-<span class="number">3.5</span></span><br><span class="line"><span class="attr">POSTGRES_BACKUP_IMAGE</span>=kartoza/pg-backup:<span class="number">17</span>-<span class="number">3.5</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Docker-Compose配置"><a href="#Docker-Compose配置" class="headerlink" title="Docker Compose配置"></a>Docker Compose配置</h2><p>创建<code>docker-compose.yaml</code>文件：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment">#version: &#x27;3&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">nexus:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">&quot;$&#123;NEXUS_IMAGE&#125;&quot;</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">nexus</span></span><br><span class="line">    <span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">resources:</span></span><br><span class="line">        <span class="attr">limits:</span></span><br><span class="line">          <span class="attr">memory:</span> <span class="string">8192M</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;$&#123;NEXUS_PORT&#125;:8081&quot;</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">middleware</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">TZ:</span> <span class="string">Asia/Shanghai</span></span><br><span class="line">      <span class="attr">INSTALL4J_ADD_VM_PARAMS:</span> <span class="string">&quot;-Xms2g -Xmx2g -XX:MaxDirectMemorySize=2g -Djava.util.prefs.userRoot=/opt/sonatype/sonatype-work -Dnexus.datastore.enabled=true -Dnexus.datastore.nexus.jdbcUrl=jdbc:postgresql://postgres:5432/nexus?gssEncMode=disable -Dnexus.datastore.nexus.username=nexus -Dnexus.datastore.nexus.password=Nexus@gmail.123.com -Dnexus.datastore.nexus.advanced=maximumPoolSize=50 -Dkaraf.data=/opt/sonatype/sonatype-work -Dkaraf.etc=/opt/sonatype/sonatype-work/etc&quot;</span></span><br><span class="line">      <span class="attr">NEXUS_SECURITY_RANDOMPASSWORD:</span> <span class="string">&quot;false&quot;</span></span><br><span class="line">      <span class="attr">NEXUS_SECRETS_KEY_FILE:</span> <span class="string">/opt/sonatype/sonatype-work/etc/nexus-secrets.json</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">healthcheck:</span></span><br><span class="line">      <span class="attr">test:</span> [<span class="string">&quot;CMD&quot;</span>, <span class="string">&quot;curl&quot;</span>, <span class="string">&quot;-f&quot;</span>, <span class="string">&quot;http://localhost:8081/service/rest/v1/status&quot;</span>]</span><br><span class="line">      <span class="attr">interval:</span> <span class="string">30s</span></span><br><span class="line">      <span class="attr">timeout:</span> <span class="string">10s</span></span><br><span class="line">      <span class="attr">retries:</span> <span class="number">3</span></span><br><span class="line">      <span class="attr">start_period:</span> <span class="string">120s</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/etc/localtime:/etc/localtime:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./nexus/secret/nexus-secrets.json:/opt/sonatype/sonatype-work/etc/nexus-secrets.json:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./nexus/sonatype-work:/opt/sonatype/sonatype-work</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">nexus-cleanup:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">ghcr.io/freemankevin/clean-snapshots/nexus-cleanup:sha-afbc846</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">nexus-cleanup</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">NEXUS_URL:</span> <span class="string">&quot;$&#123;NEXUS_URL&#125;&quot;</span></span><br><span class="line">      <span class="attr">NEXUS_USER:</span> <span class="string">&quot;$&#123;NEXUS_USER:-admin&#125;&quot;</span></span><br><span class="line">      <span class="attr">NEXUS_PASS:</span> <span class="string">&quot;$&#123;NEXUS_PASS&#125;&quot;</span></span><br><span class="line">      <span class="attr">REPOSITORY_NAME:</span> <span class="string">&quot;$&#123;REPOSITORY_NAME:-maven-snapshots&#125;&quot;</span></span><br><span class="line">      <span class="attr">RETAIN_COUNT:</span> <span class="string">&quot;3&quot;</span></span><br><span class="line">      <span class="attr">DRY_RUN:</span> <span class="string">&quot;false&quot;</span></span><br><span class="line">      <span class="attr">LOG_LEVEL:</span> <span class="string">&quot;INFO&quot;</span></span><br><span class="line">      <span class="attr">SCHEDULE_TIME:</span> <span class="string">&quot;03:00&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/etc/localtime:/etc/localtime:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./nexus/nexus-cleanup-logs:/var/log</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;$&#123;HEALTHCHECK_PORT&#125;:8000&quot;</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">healthcheck:</span></span><br><span class="line">      <span class="attr">test:</span> [<span class="string">&quot;CMD&quot;</span>, <span class="string">&quot;curl&quot;</span>, <span class="string">&quot;-f&quot;</span>, <span class="string">&quot;http://localhost:8000/health&quot;</span>]</span><br><span class="line">      <span class="attr">interval:</span> <span class="string">30s</span></span><br><span class="line">      <span class="attr">timeout:</span> <span class="string">10s</span></span><br><span class="line">      <span class="attr">retries:</span> <span class="number">3</span></span><br><span class="line">      <span class="attr">start_period:</span> <span class="string">10s</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="attr">nexus:</span></span><br><span class="line">        <span class="attr">condition:</span> <span class="string">service_healthy</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="attr">postgres:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">&quot;$&#123;POSTGRES_IMAGE&#125;&quot;</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">postgres</span></span><br><span class="line">    <span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">resources:</span></span><br><span class="line">        <span class="attr">limits:</span></span><br><span class="line">          <span class="attr">memory:</span> <span class="string">8192M</span>  </span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;$&#123;POSTGRES_PORT&#125;:5432&quot;</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">middleware</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">TZ:</span> <span class="string">Asia/Shanghai</span></span><br><span class="line">      <span class="attr">POSTGRES_DB:</span> <span class="string">&quot;$&#123;POSTGRES_DB&#125;&quot;</span></span><br><span class="line">      <span class="attr">POSTGRES_USER:</span> <span class="string">&quot;$&#123;POSTGRES_USER&#125;&quot;</span></span><br><span class="line">      <span class="attr">POSTGRES_PASS:</span> <span class="string">&quot;$&#123;POSTGRES_PASS&#125;&quot;</span></span><br><span class="line">      <span class="attr">POSTGRES_INITDB_ARGS:</span> <span class="string">&quot;--encoding=UTF8&quot;</span></span><br><span class="line">      <span class="attr">ALLOW_IP_RANGE:</span> <span class="string">&quot;0.0.0.0/0&quot;</span></span><br><span class="line">      <span class="attr">POSTGRES_MULTIPLE_EXTENSIONS:</span> <span class="string">&quot;postgis,hstore,postgis_topology,postgis_raster,pgrouting,pg_trgm&quot;</span></span><br><span class="line">      <span class="attr">RUN_AS_ROOT:</span> <span class="string">&#x27;true&#x27;</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">healthcheck:</span></span><br><span class="line">      <span class="attr">test:</span> [<span class="string">&quot;CMD-SHELL&quot;</span>, <span class="string">&quot;PGPASSWORD=$&#123;POSTGRES_PASS&#125; pg_isready -h localhost -U $&#123;POSTGRES_USER&#125;&quot;</span>]</span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/etc/localtime:/etc/localtime:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./postgres/data:/var/lib/postgresql</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./postgres/dbbackups:/backups</span></span><br><span class="line">      <span class="comment">#- ./init-postgres.sql:/docker-entrypoint-initdb.d/init.sql</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">postgres-backup:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">&quot;$&#123;POSTGRES_BACKUP_IMAGE&#125;&quot;</span></span><br><span class="line">    <span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">resources:</span></span><br><span class="line">        <span class="attr">limits:</span></span><br><span class="line">          <span class="attr">memory:</span> <span class="string">4096M</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">postgres-backup</span></span><br><span class="line">    <span class="attr">hostname:</span> <span class="string">postgres-backups</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">middleware</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">TZ:</span> <span class="string">Asia/Shanghai</span></span><br><span class="line">      <span class="attr">DUMPPREFIX:</span> <span class="string">PG_db</span></span><br><span class="line">      <span class="attr">POSTGRES_USER:</span> <span class="string">&quot;$&#123;POSTGRES_USER&#125;&quot;</span></span><br><span class="line">      <span class="attr">POSTGRES_PASS:</span> <span class="string">&quot;$&#123;POSTGRES_PASS&#125;&quot;</span></span><br><span class="line">      <span class="attr">POSTGRES_PORT:</span> <span class="string">&quot;5432&quot;</span></span><br><span class="line">      <span class="attr">POSTGRES_HOST:</span> <span class="string">&quot;postgres&quot;</span></span><br><span class="line">      <span class="attr">CRON_SCHEDULE:</span> <span class="string">&quot;0 2 * * *&quot;</span></span><br><span class="line">      <span class="attr">REMOVE_BEFORE:</span> <span class="string">&quot;15&quot;</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/etc/localtime:/etc/localtime:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./postgres/dbbackups:/backups</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="attr">postgres:</span></span><br><span class="line">        <span class="attr">condition:</span> <span class="string">service_healthy</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">middleware:</span></span><br><span class="line">    <span class="attr">driver:</span> <span class="string">bridge</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="服务部署"><a href="#服务部署" class="headerlink" title="服务部署"></a>服务部署</h2><h3 id="加载Docker镜像（离线环境）"><a href="#加载Docker镜像（离线环境）" class="headerlink" title="加载Docker镜像（离线环境）"></a>加载Docker镜像（离线环境）</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker load -i images/nexus_3.79.0_amd64.tar.gz</span><br><span class="line">docker load -i images/nexus-cleanup.tar.gz</span><br><span class="line">docker load -i images/pg-v17-3.5.tar.gz</span><br><span class="line">docker load -i images/pg-backup-v17-3.5.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<p>验证服务状态：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose ps</span><br></pre></td></tr></table></figure>
+
+<h2 id="密码重置"><a href="#密码重置" class="headerlink" title="密码重置"></a>密码重置</h2><p>如果需要重置管理员密码：</p>
+<ol>
+<li>进入PostgreSQL容器：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it postgres bash</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>执行SQL：</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--- 将默认admin 密码改为 admin123</span></span><br><span class="line"><span class="keyword">UPDATE</span> security_user </span><br><span class="line"><span class="keyword">SET</span> password<span class="operator">=</span><span class="string">&#x27;$shiro1$SHA-512$1024$NE+wqQq/TmjZMvfI7ENh/g==$V4yPw8T64UQ6GfJfxYq2hLsVrBY8D1v+bktfOxGdt4b/9BthpWPNUy/CBk6V9iA0nHpzYzJFWO8v/tZFtES8CA==&#x27;</span>, </span><br><span class="line">status<span class="operator">=</span><span class="string">&#x27;active&#x27;</span> </span><br><span class="line"><span class="keyword">WHERE</span> id<span class="operator">=</span><span class="string">&#x27;admin&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>重启服务：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose restart nexus</span><br></pre></td></tr></table></figure>
+
+<h2 id="监控与验证"><a href="#监控与验证" class="headerlink" title="监控与验证"></a>监控与验证</h2><h3 id="服务健康检查"><a href="#服务健康检查" class="headerlink" title="服务健康检查"></a>服务健康检查</h3><ul>
+<li>Nexus: <code>curl http://localhost:18080/service/rest/v1/status</code></li>
+<li>Cleanup: <code>curl http://localhost:8000/health</code></li>
+<li>PostgreSQL: <code>docker exec postgres pg_isready -U nexus</code></li>
+</ul>
+<h3 id="日志检查"><a href="#日志检查" class="headerlink" title="日志检查"></a>日志检查</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker logs nexus</span><br><span class="line"><span class="built_in">tail</span> -f ./nexus/nexus-cleanup-logs/cleanup.log</span><br></pre></td></tr></table></figure>
+
+<h2 id="性能优化建议"><a href="#性能优化建议" class="headerlink" title="性能优化建议"></a>性能优化建议</h2><ol>
+<li><p><strong>JVM调优</strong>：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line">-Xms4g -Xmx4g -XX:<span class="attr">MaxDirectMemorySize</span>=<span class="number">4</span>g</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>PostgreSQL配置</strong>：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">max_connections</span> = <span class="number">200</span></span><br><span class="line"><span class="attr">work_mem</span> = <span class="number">16</span>MB</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>清理策略</strong>：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">RETAIN_COUNT:</span> <span class="string">&quot;5&quot;</span></span><br><span class="line"><span class="attr">SCHEDULE_TIME:</span> <span class="string">&quot;02:00&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="常见问题排查"><a href="#常见问题排查" class="headerlink" title="常见问题排查"></a>常见问题排查</h2><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>解决方案</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Nexus启动失败</td>
+<td>检查JVM内存设置</td>
+</tr>
+<tr>
+<td>PostgreSQL连接错误</td>
+<td>验证.env文件凭据</td>
+</tr>
+<tr>
+<td>清理服务不工作</td>
+<td>检查NEXUS_URL配置</td>
+</tr>
+</tbody></table>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>本文详细介绍了Nexus在Docker环境中的完整部署方案，包含数据库集成、自动清理和备份功能。该方案适合生产环境使用，可根据实际需求进行调整优化。</p>
+<p><strong>相关资源</strong>：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9oZWxwLnNvbmF0eXBlLmNvbS9yZXBvbWFuYWdlcjM=">Nexus官方文档<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucG9zdGdyZXNxbC5vcmcvZG9jcy9jdXJyZW50L3J1bnRpbWUtY29uZmlnLmh0bWw=">PostgreSQL最佳实践<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Freeman Kevin
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://freemankevin.uk/2025/04/22/docker-nexus/" title="在 Docker 环境中部署 Nexus 仓库">https://freemankevin.uk/2025/04/22/docker-nexus/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLW5kLzQuMC9jbg=="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+              <a href="/tags/PostgreSQL/" rel="tag"># PostgreSQL</a>
+              <a href="/tags/Nexus/" rel="tag"># Nexus</a>
+              <a href="/tags/Maven/" rel="tag"># Maven</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/03/05/vim/" rel="prev" title="Vim 常用配置说明文档">
+                  <i class="fa fa-angle-left"></i> Vim 常用配置说明文档
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/04/23/Cloudflare-Tunnel/" rel="next" title="使用 Cloudflare Tunnel 安全暴露本地服务到公网">
+                  使用 Cloudflare Tunnel 安全暴露本地服务到公网 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Freeman Kevin</span>
+  </div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL0ZyZWVtYW5LZXZpbi9GcmVlbWFuS2V2aW4uZ2l0aHViLmlv" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"freemankevin","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js" defer></script>
+
+</body>
+</html>
