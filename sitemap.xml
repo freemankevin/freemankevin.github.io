@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://freemankevin.uk/2025/11/13/k8s-kubeadm/</loc>
+    
+    <lastmod>2025-11-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://freemankevin.uk/tags/index.html</loc>
     
     <lastmod>2025-10-21</lastmod>
@@ -56,15 +65,6 @@
   </url>
   
   <url>
-    <loc>https://freemankevin.uk/2024/12/27/ubuntu-nvidia-driver/</loc>
-    
-    <lastmod>2025-10-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://freemankevin.uk/2024/12/27/ubuntu-repo/</loc>
     
     <lastmod>2025-10-21</lastmod>
@@ -74,7 +74,7 @@
   </url>
   
   <url>
-    <loc>https://freemankevin.uk/2025/01/14/slow-project/</loc>
+    <loc>https://freemankevin.uk/2024/12/27/ubuntu-nvidia-driver/</loc>
     
     <lastmod>2025-10-21</lastmod>
     
@@ -84,6 +84,15 @@
   
   <url>
     <loc>https://freemankevin.uk/2024/12/11/swap/</loc>
+    
+    <lastmod>2025-10-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://freemankevin.uk/2025/01/14/slow-project/</loc>
     
     <lastmod>2025-10-21</lastmod>
     
@@ -110,7 +119,7 @@
   </url>
   
   <url>
-    <loc>https://freemankevin.uk/2024/12/26/postgresql-optimization/</loc>
+    <loc>https://freemankevin.uk/2025/01/13/prometheus/</loc>
     
     <lastmod>2025-10-21</lastmod>
     
@@ -119,7 +128,7 @@
   </url>
   
   <url>
-    <loc>https://freemankevin.uk/2025/01/13/prometheus/</loc>
+    <loc>https://freemankevin.uk/2024/12/26/postgresql-optimization/</loc>
     
     <lastmod>2025-10-21</lastmod>
     
@@ -137,7 +146,7 @@
   </url>
   
   <url>
-    <loc>https://freemankevin.uk/2024/12/11/mount-hd-lvm/</loc>
+    <loc>https://freemankevin.uk/2025/01/01/mount-hd-mbr/</loc>
     
     <lastmod>2025-10-21</lastmod>
     
@@ -146,7 +155,7 @@
   </url>
   
   <url>
-    <loc>https://freemankevin.uk/2025/01/01/mount-hd-mbr/</loc>
+    <loc>https://freemankevin.uk/2024/12/11/mount-hd-lvm/</loc>
     
     <lastmod>2025-10-21</lastmod>
     
@@ -209,7 +218,7 @@
   </url>
   
   <url>
-    <loc>https://freemankevin.uk/2025/01/14/lazydocker/</loc>
+    <loc>https://freemankevin.uk/2025/01/10/logrotate/</loc>
     
     <lastmod>2025-10-21</lastmod>
     
@@ -218,7 +227,7 @@
   </url>
   
   <url>
-    <loc>https://freemankevin.uk/2025/01/10/logrotate/</loc>
+    <loc>https://freemankevin.uk/2025/01/14/lazydocker/</loc>
     
     <lastmod>2025-10-21</lastmod>
     
@@ -290,7 +299,7 @@
   </url>
   
   <url>
-    <loc>https://freemankevin.uk/2025/01/15/k8s-argocd/</loc>
+    <loc>https://freemankevin.uk/2025/01/13/jenkins/</loc>
     
     <lastmod>2025-10-21</lastmod>
     
@@ -299,7 +308,7 @@
   </url>
   
   <url>
-    <loc>https://freemankevin.uk/2025/01/13/jenkins/</loc>
+    <loc>https://freemankevin.uk/2025/01/15/k8s-argocd/</loc>
     
     <lastmod>2025-10-21</lastmod>
     
@@ -407,15 +416,6 @@
   </url>
   
   <url>
-    <loc>https://freemankevin.uk/2025/01/21/docker-runner/</loc>
-    
-    <lastmod>2025-10-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://freemankevin.uk/2025/05/13/docker-minio/</loc>
     
     <lastmod>2025-10-21</lastmod>
@@ -426,6 +426,15 @@
   
   <url>
     <loc>https://freemankevin.uk/2025/04/22/docker-nexus/</loc>
+    
+    <lastmod>2025-10-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://freemankevin.uk/2025/01/21/docker-runner/</loc>
     
     <lastmod>2025-10-21</lastmod>
     
@@ -452,7 +461,7 @@
   </url>
   
   <url>
-    <loc>https://freemankevin.uk/2025/01/14/clean-docker/</loc>
+    <loc>https://freemankevin.uk/2025/08/13/docker-manifest/</loc>
     
     <lastmod>2025-10-21</lastmod>
     
@@ -461,7 +470,7 @@
   </url>
   
   <url>
-    <loc>https://freemankevin.uk/2025/08/13/docker-manifest/</loc>
+    <loc>https://freemankevin.uk/2025/01/14/clean-docker/</loc>
     
     <lastmod>2025-10-21</lastmod>
     
@@ -488,6 +497,15 @@
   </url>
   
   <url>
+    <loc>https://freemankevin.uk/2025/01/15/backup-minio/</loc>
+    
+    <lastmod>2025-10-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://freemankevin.uk/2024/12/22/backup-es/</loc>
     
     <lastmod>2025-10-21</lastmod>
@@ -498,15 +516,6 @@
   
   <url>
     <loc>https://freemankevin.uk/2025/01/08/WebpageToPDF/</loc>
-    
-    <lastmod>2025-10-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://freemankevin.uk/2025/01/15/backup-minio/</loc>
     
     <lastmod>2025-10-21</lastmod>
     
@@ -571,7 +580,7 @@
 
   <url>
     <loc>https://freemankevin.uk/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -579,644 +588,644 @@
   
   <url>
     <loc>https://freemankevin.uk/tags/Cloudflare/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Intranet-penetration/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/DevOps/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Apt/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Offline/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Debian/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Docker/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Development/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Minica/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Https/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Locust/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Test/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Flask/</loc>
-    <lastmod>2025-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://freemankevin.uk/tags/Cron/</loc>
-    <lastmod>2025-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://freemankevin.uk/tags/ElasticSearch/</loc>
-    <lastmod>2025-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://freemankevin.uk/tags/Backup/</loc>
-    <lastmod>2025-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://freemankevin.uk/tags/Wechat/</loc>
-    <lastmod>2025-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://freemankevin.uk/tags/Download/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/MinIO/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freemankevin.uk/tags/Backup/</loc>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freemankevin.uk/tags/Cron/</loc>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freemankevin.uk/tags/ElasticSearch/</loc>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freemankevin.uk/tags/Wechat/</loc>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freemankevin.uk/tags/Download/</loc>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/PITR/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/PostgreSQL/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Yum/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/CentOS/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Mount/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/CIFS/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Linux/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Windows/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Harbor/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Manifest/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Multi-Architecture/</loc>
-    <lastmod>2025-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://freemankevin.uk/tags/GitLab-Runner/</loc>
-    <lastmod>2025-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://freemankevin.uk/tags/GitLab/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/SITE-Replication/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/High-Availability/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Error-Recovery/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Nexus/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Maven/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://freemankevin.uk/tags/VLLM/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <loc>https://freemankevin.uk/tags/GitLab-Runner/</loc>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://freemankevin.uk/tags/OPenAI/</loc>
-    <lastmod>2025-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://freemankevin.uk/tags/LLM/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <loc>https://freemankevin.uk/tags/GitLab/</loc>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Container/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Dozzle/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freemankevin.uk/tags/VLLM/</loc>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freemankevin.uk/tags/OPenAI/</loc>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freemankevin.uk/tags/LLM/</loc>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Firewall/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Ufw/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Iptables/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/HTML/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Fonts/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/GitHub/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Git/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Proxy/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Gitlab/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/CICD/</loc>
-    <lastmod>2025-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://freemankevin.uk/tags/ArgoCD/</loc>
-    <lastmod>2025-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://freemankevin.uk/tags/Kubernetes/</loc>
-    <lastmod>2025-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://freemankevin.uk/tags/GitOps/</loc>
-    <lastmod>2025-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://freemankevin.uk/tags/TLS/</loc>
-    <lastmod>2025-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://freemankevin.uk/tags/KubeSphere/</loc>
-    <lastmod>2025-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://freemankevin.uk/tags/Ingress-NGINX/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Jenkins/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://freemankevin.uk/tags/Helm/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <loc>https://freemankevin.uk/tags/TLS/</loc>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://freemankevin.uk/tags/Runner/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <loc>https://freemankevin.uk/tags/KubeSphere/</loc>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://freemankevin.uk/tags/NGINX/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <loc>https://freemankevin.uk/tags/Ingress-NGINX/</loc>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://freemankevin.uk/tags/Traefik/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <loc>https://freemankevin.uk/tags/ArgoCD/</loc>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freemankevin.uk/tags/Kubernetes/</loc>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freemankevin.uk/tags/GitOps/</loc>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/ETCD/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/NFS/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freemankevin.uk/tags/Helm/</loc>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freemankevin.uk/tags/Runner/</loc>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freemankevin.uk/tags/NGINX/</loc>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freemankevin.uk/tags/Traefik/</loc>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Update/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Kernel/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Optimization/</loc>
-    <lastmod>2025-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://freemankevin.uk/tags/Lazydocker/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Nginx/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Logrotate/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freemankevin.uk/tags/Lazydocker/</loc>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/LVM/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Aliyun/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/MkDocs/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/GitHub-Pages/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/GPT/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/MBR/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Network/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Portainer/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Ubuntu/</loc>
-    <lastmod>2025-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://freemankevin.uk/tags/Memory/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Prometheus/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freemankevin.uk/tags/Memory/</loc>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Rufus/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Swap/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Netplan/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/Driver/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/NVIDIA/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/OpenSSL/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/OpenSSH/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/VIM/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/tags/VNC/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -1225,91 +1234,91 @@
   
   <url>
     <loc>https://freemankevin.uk/categories/Development/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/categories/Linux/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/categories/Test/</loc>
-    <lastmod>2025-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://freemankevin.uk/categories/ElasticSearch/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/categories/MinIO/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freemankevin.uk/categories/ElasticSearch/</loc>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/categories/PostgreSQL/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/categories/Docker/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/categories/GitHub/</loc>
-    <lastmod>2025-11-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://freemankevin.uk/categories/DevOps/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/categories/Kubernetes/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://freemankevin.uk/categories/DevOps/</loc>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/categories/DevOps/Kubernetes/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/categories/MkDocs/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://freemankevin.uk/categories/Ubuntu/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
