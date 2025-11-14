@@ -60,7 +60,7 @@ free | grep Swap
 
 ## 📦 安装步骤
 
-### 步骤 1：配置 APT 源（两台 VM）
+### 配置 APT 源（两台 VM）
 
 使用清华 TUNA 镜像加速软件包下载：
 
@@ -84,7 +84,7 @@ deb https://mirrors.tuna.tsinghua.edu.cn/debian-security/ trixie-security main c
 deb-src https://mirrors.tuna.tsinghua.edu.cn/debian-security/ trixie-security main contrib non-free-firmware
 ```
 
-### 步骤 2：禁用 Swap（两台 VM）
+### 禁用 Swap（两台 VM）
 
 Kubelet 无法在启用 Swap 的系统上运行：
 
@@ -99,7 +99,7 @@ sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 free | grep Swap | awk '{print $2}'
 ```
 
-### 步骤 3：安装并配置容器运行时（两台 VM）
+### 安装并配置容器运行时（两台 VM）
 
 使用 Containerd 作为容器运行时：
 
@@ -144,7 +144,7 @@ sudo systemctl enable containerd
 sudo ctr version
 ```
 
-### 步骤 4：安装 Kubeadm、Kubelet、Kubectl（两台 VM）
+### 安装 Kubeadm、Kubelet、Kubectl（两台 VM）
 
 添加 Kubernetes 官方仓库并安装 v1.33 版本：
 
@@ -172,7 +172,7 @@ sudo apt-mark hold kubelet kubeadm kubectl
 kubeadm version
 ```
 
-### 步骤 5：初始化 Control Plane（仅 VM 1 - Master 节点）
+### 初始化 Control Plane（仅 VM 1 - Master 节点）
 
 **前置条件：** 记录 Master 节点的 IP 地址（本例为 `192.168.199.135`）
 
@@ -190,7 +190,7 @@ sudo kubeadm init \
 - kubectl 配置命令
 - **`kubeadm join` 命令**（必须保存供 Worker 节点使用）
 
-### 步骤 6：配置 Kubectl（仅 VM 1）
+### 配置 Kubectl（仅 VM 1）
 
 ```bash
 # 为当前用户配置 kubectl
@@ -202,7 +202,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl get nodes
 ```
 
-### 步骤 7：Worker Node 加入集群（仅 VM 2）
+### Worker Node 加入集群（仅 VM 2）
 
 在 VM 2 上执行步骤 5 中保存的 `kubeadm join` 命令：
 
@@ -213,7 +213,7 @@ sudo kubeadm join 192.168.199.135:6443 --token <YOUR_TOKEN> \
 
 **说明：** `<YOUR_TOKEN>` 和 `<YOUR_HASH>` 来自步骤 5 的输出。
 
-### 步骤 8：部署网络插件 - Flannel（VM 1 或任意有 kubectl 访问的节点）
+### 部署网络插件 - Flannel（VM 1 或任意有 kubectl 访问的节点）
 
 Kubernetes 需要网络插件实现 Pod 间通信。我们使用 Flannel：
 
@@ -228,7 +228,7 @@ kubectl get pods -n kube-system | grep flannel
 kubectl get pods -n kube-system
 ```
 
-### 步骤 8.1：预加载 Flannel 镜像（两台 VM - 可选但推荐）
+### 预加载 Flannel 镜像（两台 VM - 可选但推荐）
 
 如果网络不稳定或镜像下载缓慢，可提前在两台 VM 上加载 Flannel 镜像：
 
@@ -266,7 +266,7 @@ sudo ctr images list | grep flannel
 sudo ctr --namespace k8s.io images list | grep flannel
 ```
 
-### 步骤 9：修复 CNI 插件路径（两台 VM）
+### 修复 CNI 插件路径（两台 VM）
 
 如果 CoreDNS Pod 仍无法启动，执行以下修复：
 
