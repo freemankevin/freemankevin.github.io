@@ -111,7 +111,7 @@ deploy:
 
 algolia:
   applicationID: 'O3AB73GDVU'
-  apiKey: 'b3f1048d604fe9a6c9648855741c1e6d'
+  apiKey: 'b3f1048d604fe9a6c9648855741c1e6d'  # Search-Only API Key（前端搜索使用）
   indexName: 'freemankevin'
   chunkSize: 5000
   fields:
