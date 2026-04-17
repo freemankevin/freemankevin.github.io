@@ -1,13 +1,12 @@
 name: Update Algolia Index
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'source/_posts/**'
-      - '_config.yml'
-  workflow_dispatch:  # 允许手动触发
+  workflow_dispatch:  # 仅手动触发，避免自动触发
+    inputs:
+      reason:
+        description: '更新原因'
+        required: false
+        default: '手动更新搜索索引'
 
 jobs:
   algolia-update:
@@ -20,19 +19,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'  # 使用 Node 20（与本地环境一致）
-          cache: 'npm'
+          node-version: '20'
           
       - name: Install dependencies
-        run: npm ci  # 使用 package-lock.json 锁定版本，避免依赖冲突
+        run: npm ci
         
       - name: Update Algolia index
         run: |
-          # 使用 npm run 执行 hexo 命令（本地安装的依赖）
-          npm run clean
-          npm run generate
-          # 使用 npx 执行 hexo algolia（本地安装的插件）
+          npx hexo clean
+          npm run build
           npx hexo algolia
         env:
-          # 使用 Write API Key
-          HEXO_ALGOLIA_INDEXING_KEY: ${{ secrets.ALGOLIA_WRITE_API_KEY }}
+          HEXO_ALGOLIA_INDEXING_KEY: ${{ secrets.ALGOLIA_WRITE_API_KEY || secrets.ALGOLIA_ADMIN_API_KEY }}
