@@ -20,7 +20,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '16'  # Node 16 兼容性更好，避免 ESM 问题
+          node-version: '20'  # 使用 Node 20（与本地环境一致）
           cache: 'npm'
           
       - name: Install dependencies
@@ -34,5 +34,5 @@ jobs:
           # 使用 npx 执行 hexo algolia（本地安装的插件）
           npx hexo algolia
         env:
-          # 使用 Write API Key（推荐）或 Admin API Key（备用）
-          HEXO_ALGOLIA_INDEXING_KEY: ${{ secrets.ALGOLIA_WRITE_API_KEY || secrets.ALGOLIA_ADMIN_API_KEY }}
+          # 使用 Write API Key
+          HEXO_ALGOLIA_INDEXING_KEY: ${{ secrets.ALGOLIA_WRITE_API_KEY }}
