@@ -5,7 +5,7 @@ tags: ["Cloudflare", "Intranet penetration", "DevOps"]
 categories: Development
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cloudflare Tunnel 是一种强大的反向隧道服务，允许用户将本地服务器或内部网络资源安全暴露到公网，而无需开放防火墙端口或拥有公网 IP 地址。本文将详细介绍 Cloudflare Tunnel 的工作原理、功能特点、使用场景，并结合实际操作步骤，展示如何通过 Cloudflare Tunnel 将本地服务映射到公网域名。
+ Cloudflare Tunnel 是一种强大的反向隧道服务，允许用户将本地服务器或内部网络资源安全暴露到公网，而无需开放防火墙端口或拥有公网 IP 地址。本文将详细介绍 Cloudflare Tunnel 的工作原理、功能特点、使用场景，并结合实际操作步骤，展示如何通过 Cloudflare Tunnel 将本地服务映射到公网域名。
 
 <!-- more -->
 

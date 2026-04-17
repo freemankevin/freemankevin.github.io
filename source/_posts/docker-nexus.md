@@ -5,7 +5,7 @@ tags: [Docker, Nexus, Maven, PostgreSQL]
 categories: Development
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nexus是一个功能强大的仓库管理工具，用于托管Maven工件、Docker镜像等。本文将详细介绍如何在Docker环境中部署Nexus仓库管理器，并集成PostgreSQL数据库、快照清理服务和数据库备份服务。
+ Nexus是一个功能强大的仓库管理工具，用于托管Maven工件、Docker镜像等。本文将详细介绍如何在Docker环境中部署Nexus仓库管理器，并集成PostgreSQL数据库、快照清理服务和数据库备份服务。
 
 <!-- more -->
 

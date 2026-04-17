@@ -8,7 +8,7 @@ tags:
 category: Linux
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rufus 是一个免费、开源的工具，用于创建启动 U 盘，非常适合安装各种 Linux 发行版。本文介绍了使用 Rufus 为 Linux 发行版（如 Debian 或 CentOS）创建启动 U 盘的详细步骤。首先，准备好 U 盘、Linux ISO 文件和 Rufus 软件。然后，在 Rufus 中选择设备、配置启动选项和文件系统，并启动创建过程。完成后，使用启动 U 盘进行 Linux 安装。通过这些步骤，你可以轻松创建 Linux 启动 U 盘，并在目标电脑上安装所需的操作系统。
+Rufus 是一个免费、开源的工具，用于创建启动 U 盘，非常适合安装各种 Linux 发行版。本文介绍了使用 Rufus 为 Linux 发行版（如 Debian 或 CentOS）创建启动 U 盘的详细步骤。首先，准备好 U 盘、Linux ISO 文件和 Rufus 软件。然后，在 Rufus 中选择设备、配置启动选项和文件系统，并启动创建过程。完成后，使用启动 U 盘进行 Linux 安装。通过这些步骤，你可以轻松创建 Linux 启动 U 盘，并在目标电脑上安装所需的操作系统。
 
 <!-- more -->
 

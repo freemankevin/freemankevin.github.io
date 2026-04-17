@@ -9,7 +9,7 @@ tags:
 category: Development 
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 本指南将详细介绍如何在 Windows 和 Linux 系统上使用 Docker 部署 vLLM 大模型服务，并提供跨平台测试方案。
+ 本指南将详细介绍如何在 Windows 和 Linux 系统上使用 Docker 部署 vLLM 大模型服务，并提供跨平台测试方案。
 
 <!-- more -->
 

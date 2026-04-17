@@ -9,7 +9,7 @@ tags:
 category: Kubernetes
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 本文将详细介绍如何在 Kubernetes 集群中安装和配置带有 TLS 的 Traefik Ingress Controller。包括环境准备、安装配置、TLS 证书管理、认证设置以及常见问题排查等完整流程。
+ 本文将详细介绍如何在 Kubernetes 集群中安装和配置带有 TLS 的 Traefik Ingress Controller。包括环境准备、安装配置、TLS 证书管理、认证设置以及常见问题排查等完整流程。
 
 <!-- more -->
 

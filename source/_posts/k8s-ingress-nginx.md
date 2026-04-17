@@ -1,16 +1,47 @@
 ---
-title: 如何在Kubernetes 环境中安装 INGRESS-NGINX
+title: Kubernetes Ingress-NGINX 生产级部署配置指南
 date: 2025-01-21 15:57:25
+keywords:
+  - Kubernetes
+  - Ingress
+  - NGINX
+  - LoadBalancer
+categories:
+  - Kubernetes
+  - Networking
 tags:
-    - TLS
-    - KubeSphere
-    - Ingress-NGINX
-category: Kubernetes
+  - Kubernetes
+  - Ingress
+  - NGINX
+  - TLS
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 本文将详细介绍如何在 Kubernetes 中部署 Ingress-NGINX 控制器，并配置 HTTP 和 HTTPS 访问。通过 Helm 工具，您可以快速安装并设置 NGINX 来代理外部流量，同时暴露 NodePort 服务。我们还会讲解如何配置 TLS 安全连接，并使用 Kubernetes Secret 来存储证书，确保数据传输加密。跟着本文的步骤走，您就能顺利完成 Ingress 部署，让集群应用访问更加便捷安全。
+Ingress-NGINX 是 Kubernetes 集群流量管理的核心组件，提供七层负载均衡、TLS终止和路径路由等功能。本指南涵盖生产级部署、性能优化、TLS配置、安全加固和故障排查等核心内容，适用于构建企业级Kubernetes入口流量管理方案。
 
 <!-- more -->
+
+## Ingress-NGINX 架构概述
+
+### 核心功能
+
+| 功能 | 说明 | 生产应用 |
+|------|------|----------|
+| 七层路由 | 基于域名/路径的路由 | 微服务流量管理 |
+| TLS终止 | SSL/TLS证书管理 | HTTPS服务暴露 |
+| 负载均衡 | 多后端Pod流量分发 | 高可用保障 |
+| 会话保持 | 基于Cookie的会话粘性 | 状态应用支持 |
+| 速率限制 | 基于IP/路径的限流 | 安全防护 |
+| 监控指标 | Prometheus集成 | 性能观测 |
+
+### 部署模式
+
+**DaemonSet模式**：每节点部署一个Pod
+- 优点：性能最优，无网络跳转
+- 适用：大规模生产环境
+
+**Deployment模式**：指定副本数部署
+- 优点：资源可控，灵活调度
+- 适用：中小规模环境
 
 ### 拉取 Helm 包
 

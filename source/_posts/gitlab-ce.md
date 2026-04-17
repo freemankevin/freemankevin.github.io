@@ -1,16 +1,52 @@
 ---
-title: Gitlab-ce 部署与使用教程
+title: GitLab CE 生产环境部署完整指南
 date: 2025-01-13 16:45:25
+keywords:
+  - GitLab
+  - Git
+  - CI/CD
+  - DevOps
+categories:
+  - DevOps
+  - Development
 tags:
-    - Development
-    - Linux
-    - Gitlab
-category: Development
+  - GitLab
+  - Docker
+  - CI/CD
+  - VersionControl
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇文章详细介绍了GitLab-CE的部署与使用教程，包括基础部署配置、系统配置、CI/CD配置、项目管理、运维管理、高可用配置、Jenkins集成、容器镜像仓库集成以及项目协作与问题管理等核心内容。文档提供了大量实用的配置示例和最佳实践建议，适合DevOps工程师和开发团队参考，帮助搭建和优化GitLab平台，提升团队开发效率。
+GitLab CE 是完整的 DevOps 平台，提供代码管理、CI/CD、容器仓库等功能。本指南涵盖生产级部署、性能优化、安全配置、高可用架构和运维管理等核心内容，适用于构建企业级代码协作平台。
 
 <!-- more -->
+
+## GitLab 架构概述
+
+### 核心组件
+
+| 组件 | 功能 | 生产配置 |
+|------|------|----------|
+| GitLab Rails | 核心应用服务 | Puma多进程 |
+| GitLab Shell | Git操作处理 | SSH/HTTP协议 |
+| Gitaly | Git存储服务 | 多节点集群 |
+| Sidekiq | 后台任务处理 | 多线程配置 |
+| PostgreSQL | 数据库服务 | 主从复制 |
+| Redis | 缓存队列服务 | Sentinel模式 |
+| Puma | Web服务器 | Worker进程池 |
+| Prometheus | 监控服务 | 内置或外部 |
+| Nginx | 反向代理 | SSL终止 |
+
+### 部署模式
+
+**单节点部署**：适合中小团队（<500用户）
+- 配置：8核CPU，16GB内存，100GB SSD
+- 所有组件同节点运行
+
+**高可用部署**：适合大型团队（>500用户）
+- Gitaly集群：3节点，独立存储
+- PostgreSQL：主从复制或Patroni集群
+- Redis：Sentinel高可用
+- GitLab Rails：多实例+负载均衡
 
 ## 基础部署配置
 

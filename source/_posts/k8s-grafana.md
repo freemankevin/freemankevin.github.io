@@ -8,7 +8,7 @@ tags:
 category: Kubernetes
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 本文介绍如何通过 Helm 部署 Grafana 并配置反向代理，以便在 Kubernetes 集群中使用 Grafana，支持 HTTPS 加密和基本认证。
+ 本文介绍如何通过 Helm 部署 Grafana 并配置反向代理，以便在 Kubernetes 集群中使用 Grafana，支持 HTTPS 加密和基本认证。
 
 <!-- more -->
 

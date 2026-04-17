@@ -1,16 +1,100 @@
 ---
-title: 创建 CIFS (SMB) 共享并挂载给 Linux 和 Windows 使用
+title: CIFS/SMB 跨平台文件共享与 Windows-Linux 集成方案
 date: 2025-01-06 13:57:25
+keywords:
+  - CIFS
+  - SMB
+  - Windows
+  - FileShare
+categories:
+  - Storage
+  - CrossPlatform
 tags:
-    - Linux
-    - Windows
-    - CIFS
-category: Linux
+  - CIFS
+  - SMB
+  - Windows
+  - FileShare
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本文将指导您如何在 Windows 系统上创建 SMB/CIFS 共享，并展示如何在 Linux 和 Windows 客户端上挂载这些共享。我们还将介绍如何配置防火墙，以确保 SMB/CIFS 通信的安全性，帮助您顺利实现跨平台的文件共享。
+CIFS/SMB 是 Windows-Linux 跨平台文件共享的标准协议，实现异构环境下的数据共享。本指南涵盖 Windows 共享创建、Linux 客户端挂载、安全认证配置和跨平台集成最佳实践，适用于混合IT环境的文件共享架构。
 
 <!-- more -->
+
+## CIFS/SMB 协议架构
+
+### SMB 协议版本演进
+
+```
+SMB 1.0 (1980s)
+  └─ 基础文件共享
+  └─ 安全性差，已弃用
+
+SMB 2.0 (2006)
+  └─ 性能优化，减少指令数
+  └─ Windows Vista/Server 2008
+
+SMB 2.1 (2009)
+  └─ Windows 7/Server 2008 R2
+
+SMB 3.0 (2012)
+  └─ SMB Multichannel（多通道）
+  └─ SMB Direct（RDMA加速）
+  └─ 加密传输
+  └─ Windows 8/Server 2012
+
+SMB 3.1.1 (2015)
+  └─ 预认证完整性检查
+  └─ Windows 10/Server 2016
+```
+
+### SMB 版本特性对比
+
+| SMB版本 | 性能 | 安全性 | 加密 | 生产推荐 |
+|---------|------|--------|------|----------|
+| SMB 1.0 | 低 | 弱 | 无 | 已弃用 |
+| SMB 2.0 | 中 | 中等 | 无 | 传统系统 |
+| SMB 2.1 | 中 | 中等 | 无 | Windows 7 |
+| SMB 3.0 | 高 | 强 | 支持 | 生产首选 |
+| SMB 3.1.1 | 最高 | 最强 | 强制 | 企业环境 |
+
+### 跨平台共享架构
+
+```
+┌─────────────────────────────────┐
+│  Windows Server                 │
+│  ┌───────────────────────────┐  │
+│  │ SMB Share Directory       │  │  D:\SharedData
+│  │ \\SERVER\SharedData       │  │
+│  └───────────────────────────┐  │
+│                                 │
+│  ┌───────────────────────────┐  │
+│  │ SMB Service               │  │  TCP 445
+│  │ Authentication            │  │  AD/LDAP
+│  └───────────────────────────┐  │
+└─────────────────────────────────┘
+         │
+         │ SMB Protocol (TCP 445/139)
+         │
+         ▼
+┌─────────────────────────────────┐
+│  Linux Client                   │
+│  ┌───────────────────────────┐  │
+│  │ mount.cifs                │  │  cifs-utils
+│  │ /mnt/windows_share        │  │  挂载点
+│  └───────────────────────────┐  │
+└─────────────────────────────────┘
+```
+
+### CIFS 挂载配置要点
+
+| 配置项 | 推荐值 | 说明 |
+|-------|--------|------|
+| vers | 3.0 | SMB版本协商 |
+| sec | ntlmssp | 认证方式 |
+| iocharset | utf8 | 字符集编码 |
+| uid/gid | 1000:1000 | 用户映射 |
+| file_mode | 0755 | 文件权限 |
+| dir_mode | 0755 | 目录权限 |
 
 ## 创建 SMB/CIFS 共享
 

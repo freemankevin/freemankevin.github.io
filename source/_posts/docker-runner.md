@@ -8,7 +8,7 @@ tags:
 category: Development 
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在本篇文章中，我们将介绍如何在 Docker 环境中部署 GitLab Runner，以便使用 GitLab CI/CD 实现自动化构建与部署。我们将通过 Docker Compose 配置并管理 GitLab Runner 容器，详细讲解配置文件和注册过程。
+ 在本篇文章中，我们将介绍如何在 Docker 环境中部署 GitLab Runner，以便使用 GitLab CI/CD 实现自动化构建与部署。我们将通过 Docker Compose 配置并管理 GitLab Runner 容器，详细讲解配置文件和注册过程。
 
 <!-- more -->
 

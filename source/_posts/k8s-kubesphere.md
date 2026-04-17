@@ -8,7 +8,7 @@ tags:
 category: Kubernetes
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 本文将介绍如何在 Kubernetes 集群中在线安装 KubeSphere，这是一个功能强大的容器管理平台，能够帮助用户方便地管理 Kubernetes 环境。我们将通过 Helm 进行安装，详细讲解每一步的操作流程，并展示如何通过浏览器访问 KubeSphere 控制台。最后，我们还会提供卸载 KubeSphere 的步骤，帮助您轻松管理平台的生命周期。
+ 本文将介绍如何在 Kubernetes 集群中在线安装 KubeSphere，这是一个功能强大的容器管理平台，能够帮助用户方便地管理 Kubernetes 环境。我们将通过 Helm 进行安装，详细讲解每一步的操作流程，并展示如何通过浏览器访问 KubeSphere 控制台。最后，我们还会提供卸载 KubeSphere 的步骤，帮助您轻松管理平台的生命周期。
 
 <!-- more -->
 

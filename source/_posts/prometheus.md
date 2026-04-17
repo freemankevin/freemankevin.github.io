@@ -1,16 +1,68 @@
 ---
-title: Prometheus 部署与使用教程
+title: Prometheus 企业级监控告警平台部署指南
 date: 2025-01-13 17:59:25
+keywords:
+  - Prometheus
+  - Monitoring
+  - Alerting
+  - DevOps
+categories:
+  - DevOps
+  - Monitoring
 tags:
-    - Development
-    - Linux
-    - Prometheus
-category: Development
+  - Prometheus
+  - Grafana
+  - AlertManager
+  - Monitoring
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本文详细介绍了 Prometheus 监控系统的部署与使用，包括基础部署配置、高级特性配置、告警配置、监控指标以及最佳实践等核心内容。文档提供了丰富的配置示例和实践建议，特别深入介绍了高可用部署、联邦集群、告警抑制机制等企业级特性，适合运维团队搭建企业级监控告警平台参考。
+Prometheus 是云原生监控告警的标准解决方案，提供多维数据采集、灵活查询和告警管理。本指南涵盖生产级部署、高可用架构、联邦集群、告警配置、性能优化和运维管理等核心内容，适用于构建企业级可观测性平台。
 
 <!-- more -->
+
+## Prometheus 监控架构
+
+### 核心组件
+
+| 组件 | 功能 | 生产配置 |
+|------|------|----------|
+| Prometheus Server | 数据采集与存储 | 多副本+联邦 |
+| AlertManager | 告警路由与管理 | 高可用集群 |
+| Grafana | 可视化展示 | 多数据源 |
+| Node Exporter | 主机指标采集 | 所有节点部署 |
+| Thanos | 长期存储方案 | 对象存储后端 |
+
+### 数据采集模式
+
+**Pull模式**：Prometheus主动拉取
+- 优点：集中控制，易于管理
+- 适用：服务发现、静态配置
+
+**Push模式**：应用主动推送
+- 通过Pushgateway实现
+- 适用：短生命周期任务
+
+### 高可用架构
+
+```
+┌────────────────────────────────────────┐
+│         Load Balancer / VIP            │
+└────────────────────────────────────────┘
+        │                    │
+        ▼                    ▼
+┌──────────────┐  ┌──────────────┐
+│ Prometheus 1 │  │ Prometheus 2 │
+│   (Active)   │  │  (Standby)   │
+└──────────────┘  └──────────────┘
+        │                    │
+        └────────────────────┴──► Thanos Query
+                                     │
+                                     ▼
+                              ┌─────────────┐
+                              │ Object Store│
+                              │   (S3/GCS)  │
+                              └─────────────┘
+```
 
 ## 基础部署配置
 

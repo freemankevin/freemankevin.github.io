@@ -8,7 +8,7 @@ tags:
 category: Development
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在本篇文章中，我们将介绍如何使用轻量级工具 `minica` 在本地开发环境中生成自签名证书，支持 macOS、Windows 和 Linux（包括 CentOS 和 Debian 系列）。内容涵盖安装方法、证书生成、根证书的安装与信任配置，以及如何在本地开发服务器（如 NGINX）中集成 HTTPS 支持。通过本教程，你可以快速实现开发环境的 HTTPS 配置，让本地站点更加安全、专业，且无需依赖外部 CA。
+在本篇文章中，我们将介绍如何使用轻量级工具 `minica` 在本地开发环境中生成自签名证书，支持 macOS、Windows 和 Linux（包括 CentOS 和 Debian 系列）。内容涵盖安装方法、证书生成、根证书的安装与信任配置，以及如何在本地开发服务器（如 NGINX）中集成 HTTPS 支持。通过本教程，你可以快速实现开发环境的 HTTPS 配置，让本地站点更加安全、专业，且无需依赖外部 CA。
 
 <!-- more -->
 ## 安装 `minica`

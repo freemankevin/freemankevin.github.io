@@ -1,16 +1,47 @@
 ---
-title: Harbor 部署与使用教程
+title: Harbor 企业级容器镜像仓库生产部署指南
 date: 2025-01-13 17:57:25
+keywords:
+  - Harbor
+  - Container Registry
+  - DevOps
+  - Docker Registry
+categories:
+  - DevOps
+  - Container
 tags:
-    - Development
-    - Linux
-    - Harbor
-category: Development
+  - Harbor
+  - Docker
+  - Registry
+  - Security
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇文章详细介绍了Harbor企业级容器镜像仓库的部署与使用教程，包括基础部署配置、系统配置、高级特性配置、企业级特性、运维管理等核心内容。文档提供了丰富的配置示例和最佳实践建议，涵盖了从基础部署到企业级应用的完整指南，适合DevOps工程师和运维团队参考，帮助搭建安全可靠的容器镜像管理平台。
+Harbor 是企业级容器镜像仓库解决方案，提供镜像管理、安全扫描、访问控制等核心功能。本指南涵盖生产环境部署、高可用配置、安全加固、性能优化和运维管理等全流程内容，适用于构建安全可靠的容器镜像管理平台。
 
 <!-- more -->
+
+## Harbor 架构概述
+
+### 核心组件
+
+| 组件 | 功能 | 生产要求 |
+|------|------|----------|
+| Harbor Core | 核心API服务 | 2副本+负载均衡 |
+| Harbor Portal | Web UI界面 | 与Core同部署 |
+| Registry | 镜像存储服务 | 高可用存储后端 |
+| Chart Museum | Helm Chart仓库 | 可选组件 |
+| Clair/Trivy | 镜像扫描服务 | 独立部署 |
+| Notary | 镜像签名服务 | 可选，生产推荐 |
+| Redis | 缓存服务 | Sentinel高可用 |
+| PostgreSQL | 数据库服务 | 主从复制 |
+
+### 存储架构
+
+Harbor支持多种存储后端：
+- **本地文件系统**：简单部署，适合小规模
+- **NFS**：多实例共享存储
+- **S3/Swift**：对象存储，云环境推荐
+- **Ceph**：分布式存储，企业级应用
 
 ## 基础部署配置
 
@@ -115,7 +146,38 @@ docker login harbor.example.com -u admin -p Harbor12345
 
 ### 安全配置
 
-1. 创建机器人账户：
+#### TLS证书配置（生产必需）
+
+生成自签名证书（测试环境）：
+```bash
+mkdir -p /data/harbor/cert
+openssl req -newkey rsa:4096 -nodes -sha256 -keyout /data/harbor/cert/harbor.key \
+  -x509 -days 365 -out /data/harbor/cert/harbor.crt \
+  -subj "/C=CN/ST=Shanghai/L=Shanghai/O=DevOps/CN=harbor.example.com"
+
+# 添加到Docker信任列表
+mkdir -p /etc/docker/certs.d/harbor.example.com
+cp /data/harbor/cert/harbor.crt /etc/docker/certs.d/harbor.example.com/ca.crt
+```
+
+使用企业CA证书（生产环境）：
+```bash
+# 将CA证书和服务器证书放入指定目录
+cp harbor-ca.crt /etc/docker/certs.d/harbor.example.com/ca.crt
+cp harbor-server.crt /data/harbor/cert/harbor.crt
+cp harbor-server.key /data/harbor/cert/harbor.key
+
+# 配置harbor.yml
+hostname: harbor.example.com
+http:
+  port: 80
+https:
+  port: 443
+  certificate: /data/harbor/cert/harbor.crt
+  private_key: /data/harbor/cert/harbor.key
+```
+
+#### 1. 创建机器人账户：
 ```yaml
 robot_account:
   name: jenkins

@@ -10,7 +10,7 @@ tags:
 category: Development 
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MinIO 是一个高性能的分布式对象存储系统，其站点复制（Site Replication）功能支持跨集群的数据和元数据同步。本文记录了如何使用 Docker Compose 部署 MinIO 站点复制集群，配置两个 MinIO 实例，并进行同步测试和故障恢复测试。测试环境基于 20T 磁盘，适用于需要高可用性和灾难恢复的场景。
+ MinIO 是一个高性能的分布式对象存储系统，其站点复制（Site Replication）功能支持跨集群的数据和元数据同步。本文记录了如何使用 Docker Compose 部署 MinIO 站点复制集群，配置两个 MinIO 实例，并进行同步测试和故障恢复测试。测试环境基于 20T 磁盘，适用于需要高可用性和灾难恢复的场景。
 
 <!-- more -->
 
@@ -152,17 +152,33 @@ log() {
   esac
 
   # 直接输出消息，避免嵌套格式化问题
-  printf "${color}%s %-7s\t%s${RESET}\n" "$timestamp $icon" "[$level]" "$message"
+  printf "${color}%s %-7s\t%s${RESET}
+" "$timestamp $icon" "[$level]" "$message"
 }
 
 # 简洁标题样式（改为 === 标题 === 形式）
 header() {
   if [ "$2" = "MinIO 站点复制初始化" ]; then
-    printf "\n\n${MAGENTA}███╗   ███╗██╗███╗   ██╗██╗ ██████╗     ███╗   ███╗ ██████╗\n████╗ ████║██║████╗  ██║██║██╔═══██╗    ████╗ ████║██╔════╝\n██╔████╔██║██║██╔██╗ ██║██║██║   ██║    ██╔████╔██║██║     \n██║╚██╔╝██║██║██║╚██╗██║██║██║   ██║    ██║╚██╔╝██║██║     \n██║ ╚═╝ ██║██║██║ ╚████║██║╚██████╔╝    ██║ ╚═╝ ██║╚██████╗\n╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝ ╚═════╝     ╚═╝     ╚═╝ ╚═════╝\n\n>> %s %s${RESET}\n" "$1" "$2"
-    printf "\n"
+    printf "
+
+${MAGENTA}███╗   ███╗██╗███╗   ██╗██╗ ██████╗     ███╗   ███╗ ██████╗
+████╗ ████║██║████╗  ██║██║██╔═══██╗    ████╗ ████║██╔════╝
+██╔████╔██║██║██╔██╗ ██║██║██║   ██║    ██╔████╔██║██║     
+██║╚██╔╝██║██║██║╚██╗██║██║██║   ██║    ██║╚██╔╝██║██║     
+██║ ╚═╝ ██║██║██║ ╚████║██║╚██████╔╝    ██║ ╚═╝ ██║╚██████╗
+╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝ ╚═════╝     ╚═╝     ╚═╝ ╚═════╝
+
+>> %s %s${RESET}
+" "$1" "$2"
+    printf "
+"
   else
-    printf "\n${CYAN}[ TASK %d ] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n>> %s %s${RESET}\n" "$task_number" "$1" "$2"
-    printf "\n"
+    printf "
+${CYAN}[ TASK %d ] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+>> %s %s${RESET}
+" "$task_number" "$1" "$2"
+    printf "
+"
     task_number=$((task_number + 1))
   fi
 }
@@ -193,7 +209,8 @@ wait_for_services() {
         log SUCCESS "服务已就绪: $url"
         all_ready=1
         if [ "$site" = "SITE1" ]; then
-          printf "${CYAN}%s${RESET}\n" "$(for i in $(seq 1 61); do printf "-"; done)"
+          printf "${CYAN}%s${RESET}
+" "$(for i in $(seq 1 61); do printf "-"; done)"
         fi
         break
       fi
@@ -318,13 +335,17 @@ setup_replication() {
 verify_status() {
   header "$ICON_NETWORK" "复制状态验证"
   for site in "${!SITES[@]}"; do
-    printf "${GREEN}%s [SUCCESS]   查询成功: %s → %s${RESET}\n" "$ICON_SUCCESS" "$site" "${SITES[$site]}"
-    printf "${CYAN}%s${RESET}\n" "$(for i in $(seq 1 160); do printf "-"; done)"
+    printf "${GREEN}%s [SUCCESS]   查询成功: %s → %s${RESET}
+" "$ICON_SUCCESS" "$site" "${SITES[$site]}"
+    printf "${CYAN}%s${RESET}
+" "$(for i in $(seq 1 160); do printf "-"; done)"
     status_output=$(/usr/bin/mc admin replicate info "$site" 2>&1)
     if echo "$status_output" | grep -q "SiteReplication enabled"; then
-      printf "${GREEN}%s${RESET}\n" "$status_output"
+      printf "${GREEN}%s${RESET}
+" "$status_output"
     else
-      printf "${RED}%s${RESET}\n" "$status_output"
+      printf "${RED}%s${RESET}
+" "$status_output"
     fi
     echo ""
   done

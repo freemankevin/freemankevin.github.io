@@ -8,7 +8,7 @@ tags:
 category: Linux
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OpenSSL 和 OpenSSH 是现代 Linux 系统中不可或缺的安全工具，广泛用于加密通讯、身份验证和保障网络安全。定期升级这两个组件是确保系统安全性和稳定性的必要操作。本文将介绍如何在 CentOS 和 Debian 系统上手动升级 OpenSSL 和 OpenSSH。
+OpenSSL 和 OpenSSH 是现代 Linux 系统中不可或缺的安全工具，广泛用于加密通讯、身份验证和保障网络安全。定期升级这两个组件是确保系统安全性和稳定性的必要操作。本文将介绍如何在 CentOS 和 Debian 系统上手动升级 OpenSSL 和 OpenSSH。
 
 <!-- more -->
 

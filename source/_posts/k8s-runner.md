@@ -9,7 +9,7 @@ tags:
 category: Kubernetes
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 本文将详细介绍如何在 Kubernetes 集群中部署 GitLab Runner，包括环境准备、Runner 配置、认证设置、网络支持、Harbor 集成等完整的部署和配置流程。
+ 本文将详细介绍如何在 Kubernetes 集群中部署 GitLab Runner，包括环境准备、Runner 配置、认证设置、网络支持、Harbor 集成等完整的部署和配置流程。
 
 <!-- more -->
 

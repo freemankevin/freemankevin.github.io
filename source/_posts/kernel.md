@@ -8,7 +8,7 @@ tags:
 category: Linux
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;内核是操作系统的核心，控制着硬件和软件的交互。随着 Linux 内核的不断发展，升级到最新的内核版本不仅能提高性能，还能增强系统安全性。本教程将指导您如何在 CentOS 和 Debian 系统中升级 Linux 内核。
+内核是操作系统的核心，控制着硬件和软件的交互。随着 Linux 内核的不断发展，升级到最新的内核版本不仅能提高性能，还能增强系统安全性。本教程将指导您如何在 CentOS 和 Debian 系统中升级 Linux 内核。
 
 <!-- more -->
 

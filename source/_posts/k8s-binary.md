@@ -10,7 +10,7 @@ tags:
 category: Kubernetes
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 本文详细介绍如何使用二进制方式在 Debian 系统上搭建一个生产级别的高可用 Kubernetes 集群。
+ 本文详细介绍如何使用二进制方式在 Debian 系统上搭建一个生产级别的高可用 Kubernetes 集群。
 
 <!-- more -->
 

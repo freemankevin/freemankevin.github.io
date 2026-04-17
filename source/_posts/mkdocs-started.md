@@ -9,7 +9,7 @@ tags:
 category: MkDocs
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本指南将帮助你从头开始创建一个使用 MkDocs 的博客站点，并将其托管在 GitHub Pages 上。我们将涵盖以下内容：首先，我们会介绍如何安装 MkDocs，然后创建一个新的 MkDocs 项目。接下来，我们会配置和编辑内容，之后将站点部署到 GitHub Pages。我们还将介绍如何配置自定义域名，最后会添加 `.gitignore` 文件来忽略不必要的文件。
+本指南将帮助你从头开始创建一个使用 MkDocs 的博客站点，并将其托管在 GitHub Pages 上。我们将涵盖以下内容：首先，我们会介绍如何安装 MkDocs，然后创建一个新的 MkDocs 项目。接下来，我们会配置和编辑内容，之后将站点部署到 GitHub Pages。我们还将介绍如何配置自定义域名，最后会添加 `.gitignore` 文件来忽略不必要的文件。
 
 
 

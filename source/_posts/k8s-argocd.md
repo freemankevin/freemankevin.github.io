@@ -1,24 +1,68 @@
 ---
-title: 如何在Kubernetes 环境中部署ArgoCD
+title: Kubernetes ArgoCD GitOps持续交付平台部署指南
 date: 2025-01-15 17:47:25
 keywords:
   - Kubernetes
   - ArgoCD
-  - DevOps
   - GitOps
-  - Helm
+  - ContinuousDelivery
 categories:
   - DevOps
   - Kubernetes
 tags:
   - ArgoCD
-  - Kubernetes
   - GitOps
+  - Kubernetes
+  - CD
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 本文详细介绍如何在 Kubernetes 集群中部署高可用的 ArgoCD，包括客户端工具安装、服务端部署、TLS 配置、用户认证、RBAC 权限管理等完整的部署和配置流程。
+ArgoCD 是 Kubernetes 环境下的 GitOps 持续交付工具，以声明式方式管理应用生命周期。本指南涵盖高可用部署、用户认证、RBAC配置、应用管理、同步策略和运维监控等核心内容，适用于构建企业级 GitOps 平台。
 
 <!-- more -->
+
+## ArgoCD 架构概述
+
+### 核心组件
+
+| 组件 | 功能 | 生产配置 |
+|------|------|----------|
+| API Server | Web UI和API接口 | 高可用副本 |
+| Repo Server | Git仓库同步服务 | 多副本 |
+| Application Controller | 应用状态控制器 | 单实例Leader选举 |
+| Dex | OIDC认证服务 | 可选，集成外部认证 |
+
+### GitOps 工作流程
+
+```
+┌──────────────┐
+│  Git Repo    │  应用配置定义
+│  (Source)    │
+└──────────────┘
+       │
+       │ ArgoCD 监听变更
+       ▼
+┌──────────────┐
+│   ArgoCD     │  配置同步引擎
+│  Controller  │
+└──────────────┘
+       │
+       │ 自动应用配置
+       ▼
+┌──────────────┐
+│ Kubernetes   │  目标集群
+│   Cluster    │
+└──────────────┘
+```
+
+### 部署模式
+
+**单实例模式**：适合测试和小规模应用
+- 配置：单副本，共享存储
+- 应用：开发/测试环境
+
+**高可用模式**：生产环境推荐
+- 配置：多副本Redis+副本池
+- 应用：生产/大规模环境
 
 ## 环境要求
 

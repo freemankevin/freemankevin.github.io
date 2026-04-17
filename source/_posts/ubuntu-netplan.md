@@ -8,7 +8,7 @@ tags:
 category: Ubuntu
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本文将详细介绍如何在 Ubuntu 系统中通过 `Netplan` 配置静态 IP 地址。`Netplan` 是当前 Ubuntu 默认的网络管理工具，支持简便的 YAML 配置文件格式。在这篇文章中，你将学习如何查找网卡名称、编辑 `Netplan` 配置文件、设置静态 IP、应用配置并进行验证。通过本教程，你可以确保服务器或工作站的网络配置稳定可靠。
+本文将详细介绍如何在 Ubuntu 系统中通过 `Netplan` 配置静态 IP 地址。`Netplan` 是当前 Ubuntu 默认的网络管理工具，支持简便的 YAML 配置文件格式。在这篇文章中，你将学习如何查找网卡名称、编辑 `Netplan` 配置文件、设置静态 IP、应用配置并进行验证。通过本教程，你可以确保服务器或工作站的网络配置稳定可靠。
 
 <!-- more -->
 

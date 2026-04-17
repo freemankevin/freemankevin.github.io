@@ -8,7 +8,7 @@ tags:
 category: Development
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 本文详细介绍了Docker命令行管理工具lazydocker的部署与使用，包括在线安装配置、基础操作、高级功能、自动化集成等内容。通过合理配置，可以显著提升Docker服务的命令行管理效率，适合运维人员在无UI界面环境下快速管理和监控Docker服务。
+ 本文详细介绍了Docker命令行管理工具lazydocker的部署与使用，包括在线安装配置、基础操作、高级功能、自动化集成等内容。通过合理配置，可以显著提升Docker服务的命令行管理效率，适合运维人员在无UI界面环境下快速管理和监控Docker服务。
 
 
 <!-- more -->

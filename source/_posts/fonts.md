@@ -8,7 +8,7 @@ tags:
 category: Development
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在现代网页设计和应用程序开发中，选择合适的字体是确保用户体验和设计风格的重要部分。本文将介绍五种流行的字体：**Baloo**、**Rounded Mplus 1c**、**M PLUS Rounded 1c**、**Noto Serif SC**、**Source Code Pro** 和 **DM Mono**，并探讨它们各自的特点和适用场景。
+在现代网页设计和应用程序开发中，选择合适的字体是确保用户体验和设计风格的重要部分。本文将介绍五种流行的字体：**Baloo**、**Rounded Mplus 1c**、**M PLUS Rounded 1c**、**Noto Serif SC**、**Source Code Pro** 和 **DM Mono**，并探讨它们各自的特点和适用场景。
 
 <!-- more -->
 

@@ -8,7 +8,7 @@ tags:
 category: Linux
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CIFS 是一种网络文件系统协议，可以在 Linux 和 Windows 系统间共享文件。CIFS 既可以作为客户端使用，也可以作为服务端提供共享服务。本文将介绍如何在 Linux 系统上安装并配置 CIFS 服务端，如何在 Linux 上挂载 CIFS 共享，以及如何在 Windows 上访问 CIFS 共享。我们将同时支持 CentOS、Debian 和 Windows 环境。
+CIFS 是一种网络文件系统协议，可以在 Linux 和 Windows 系统间共享文件。CIFS 既可以作为客户端使用，也可以作为服务端提供共享服务。本文将介绍如何在 Linux 系统上安装并配置 CIFS 服务端，如何在 Linux 上挂载 CIFS 共享，以及如何在 Windows 上访问 CIFS 共享。我们将同时支持 CentOS、Debian 和 Windows 环境。
 
 <!-- more -->
 

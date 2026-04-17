@@ -1,17 +1,47 @@
 ---
-title: 如何优化 Linux 系统性能以支持高并发
+title: Linux 系统高并发性能调优完整指南
 date: 2024-12-27 15:00:00
-tags:
-  - Optimization 
-  - Container
+keywords:
   - Linux
-category: Linux
+  - Performance
+  - Optimization
+  - HighConcurrency
+categories:
+  - Linux
+  - Performance
+tags:
+  - Linux
+  - Kernel
+  - TCP
+  - Optimization
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在本篇文章中，我们将详细介绍针对高并发场景下的系统性能瓶颈的优化实践，涉及网络层（TCP参数、Offloading）、文件描述符、CPU调度、内存管理（HugePages）、I/O调度、容器化（Docker）以及日志监控等关键技术点，旨在提升系统在高负载下的吞吐量和响应速度。
+Linux 系统性能优化是高并发场景下的关键基础设施工作。本指南涵盖网络调优（TCP参数、Offloading）、文件系统优化、CPU调度、内存管理（HugePages）、I/O调度、容器优化和监控体系等核心技术，提供系统级的性能调优方案，适用于生产环境的高负载服务器。
 
 <!-- more -->
-> 这里以 `CentOS 7.9` 环境举例。
+
+> 本文基于 CentOS 7.9 生产环境示例，配置适用于通用 Linux 系统。
+
+## Linux 性能优化架构
+
+### 核心优化维度
+
+| 优化维度 | 关键参数 | 性能影响 |
+|---------|---------|----------|
+| 网络层 | TCP参数、Offloading | 网络吞吐量 |
+| 文件系统 | fd限制、inode | 并发连接数 |
+| CPU调度 | isolcpus、affinity | 处理性能 |
+| 内存管理 | HugePages、swap | 内存效率 |
+| I/O调度 | elevator、deadline | 磁盘性能 |
+| 内核参数 | sysctl配置 | 系统行为 |
+| 容器优化 | Docker限制 | 资源隔离 |
+
+### 性能监控工具
+
+- **系统监控**：top, htop, glances
+- **网络监控**：iftop, nethogs, ss
+- **I/O监控**：iostat, iotop, fio
+- **内核监控**：sysctl, dmesg, perf
 
 ## 文件系统 
 

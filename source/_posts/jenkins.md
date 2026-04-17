@@ -1,16 +1,54 @@
 ---
-title: Jenkins 部署与使用教程
+title: Jenkins 生产级部署与CI/CD流水线完整指南
 date: 2025-01-13 16:05:25
+keywords:
+  - Jenkins
+  - CI/CD
+  - DevOps
+  - Pipeline
+  - Automation
+categories:
+  - DevOps
+  - Automation
 tags:
-    - Development
-    - Linux
-    - Jenkins
-category: Development
+  - Jenkins
+  - Docker
+  - Pipeline
+  - GitOps
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇文章详细介绍了Jenkins的部署与使用教程，涵盖了从基础部署配置、系统核心配置、流水线配置到高级特性配置的完整指南。文章分为六大部分，包括基础部署、系统配置、流水线配置、高级特性、运维管理和最佳实践，并提供了大量实用的代码示例和配置说明。无论是Jenkins新手还是有经验的DevOps工程师，都能从本文中找到有价值的内容，帮助更好地使用Jenkins进行持续集成和持续部署。
+Jenkins 是业界领先的自动化服务器，广泛应用于持续集成和持续部署场景。本指南涵盖生产级部署配置、流水线设计、插件管理、安全加固、性能优化和运维监控等核心内容，提供完整的 DevOps 自动化解决方案。
 
 <!-- more -->
+
+## Jenkins 架构概述
+
+### 核心组件
+
+| 组件 | 功能 | 生产配置 |
+|------|------|----------|
+| Jenkins Master | 核心控制节点 | 独立部署，高可用 |
+| Jenkins Agent | 构建执行节点 | 动态/静态Agent池 |
+| Jenkins Pipeline | 流水线引擎 | Declarative/Scripted |
+| Plugin System | 扩展系统 | 选择性安装，版本管理 |
+| Security Realm | 认证系统 | LDAP/OAuth/SAML |
+| Authorization | 权限系统 | RBAC策略 |
+
+### 部署模式
+
+**单节点模式**：适合小型团队（<10并发构建）
+- 配置：4核CPU，8GB内存，100GB磁盘
+- 所有构建在Master节点执行
+
+**Master-Agent模式**：适合中大型团队（>10并发构建）
+- Master：管理调度，2核CPU，4GB内存
+- Agent：构建执行，按需动态创建
+- 支持Kubernetes动态Agent
+
+**高可用模式**：生产环境推荐
+- Master集群：主备切换或负载均衡
+- Agent池：多节点负载分担
+- 存储持久化：NFS/S3共享存储
 
 
 ## 基础部署配置

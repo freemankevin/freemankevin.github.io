@@ -8,7 +8,7 @@ tags:
 category: Linux
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 当前文档为 Vim 编辑器的常用配置说明，适用于 Linux 和 Mac 环境。配置项旨在提升代码编辑体验，包括语法高亮、文件类型检测、粘贴优化等功能。配置文件通常位于 `~/.vimrc`（Linux/Mac），如果文件不存在，可通过 `vim ~/.vimrc` 创建。
+ 当前文档为 Vim 编辑器的常用配置说明，适用于 Linux 和 Mac 环境。配置项旨在提升代码编辑体验，包括语法高亮、文件类型检测、粘贴优化等功能。配置文件通常位于 `~/.vimrc`（Linux/Mac），如果文件不存在，可通过 `vim ~/.vimrc` 创建。
 
 <!-- more -->
 
