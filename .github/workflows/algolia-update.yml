@@ -28,14 +28,11 @@ jobs:
         
       - name: Update Algolia index
         run: |
-          # 使用 Write API Key 更新索引（安全权限，仅限写入）
-          # 创建方法：Algolia Dashboard -> Settings -> API Keys -> Create API Key
-          # ACL: addObject, deleteObject, listIndexes, editSettings
-          export HEXO_ALGOLIA_INDEXING_KEY="${{ secrets.ALGOLIA_WRITE_API_KEY }}"
-          hexo clean
-          hexo generate
-          hexo algolia
+          # 使用 npm run 执行 hexo 命令（本地安装的依赖）
+          npm run clean
+          npm run generate
+          # 使用 npx 执行 hexo algolia（本地安装的插件）
+          npx hexo algolia
         env:
-          # 可选：使用 Admin API Key（完全权限，风险较高）
-          # 建议优先使用 Write API Key
+          # 使用 Write API Key（推荐）或 Admin API Key（备用）
           HEXO_ALGOLIA_INDEXING_KEY: ${{ secrets.ALGOLIA_WRITE_API_KEY || secrets.ALGOLIA_ADMIN_API_KEY }}
