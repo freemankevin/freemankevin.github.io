@@ -80,7 +80,9 @@ ubuntu-drivers devices
 sudo apt install nvidia-driver-535
 ```
 
-> **注意**：如果你知道具体需要的驱动版本，也可以替换为对应的版本号。
+{% note info %}
+如果你知道具体需要的驱动版本，也可以替换为对应的版本号。
+{% endnote %}
 
 ------
 

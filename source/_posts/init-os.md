@@ -1,5 +1,5 @@
 ---
-title: 如何给Linux 服务器做系统初始化
+title: Linux 服务器系统初始化完整指南
 date: 2025-01-06 15:57:25
 tags:
     - Linux
@@ -8,10 +8,23 @@ tags:
 category: Linux
 ---
 
-本文将指导您如何为Linux服务器进行系统初始化，涵盖了常见的操作系统（Debian和CentOS）配置。无论是设置静态IP、配置NTP时间同步，还是优化系统内核，本教程将一步步帮助您做好基础设置，确保系统运行稳定且高效。适合开发人员与运维工程师参考。
+本文将指导您如何为 Linux 服务器进行系统初始化，涵盖了常见的操作系统（Debian 和 CentOS）配置。无论是设置静态 IP、配置 NTP 时间同步，还是优化系统内核，本教程将一步步帮助您做好基础设置，确保系统运行稳定且高效。适合开发人员与运维工程师参考。
 
 <!-- more -->
 
+**适用版本与环境说明：**
+- Red Hat 系列: CentOS 7.x/RHEL 7.x/Rocky Linux 8+/AlmaLinux 8+
+- Debian 系列: Ubuntu 18.04+/Debian 10+
+- 内核版本: 建议 4.15+ 以支持现代容器和虚拟化特性
+- 时间同步: chrony 3.x+（推荐）或 ntpd 4.x+
+- 更新日期: 2025-01-06（建议每年检查系统初始化流程更新）
+
+{% note info %}
+不同 Linux 发行版的网络配置方式和包管理工具有所差异：
+- CentOS/RHEL: 使用 NetworkManager 或 network-scripts（传统方式）
+- Ubuntu 18.04+: 使用 Netplan（推荐）或 /etc/network/interfaces（传统方式）
+- Debian 10+: 支持 systemd-networkd 或传统 networking
+{% endnote %}
 
 ### 配置 NTP（必须）
 

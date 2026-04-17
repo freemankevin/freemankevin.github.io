@@ -1,5 +1,5 @@
 ---
-title: Kubernetes v1.33 生产级部署完整指南（kubeadm）
+title: Kubernetes 生产级部署完整指南（kubeadm）
 date: 2025-11-13 17:47:25
 keywords:
   - Kubernetes
@@ -16,9 +16,23 @@ tags:
   - Production
 ---
 
-Kubernetes v1.33 是云原生应用编排的核心平台。本文档提供生产级 Kubernetes 集群部署方案，涵盖架构设计、环境准备、组件安装、网络配置、安全加固、性能优化和故障排查等全流程内容，适用于学习和生产环境。
+Kubernetes 是云原生应用编排的核心平台。本文档提供生产级 Kubernetes 集群部署方案，涵盖架构设计、环境准备、组件安装、网络配置、安全加固、性能优化和故障排查等全流程内容，适用于学习和生产环境。
 
 <!-- more -->
+
+**适用版本与环境说明：**
+- Kubernetes: 1.28.x - 1.33.x（本文以 v1.33.6 为示例）
+- Containerd: 1.7.x 及以上版本
+- Flannel: v0.27.x 及以上版本
+- 操作系统: Debian 12 (Trixie)/Ubuntu 22.04+/CentOS 7.9+/Rocky Linux 9+
+- 内核版本: 建议 5.4+ 以支持完整的容器网络特性
+- 更新日期: 2025-11-13（建议关注 Kubernetes 官方版本更新公告）
+
+{% note warning %}
+Kubernetes 版本迭代较快，部署前请访问 [Kubernetes Releases](https://kubernetes.io/releases/) 查看最新稳定版本和版本兼容性矩阵。
+{% endnote %}
+
+## Kubernetes 架构概述
 
 ## Kubernetes 架构概述
 
@@ -49,7 +63,7 @@ Kubernetes 网络需满足四个要求：
 4. Service 的 ClusterIP 可在集群内访问
 
 
-## 🏗️ 部署架构
+## 部署架构
 
 ### 单控制平面架构（测试环境）
 ```
@@ -100,11 +114,11 @@ Kubernetes 网络需满足四个要求：
 - etcd 集群：3 或 5 节点，奇数配置
 - API Server：多副本 + 负载均衡
 - 控制器：内置 Leader 选举机制
-- 网络：跨节点 Pod 通信，Service 贠载均衡
+- 网络：跨节点 Pod 通信，Service 负载均衡
 
 ---
 
-## 🔧 前置要求
+## 前置要求
 
 ### 硬件资源配置
 
@@ -182,7 +196,7 @@ lscpu
 
 ---
 
-## 📦 安装步骤
+## 安装步骤
 
 ### 配置 APT 源（两台 VM）
 
@@ -342,10 +356,11 @@ sudo kubeadm init \
   --image-repository registry.aliyuncs.com/google_containers
 ```
 
-**重要：** 初始化完成后，终端会输出：
-
+{% note warning %}
+初始化完成后，终端会输出：
 - kubectl 配置命令
 - **`kubeadm join` 命令**（必须保存供 Worker 节点使用）
+{% endnote %}
 
 ### 配置 Kubectl（仅 VM 1）
 
@@ -368,7 +383,9 @@ sudo kubeadm join 192.168.199.135:6443 --token <YOUR_TOKEN> \
   --discovery-token-ca-cert-hash sha256:<YOUR_HASH>
 ```
 
-**说明：** `<YOUR_TOKEN>` 和 `<YOUR_HASH>` 来自步骤 5 的输出。
+{% note info %}
+`<YOUR_TOKEN>` 和 `<YOUR_HASH>` 来自步骤 5 的输出。
+{% endnote %}
 
 ### 部署网络插件 - Flannel（VM 1 或任意有 kubectl 访问的节点）
 
@@ -449,7 +466,7 @@ kubectl get pods -n kube-system
 
 ---
 
-## ✅ 集群验证
+## 集群验证
 
 ### 最终验证（VM 1）
 
@@ -487,37 +504,242 @@ kubectl get cs  # 已弃用，但可用于诊断
 
 ---
 
-## 🐛 故障排除
+## 故障排除
+
+### 故障诊断流程图
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Kubernetes 集群故障诊断流程                   │
+└─────────────────────────────────────────────────────────────┘
+                           │
+                           ▼
+        ┌──────────────────────────────────┐
+        │  1. 检查节点状态                  │
+        │     kubectl get nodes            │
+        └──────────────────────────────────┘
+                           │
+                  ┌────────┴────────┐
+                  │                 │
+              Ready             NotReady
+                  │                 │
+                  ▼                 ▼
+        ┌──────────────┐   ┌──────────────────┐
+        │ 2. 检查Pod   │   │ 检查 kubelet     │
+        │    状态      │   │ 日志和网络插件   │
+        └──────────────┘   └──────────────────┘
+                  │                 │
+                  ▼                 ▼
+        ┌──────────────────┐ ┌──────────────────┐
+        │ 3. 检查系统组件   │ │ 重启 kubelet     │
+        │    Pod 状态      │ │ 修复 CNI 配置    │
+        └──────────────────┘ └──────────────────┘
+                  │
+         ┌────────┴─────────┐
+         │                  │
+       Running            Pending/CrashLoopBackOff
+         │                  │
+         ▼                  ▼
+  ┌────────────┐    ┌──────────────────┐
+  │ 集群正常    │    │ 检查 Pod 日志    │
+  └────────────┐    │ 修复镜像/配置    │
+                  └──────────────────┘
+```
+
+### 诊断命令链
+
+```bash
+# ===== 第一阶段：节点状态检查 =====
+
+# 1. 查看所有节点状态
+kubectl get nodes -o wide
+
+# 2. 查看节点详细信息
+kubectl describe node <node-name>
+
+# 3. 检查节点资源使用
+kubectl top nodes
+
+# 4. 检查 kubelet 状态（在节点上执行）
+sudo systemctl status kubelet
+sudo journalctl -u kubelet -n 100 --no-pager
+
+# ===== 第二阶段：系统 Pod 检查 =====
+
+# 5. 查看所有系统 Pod
+kubectl get pods -n kube-system -o wide
+
+# 6. 查看特定 Pod 详情
+kubectl describe pod <pod-name> -n kube-system
+
+# 7. 查看 Pod 日志
+kubectl logs <pod-name> -n kube-system
+kubectl logs <pod-name> -n kube-system --previous  # 查看上一个容器的日志
+
+# 8. 检查组件状态
+kubectl get componentstatuses
+
+# ===== 第三阶段：网络检查 =====
+
+# 9. 检查网络插件状态
+kubectl get pods -n kube-system | grep -E "flannel|calico|cilium"
+
+# 10. 检查 CNI 配置（在节点上执行）
+ls -la /etc/cni/net.d/
+cat /etc/cni/net.d/*.conf
+
+# 11. 检查 Flannel 配置
+kubectl logs -n kube-system <flannel-pod-name>
+
+# 12. 测试 Pod 间通信
+kubectl run test-pod --image=busybox --restart=Never --rm -it -- ping <pod-ip>
+```
 
 ### 问题：节点处于 NotReady 状态
 
-**原因：** 网络插件未部署或未就绪
+**原因分析：**
+1. 网络插件未部署或未就绪
+2. kubelet 服务异常
+3. CNI 配置错误
+4. 容器运行时异常
 
 **解决方案：**
 
 ```bash
-# 检查 Flannel Pod 状态
+# 1. 检查 Flannel Pod 状态
 kubectl get pods -n kube-system | grep flannel
 
-# 查看 Pod 日志
+# 2. 查看 Flannel Pod 日志
 kubectl logs -n kube-system <FLANNEL_POD_NAME>
+kubectl describe pod -n kube-system <FLANNEL_POD_NAME>
+
+# 3. 检查 kubelet 日志（在 NotReady 节点上执行）
+sudo journalctl -u kubelet -f
+
+# 4. 检查 containerd 状态
+sudo systemctl status containerd
+sudo journalctl -u containerd -n 50
+
+# 5. 重启 kubelet（在节点上执行）
+sudo systemctl restart kubelet
+
+# 6. 检查 CNI 插件路径
+ls -la /opt/cni/bin/
+ls -la /etc/cni/net.d/
+
+# 7. 如果 CNI 插件缺失，重新部署
+kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml
+```
+
+**验证修复：**
+```bash
+# 等待 1-2 分钟后检查
+kubectl get nodes
+# 应显示 Ready 状态
 ```
 
 ### 问题：CoreDNS Pod 处于 Pending 状态
 
-**原因：** CNI 插件路径配置不正确
+**原因分析：**
+1. CNI 插件路径配置不正确
+2. 网络插件未就绪
+3. 节点资源不足
 
 **解决方案：** 执行步骤 9 的修复步骤
 
+```bash
+# 1. 创建 CNI 标准目录（在所有节点执行）
+sudo mkdir -p /usr/lib/cni
+
+# 2. 创建符号链接
+cd /usr/lib/cni/
+for plugin in /opt/cni/bin/*; do
+  sudo ln -sf "$plugin" "$(basename $plugin)"
+done
+
+# 3. 验证符号链接
+ls -lh /usr/lib/cni/
+
+# 4. 重启 Kubelet（在所有节点执行）
+sudo systemctl restart kubelet
+
+# 5. 检查 CoreDNS Pod 状态
+kubectl get pods -n kube-system | grep coredns
+
+# 6. 如果仍处于 Pending，检查调度限制
+kubectl describe pod -n kube-system <coredns-pod-name>
+```
+
 ### 问题：kubeadm join 失败
 
-**原因：** Token 过期（默认 24 小时有效）
+**原因分析：**
+1. Token 过期（默认 24 小时有效）
+2. CA 证书哈希不匹配
+3. Master 节点 API Server 不可达
+4. 端口 6443 被防火墙阻止
 
 **解决方案：**
 
 ```bash
-# 在 Master 节点生成新 Token
+# 1. 在 Master 节点生成新 Token
 kubeadm token create --print-join-command
+
+# 2. 检查 Token 列表
+kubeadm token list
+
+# 3. 获取 CA 证书哈希（如果 Token 有效但哈希错误）
+openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //'
+
+# 4. 手动构建 join 命令
+kubeadm join <master-ip>:6443 --token <token> --discovery-token-ca-cert-hash sha256:<hash>
+
+# 5. 检查网络连通性（在 Worker 节点执行）
+ping <master-ip>
+curl -k https://<master-ip>:6443/version
+
+# 6. 检查防火墙规则（在 Master 节点执行）
+sudo ufw status | grep 6443
+sudo iptables -L -n | grep 6443
+```
+
+### 问题：Pod 无法启动（镜像拉取失败）
+
+**原因分析：**
+1. 镜像仓库不可达
+2. 镜像不存在或版本错误
+3. 需要认证但未配置 Secret
+4. 网络策略阻止下载
+
+**解决方案：**
+
+```bash
+# 1. 检查镜像拉取错误
+kubectl describe pod <pod-name> -n <namespace>
+# 查看 Events 部分的错误信息
+
+# 2. 手动拉取镜像测试（在节点上执行）
+sudo ctr image pull <image-name>
+# 或
+docker pull <image-name>
+
+# 3. 配置镜像加速（containerd）
+# 编辑 /etc/containerd/config.toml
+[plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
+endpoint = ["https://registry.aliyuncs.com"]
+
+# 4. 重启 containerd
+sudo systemctl restart containerd
+
+# 5. 配置私有仓库认证
+kubectl create secret docker-registry regcred \
+  --docker-server=<registry-server> \
+  --docker-username=<username> \
+  --docker-password=<password>
+
+# 6. 在 Pod 或 Deployment 中引用 Secret
+spec:
+  imagePullSecrets:
+  - name: regcred
 ```
 
 ### 获取调试日志
@@ -529,13 +751,28 @@ sudo journalctl -u kubelet -f
 # 查看 containerd 日志
 sudo journalctl -u containerd -f
 
-# 查看 kubeadm 日志
-sudo cat /var/log/pods/kube-system_*/kubeadm-*/log
+# 查看 kube-apiserver 日志
+kubectl logs -n kube-system kube-apiserver-<master-node-name>
+
+# 查看 kube-scheduler 日志
+kubectl logs -n kube-system kube-scheduler-<master-node-name>
+
+# 查看 kube-controller-manager 日志
+kubectl logs -n kube-system kube-controller-manager-<master-node-name>
+
+# 查看 etcd 日志
+kubectl logs -n kube-system etcd-<master-node-name>
+
+# 查看所有容器日志（在节点上执行）
+sudo crictl logs <container-id>
+
+# 查看 Pod 事件
+kubectl get events -n kube-system --sort-by='.lastTimestamp'
 ```
 
 ---
 
-## 📌 常用命令参考
+## 常用命令参考
 
 ```bash
 # 集群管理
@@ -558,18 +795,61 @@ kubectl cluster-info                      # 查看集群信息
 kubectl api-resources                     # 查看所有 API 资源
 ```
 
----
+## 参考资源
 
-## 📚 参考资源
+### 官方文档
 
 - [Kubernetes 官方文档](https://kubernetes.io/docs/)
 - [kubeadm 官方指南](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/)
+- [kubeadm 配置参考](https://kubernetes.io/docs/reference/setup-tools/kubeadm/)
+- [Kubernetes 版本支持政策](https://kubernetes.io/docs/setup/release/version-skew-policy/)
+- [Kubernetes 发行说明](https://kubernetes.io/docs/setup/release/notes/)
 - [Flannel 官方文档](https://github.com/flannel-io/flannel)
 - [Containerd 官方文档](https://containerd.io/)
+- [Containerd 配置指南](https://github.com/containerd/containerd/blob/main/docs/cri/usage.md)
+
+### 安全与加固
+
+- [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes) - Kubernetes 安全配置基准
+- [Kubernetes 安全最佳实践](https://kubernetes.io/docs/concepts/security/)
+- [Pod Security Standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
+- [Kubernetes 安全审计](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/)
+- [RBAC 配置指南](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
+
+### 网络与 CNI
+
+- [Kubernetes 网络模型](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
+- [CNI 插件规范](https://github.com/containernetworking/cni)
+- [Flannel 网络配置](https://github.com/flannel-io/flannel/blob/master/Documentation/kubernetes.md)
+- [Calico 网络策略](https://docs.tigera.io/calico/latest/about/calico/)
+- [Cilium 网络方案](https://cilium.io/)
+
+### 高可用与运维
+
+- [Kubernetes 高可用拓扑](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/ha-topology/)
+- [etcd 运维指南](https://etcd.io/docs/latest/op-guide/)
+- [Kubernetes 备份与恢复](https://kubernetes.io/docs/tasks/administer-cluster/back-up-etcd/)
+- [Kubernetes 监控架构](https://kubernetes.io/docs/concepts/cluster-administration/system-metrics/)
+- [kubelet 配置参考](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/)
+
+### 社区与工具
+
+- [Kubernetes GitHub 仓库](https://github.com/kubernetes/kubernetes)
+- [kubeadm GitHub](https://github.com/kubernetes/kubeadm)
+- [Kubernetes Enhancement Proposals (KEP)](https://github.com/kubernetes/enhancements)
+- [Kubernetes Slack 社区](https://slack.k8s.io/)
+- [Kubernetes Issue 跟踪](https://github.com/kubernetes/kubernetes/issues)
+
+### 进阶阅读
+
+- [《Kubernetes 权威指南》](https://github.com/kubernetes/kubernetes)
+- [云原生计算基金会 (CNCF)](https://www.cncf.io/)
+- [Kubernetes 安全白皮书](https://github.com/cncf/sig-security/tree/main/security-whitepaper)
+- [生产级 Kubernetes 部署检查清单](https://github.com/kelseyhightower/kubernetes-the-hard-way)
 
 ---
 
-## 🚀 生产环境优化配置
+## 生产环境优化配置
 
 ### Kubelet 资源预留
 
@@ -636,7 +916,7 @@ spec:
 
 ---
 
-## 🔒 安全加固配置
+## 安全加固配置
 
 ### RBAC 最小权限原则
 
@@ -739,7 +1019,7 @@ cp /etc/kubernetes/admin.conf ~/.kube/config
 
 ---
 
-## 📊 监控与运维
+## 监控与运维
 
 ### 集群健康检查脚本
 
@@ -857,7 +1137,7 @@ data:
 
 ---
 
-## 💡 最佳实践建议
+## 最佳实践建议
 
 ### 镜像管理
 - 使用私有仓库（Harbor、Nexus）

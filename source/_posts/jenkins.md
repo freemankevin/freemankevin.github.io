@@ -21,6 +21,21 @@ Jenkins 是业界领先的自动化服务器，广泛应用于持续集成和持
 
 <!-- more -->
 
+**适用版本与环境说明：**
+- Jenkins: 2.452.x LTS（本文以 2.452.2-jdk17 为示例）
+- JDK: 17（Jenkins 2.452+ 推荐 JDK 17）
+- Docker: 20.10.x 及以上版本
+- Maven: 3.8.x（示例版本）
+- Git: 2.x 及以上版本
+- 操作系统: Ubuntu 20.04+/Debian 11+/CentOS 7.9+
+- 更新日期: 2025-01-13（建议每月检查 Jenkins LTS 更新）
+
+{% note warning %}
+Jenkins LTS 版本每 4 周发布一次，插件更新频繁。部署前请访问 [Jenkins LTS Releases](https://www.jenkins.io/changelog-stable/) 查看最新版本。强烈建议生产环境使用 LTS 版本而非 Weekly 版本。
+{% endnote %}
+
+## Jenkins 架构概述
+
 ## Jenkins 架构概述
 
 ### 核心组件
@@ -33,6 +48,62 @@ Jenkins 是业界领先的自动化服务器，广泛应用于持续集成和持
 | Plugin System | 扩展系统 | 选择性安装，版本管理 |
 | Security Realm | 认证系统 | LDAP/OAuth/SAML |
 | Authorization | 权限系统 | RBAC策略 |
+
+### 架构可视化
+
+```mermaid
+graph TB
+    Dev[开发人员] -->|Git Push| GitLab[GitLab仓库]
+    GitLab -->|Webhook| Master[Jenkins Master<br/>调度中心]
+    
+    Master -->|调度构建| Agent1[Jenkins Agent 1<br/>静态节点]
+    Master -->|调度构建| Agent2[Jenkins Agent 2<br/>静态节点]
+    Master -->|动态调度| K8sAgent[Kubernetes Agent<br/>动态Pod]
+    
+    Agent1 -->|拉取代码| GitLab
+    Agent2 -->|拉取代码| GitLab
+    K8sAgent -->|拉取代码| GitLab
+    
+    Agent1 -->|构建镜像| Registry[Harbor Registry]
+    Agent2 -->|构建镜像| Registry
+    K8sAgent -->|构建镜像| Registry
+    
+    Agent1 -->|部署应用| K8sCluster[Kubernetes集群]
+    Agent2 -->|部署应用| K8sCluster
+    K8sAgent -->|部署应用| K8sCluster
+    
+    Master -->|存储数据| Storage[共享存储<br/>NFS/S3]
+    Master -->|认证| LDAP[LDAP/AD认证]
+    
+    subgraph "Jenkins 集群"
+        Master
+        Agent1
+        Agent2
+        K8sAgent
+    end
+    
+    subgraph "外部系统"
+        GitLab
+        Registry
+        K8sCluster
+        LDAP
+        Storage
+    end
+    
+    style Dev fill:#e1f5ff
+    style Master fill:#d4edda
+    style Agent1 fill:#fff3cd
+    style Agent2 fill:#fff3cd
+    style K8sAgent fill:#fff3cd
+    style Registry fill:#f8d7da
+```
+
+**架构说明：**
+
+1. **触发层**：开发人员推送代码触发 GitLab Webhook
+2. **调度层**：Jenkins Master 接收触发，调度构建任务到 Agent
+3. **执行层**：静态 Agent 或动态 Kubernetes Pod 执行构建
+4. **输出层**：构建产物推送到 Harbor，应用部署到 Kubernetes
 
 ### 部署模式
 
