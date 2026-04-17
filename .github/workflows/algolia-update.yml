@@ -20,7 +20,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '16'  # Node 16 兼容性更好，避免 ESM 问题
           cache: 'npm'
           
       - name: Install dependencies
