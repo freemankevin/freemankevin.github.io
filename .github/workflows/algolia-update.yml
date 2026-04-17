@@ -24,7 +24,7 @@ jobs:
           cache: 'npm'
           
       - name: Install dependencies
-        run: npm install
+        run: npm ci  # 使用 package-lock.json 锁定版本，避免依赖冲突
         
       - name: Update Algolia index
         run: |
