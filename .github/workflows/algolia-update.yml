@@ -28,10 +28,14 @@ jobs:
         
       - name: Update Algolia index
         run: |
-          # 使用环境变量替换配置中的 API Key
-          export ALGOLIA_API_KEY="${{ secrets.ALGOLIA_ADMIN_API_KEY }}"
+          # 使用 Write API Key 更新索引（安全权限，仅限写入）
+          # 创建方法：Algolia Dashboard -> Settings -> API Keys -> Create API Key
+          # ACL: addObject, deleteObject, listIndexes, editSettings
+          export HEXO_ALGOLIA_INDEXING_KEY="${{ secrets.ALGOLIA_WRITE_API_KEY }}"
           hexo clean
           hexo generate
           hexo algolia
         env:
-          HEXO_ALGOLIA_INDEXING_KEY: ${{ secrets.ALGOLIA_ADMIN_API_KEY }}
+          # 可选：使用 Admin API Key（完全权限，风险较高）
+          # 建议优先使用 Write API Key
+          HEXO_ALGOLIA_INDEXING_KEY: ${{ secrets.ALGOLIA_WRITE_API_KEY || secrets.ALGOLIA_ADMIN_API_KEY }}
