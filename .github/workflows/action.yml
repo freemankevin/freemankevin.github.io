@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'source/_posts/**.md'
+      - 'Dockerfile'
+      - 'docker-compose.yml'
+      - 'docker-entrypoint.sh'
   workflow_dispatch:
 
 jobs:
