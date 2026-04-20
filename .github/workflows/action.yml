@@ -9,6 +9,8 @@ on:
       - 'Dockerfile'
       - 'docker-compose.yml'
       - 'docker-entrypoint.sh'
+      - '_config.yml'
+      - '_config.next.yml'
   workflow_dispatch:
 
 jobs:
