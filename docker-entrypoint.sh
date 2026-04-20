@@ -7,7 +7,8 @@ cat > /etc/nginx/conf.d/default.conf << EOF
 server {
     listen ${PORT};
     server_name localhost;
-
+    aio off;
+    
     root /usr/share/nginx/html;
     index index.html index.htm;
 

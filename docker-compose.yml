@@ -1,0 +1,6 @@
+services:
+  web:
+    image: ghcr.io/freemankevin/freemankevin:latest
+    ports:
+      - "80:80"
+    restart: unless-stopped
