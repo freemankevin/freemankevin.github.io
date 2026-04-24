@@ -1,8 +1,6 @@
 # FreemanKevin's Blog
 
-个人技术博客：https://www.freemankevin.uk
-
-![首页预览](source/images/home.png)
+[![首页预览](source/images/home.png)](https://www.freemankevin.uk)
 
 ## Quick Start
 
