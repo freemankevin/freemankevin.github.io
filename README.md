@@ -1,17 +1,16 @@
 # FreemanKevin's Blog
 
-[![首页预览](source/images/home.png)](https://www.freemankevin.uk)
-
 个人技术博客，记录 DevOps、云原生、Linux 运维等技术笔记。
 
-**访问地址：** https://www.freemankevin.uk
+[![首页预览](source/images/home.png)](https://www.freemankevin.uk)
+
 
 ## 技术栈
 
 - **博客框架：** [Hexo](https://hexo.io/) 8.x
 - **主题：** [NexT](https://theme-next.js.org/) 8.x
 - **搜索：** Algolia
-- **部署：** GitHub Pages + GitHub Actions
+- **部署：** GitHub Actions + Vercel
 
 ## 本地运行
 
@@ -37,7 +36,7 @@ bash startup.sh
 ```shell
 npm run build   # 生成静态文件
 npm run clean   # 清除缓存和静态文件
-npm run deploy  # 部署到 GitHub Pages
+npm run deploy   # 部署到远程仓库
 ```
 
 ## 文章分类
